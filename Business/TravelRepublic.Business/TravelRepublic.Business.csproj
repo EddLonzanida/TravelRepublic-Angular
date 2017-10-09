@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A614D654-0D64-40B3-8925-3C413DD70928}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TravelRepublic.Business</RootNamespace>
+    <AssemblyName>TravelRepublic.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Eml.ClassFactory.Contracts, Version=2.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.0.1.1\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Eml.ConfigParser, Version=2.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ConfigParser.2.0.0.6\lib\net462\Eml.ConfigParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Eml.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Contracts.2.0.1.7\lib\net462\Eml.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Eml.DataRepository, Version=2.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.3\lib\net462\Eml.DataRepository.dll</HintPath>
+    </Reference>
+    <Reference Include="Eml.Mediator, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Mediator.2.0.0.1\lib\net462\Eml.Mediator.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="X.PagedList, Version=7.1.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\X.PagedList.7.1.0\lib\net452\X.PagedList.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Engines\RequestEngines\AutoCompleteEngine.cs" />
+    <Compile Include="Engines\RequestEngines\FlightBuilderEngine.cs" />
+    <Compile Include="Engines\RequestEngines\HotelSearchEngine.cs" />
+    <Compile Include="Engines\RequestEngines\HotelSearchFilterEngine.cs" />
+    <Compile Include="Engines\Requests\AutoCompleteRequest.cs" />
+    <Compile Include="Engines\Requests\HotelSearchFilterRequest.cs" />
+    <Compile Include="Engines\Requests\HotelSearchRequest.cs" />
+    <Compile Include="Engines\Requests\HotelSearchRequestBase.cs" />
+    <Compile Include="Engines\Responses\AutoCompleteResponse.cs" />
+    <Compile Include="Engines\Responses\HotelSearchFilterResponse.cs" />
+    <Compile Include="Engines\Responses\HotelSearchResponse.cs" />
+    <Compile Include="Extensions\FlightExtentions.cs" />
+    <Compile Include="Engines\Requests\FlightBuilderRequest.cs" />
+    <Compile Include="Engines\Responses\FlightBuilderResponse.cs" />
+    <Compile Include="Managers\FlightBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NuGets\TravelRepublic.Contracts\TravelRepublic.Contracts.csproj">
+      <Project>{8720B43F-45AB-4527-A6A0-058443D63284}</Project>
+      <Name>TravelRepublic.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TravelRepublic.Business.Common\TravelRepublic.Business.Common.csproj">
+      <Project>{33b71a2c-7964-4a36-a80d-892de61b1a25}</Project>
+      <Name>TravelRepublic.Business.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

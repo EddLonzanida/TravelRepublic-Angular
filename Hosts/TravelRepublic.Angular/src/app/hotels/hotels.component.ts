@@ -1,0 +1,49 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { Http } from '@angular/http';
+import { HotelService } from './hotel-service';
+import { SearchFlow } from './dto/search-flow.enum';
+import { AutoComplete } from 'primeng/primeng';
+import { SearchResultsComponent } from './search-results/search-results.component';
+
+@Component({
+  selector: 'app-hotels',
+  templateUrl: './hotels.component.html',
+  styleUrls: ['./hotels.component.css']
+})
+export class HotelsComponent {
+  // search parameters
+  searchName: string;
+
+  // auto complete
+  searchSuggestions: string[];
+
+  // search workflow
+  searchFlow = SearchFlow.HOME;
+  searchFlowEnum = SearchFlow;
+
+  // busyIndicator
+  isBusy = false;
+  isStartSearch = false;
+
+  constructor(private hotelService: HotelService) {
+    this.searchSuggestions = [];
+  }
+
+  search(): void {
+    this.searchFlow = SearchFlow.SEARCHING;
+    this.isStartSearch = true;
+    this.isBusy = true;
+  }
+  getSuggestions(event): void {
+    const query = event.query;
+    this.hotelService.getSuggestions(query).then(suggestions => {
+      this.searchSuggestions = suggestions;
+    })
+    .catch(e => {
+      console.error(e);
+    });
+  }
+  restartSearch(): void {
+    this.searchFlow = SearchFlow.HOME;
+  }
+}

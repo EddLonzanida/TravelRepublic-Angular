@@ -1,0 +1,39 @@
+<div class="profile header ui-g-12">
+    <div class="ui-g-12 ui-lg-3 ">
+        <div class="animated fadeInRight">
+            <app-checkbox title="Departures Before Now" [(isSelected)]="departureBeforeCurrentDate"></app-checkbox>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-lg-3 ">
+        <div class="animated fadeInRight">
+            <app-checkbox title="Arrivals Before Departure Date" [(isSelected)]="arrivalBeforeDepartureDate"></app-checkbox>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-lg-3 ">
+        <div class="animated fadeInRight">
+                <app-checkbox title="Segments With 2 hrs Total Waiting Time" [(isSelected)]="twoHoursWaitingTime"></app-checkbox>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-lg-3">
+        <button pButton type="button" (click)="search()" icon="fa-search-plus" label="Search" class="ui-g-12 ui-button-warning" item-width="100%"></button>
+    </div>
+</div>
+<div *ngFor="let flight of airport; let j = index">
+    <h2>Flight {{ j + 1 }} </h2>
+    <div class="ui-g" style="padding-bottom: 12px;">
+        <div *ngFor="let segment of flight.Segments; let i = index">
+            <div class="">
+                <p-panel header="Segment  {{ segment.SegmentType }}">
+                    <div style="padding-bottom: 12px;">
+                        <p>
+                            <span class="ui-sm-12 establishment-detail">Departure: <strong>{{ segment.DepartureDate | date:'medium' }}</strong></span>
+                        </p>
+                        <p>
+                            <span class="ui-sm-12 establishment-detail">Arrival: <strong>{{ segment.ArrivalDate | date:'medium'  }}</strong></span>
+                        </p>
+                    </div>
+                </p-panel>
+            </div>
+        </div>
+    </div>
+</div>
