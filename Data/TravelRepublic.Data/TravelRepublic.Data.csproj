@@ -39,10 +39,10 @@
       <HintPath>..\..\packages\Eml.ConfigParser.2.0.0.6\lib\net462\Eml.ConfigParser.dll</HintPath>
     </Reference>
     <Reference Include="Eml.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Contracts.2.0.1.7\lib\net462\Eml.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Eml.Contracts.2.0.1.9\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.DataRepository, Version=2.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.3\lib\net462\Eml.DataRepository.dll</HintPath>
+    <Reference Include="Eml.DataRepository, Version=2.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.4\lib\net462\Eml.DataRepository.dll</HintPath>
     </Reference>
     <Reference Include="Eml.SoftDelete, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.SoftDelete.1.0.0.4\lib\net462\Eml.SoftDelete.dll</HintPath>
