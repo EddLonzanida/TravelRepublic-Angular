@@ -10,7 +10,7 @@ namespace TravelRepublic.Business.Extensions
     {
         public static List<Flight> SegmentsWithTwoHoursWaitingTime(this IEnumerable<Flight> flights)
         {
-            List<Flight> filteredFlights = flights.Where(r =>
+            var filteredFlights = flights.Where(r =>
                  {
                      var waitingTime = r.Segments
                          .Zip(r.Segments.Skip(1), (x, y) => (y.DepartureDate - x.ArrivalDate).Hours);
@@ -25,7 +25,7 @@ namespace TravelRepublic.Business.Extensions
 
         public static List<Flight> ArrivalBeforeDepartureDate(this IEnumerable<Flight> flights)
         {
-            List<Flight> filteredFlights = flights.Where(r => r.Segments.All(s => s.ArrivalDate < s.DepartureDate)).ToList();
+            var filteredFlights = flights.Where(r => r.Segments.All(s => s.ArrivalDate < s.DepartureDate)).ToList();
             filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.ArrivalBeforeDepartureDate)));
             return filteredFlights;
         }
@@ -33,7 +33,7 @@ namespace TravelRepublic.Business.Extensions
         public static List<Flight> DepartureBeforeCurrentDate(this IEnumerable<Flight> flights, IClockService clockService)
         {
             var now = clockService.Now();
-            List<Flight> filteredFlights = flights.Where(r => r.Segments.All(s => s.DepartureDate < now)).ToList();
+            var filteredFlights = flights.Where(r => r.Segments.All(s => s.DepartureDate < now)).ToList();
             filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.DepartureBeforeCurrentDate)));
             return filteredFlights;
         }

@@ -47,7 +47,7 @@ namespace TravelRepublic.Business.Engines.RequestEngines
 
 
             var establishments = await tableMaintenanceRepository
-                .GetPagedListWithCountAsync(currentPage, whereClause,
+                .GetPagedListAsync(currentPage, whereClause,
                 r => orderBy(r));
 
             return new HotelSearchResponse(establishments.ToList(), establishments.TotalItemCount, repository.PageSize);

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.Composition;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using Eml.Contracts.Repositories;
 using Eml.Mediator.Contracts;
@@ -20,9 +22,11 @@ namespace TravelRepublic.Business.Engines.RequestEngines
 
         public async Task<AutoCompleteResponse> GetAsync(AutoCompleteRequest request)
         {
-            var searchTerm = request.SearchTerm.ToLower();
+            var searchTerm = request.SearchTerm; //) request.SearchTerm.ToLower();
             var suggestions = await repository
-                .GetAutoCompleteIntellisenseAsync(r => searchTerm == "" || r.Name.Contains(searchTerm), r => r.Name);
+                .GetAutoCompleteIntellisenseAsync(r => searchTerm == "" || r.Name.Contains(searchTerm), 
+                r => r.OrderBy(s => s.Name),
+                r => r.Name);
 
             return new AutoCompleteResponse(suggestions);
         }
