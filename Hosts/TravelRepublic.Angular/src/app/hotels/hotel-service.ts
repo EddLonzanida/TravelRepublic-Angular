@@ -20,17 +20,17 @@ export class HotelService {
         return this.http.get(`${this.baseUrl}hotel/${action}?search=${query}`)
             .toPromise()
             .then(res => {
-                return <string[]>res.json().Suggestions;
+                return <string[]>res.json().suggestions;
             })
             .then(data => { return data; })
             ;
     }
     search(request: HotelSearchRequest) {
         const cleanedRequest = this.cleanBaseParameters(request);
-        cleanedRequest.Page = request.Page;
-        cleanedRequest.Sorting = request.Sorting;
-        if (cleanedRequest.Page > 1) { } else { cleanedRequest.Page = undefined; }
-        if (cleanedRequest.Sorting > 0) { } else { cleanedRequest.Sorting = undefined; }
+        cleanedRequest.page = request.page;
+        cleanedRequest.sorting = request.sorting;
+        if (cleanedRequest.page > 1) { } else { cleanedRequest.page = undefined; }
+        if (cleanedRequest.sorting > 0) { } else { cleanedRequest.sorting = undefined; }
         const action = 'establishments';
         const config = { params: cleanedRequest }
         return this.http.get(`${this.baseUrl}hotel/${action}`, config)
@@ -44,8 +44,8 @@ export class HotelService {
 
     getFilters(request: HotelSearchRequestBase) {
         const cleanedRequest = this.cleanBaseParameters(request);
-        cleanedRequest.Page = undefined;
-        cleanedRequest.Sorting = undefined;
+        cleanedRequest.page = undefined;
+        cleanedRequest.sorting = undefined;
         const action = 'filter';
         const config = { params: cleanedRequest }
         return this.http.get(`${this.baseUrl}hotel/${action}`, config)
@@ -57,14 +57,14 @@ export class HotelService {
             ;
     }
     private cleanBaseParameters(request: HotelSearchRequestBase): HotelSearchRequest {
-        const cleanedRequest = new HotelSearchRequest(request.Name, request.Star, request.UserRating, request.CostMin, request.CostMax);
-        if (cleanedRequest.Name === '') { cleanedRequest.Name = undefined; }
-        if (cleanedRequest.Star > 0) { } else { cleanedRequest.Star = undefined; }
-        if (cleanedRequest.UserRating > 0) {
-            cleanedRequest.UserRating = request.UserRating / 10;
-        } else { cleanedRequest.UserRating = undefined; }
-        if (cleanedRequest.CostMin > 0) { } else { cleanedRequest.CostMin = undefined; }
-        if (cleanedRequest.CostMax > 0) { } else { cleanedRequest.CostMax = undefined; }
+        const cleanedRequest = new HotelSearchRequest(request.name, request.star, request.userRating, request.costMin, request.costMax);
+        if (cleanedRequest.name === '') { cleanedRequest.name = undefined; }
+        if (cleanedRequest.star > 0) { } else { cleanedRequest.star = undefined; }
+        if (cleanedRequest.userRating > 0) {
+            cleanedRequest.userRating = request.userRating / 10;
+        } else { cleanedRequest.userRating = undefined; }
+        if (cleanedRequest.costMin > 0) { } else { cleanedRequest.costMin = undefined; }
+        if (cleanedRequest.costMax > 0) { } else { cleanedRequest.costMax = undefined; }
 
         return cleanedRequest;
     }

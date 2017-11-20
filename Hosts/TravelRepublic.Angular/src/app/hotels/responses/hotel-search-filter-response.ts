@@ -1,9 +1,9 @@
 import { StarFilter } from '../dto/star-filter';
 
 export class HotelSearchFilterResponse {
-    constructor(public StarFilters: StarFilter[] = [],
-                public RatingMin = 0,
-                public RatingMax = 100,
-                public CostMin = 0,
-                public CostMax = 0) { }
+    constructor(public starFilters: StarFilter[] = [],
+                public ratingMin = 0,
+                public ratingMax = 100,
+                public costMin = 0,
+                public costMax = 0) { }
 }

@@ -7,9 +7,14 @@
 </div>
 <div class="profile header ui-g">
     <div class="ui-g-12 ui-md-8 ui-lg-9 ">
-        <p-autoComplete [(ngModel)]="searchName" [suggestions]="searchSuggestions" (completeMethod)="getSuggestions($event)" placeholder="Find Cheap Hotels here"
-            [disabled]="searchFlow == searchFlowEnum.SEARCHING" [minLength]="1" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
-            class="p-autocomplete"></p-autoComplete>
+        <p-autoComplete [(ngModel)]="searchName" [suggestions]="searchSuggestions"
+                        (completeMethod)="getSuggestions($event)"
+                        (onSelect)="search()"
+                        placeholder="Find Cheap Hotels here"
+                        [disabled]="searchFlow == searchFlowEnum.SEARCHING"
+                        [minLength]="1" [style]="{'width':'100%'}"
+                        [inputStyle]="{'width':'100%'}"
+            class="p-autocomplete" ></p-autoComplete>
 
     </div>
     <div class="ui-g-12 ui-md-4 ui-lg-3">

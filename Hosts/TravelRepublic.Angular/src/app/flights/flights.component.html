@@ -21,15 +21,15 @@
 <div *ngFor="let flight of airport; let j = index">
     <h2>Flight {{ j + 1 }} </h2>
     <div class="ui-g" style="padding-bottom: 12px;">
-        <div *ngFor="let segment of flight.Segments; let i = index">
-            <div class="">
-                <p-panel header="Segment  {{ segment.SegmentType }}">
+        <div *ngFor="let segment of flight.segments; let i = index">
+            <div class="" style="margin: 12px;">
+                <p-panel header="Segment  {{ segment.segmentType }}">
                     <div style="padding-bottom: 12px;">
                         <p>
-                            <span class="ui-sm-12 establishment-detail">Departure: <strong>{{ segment.DepartureDate | date:'medium' }}</strong></span>
+                            <span class="ui-sm-12 establishment-detail">Departure: <strong>{{ segment.departureDate | date:'medium' }}</strong></span>
                         </p>
                         <p>
-                            <span class="ui-sm-12 establishment-detail">Arrival: <strong>{{ segment.ArrivalDate | date:'medium'  }}</strong></span>
+                            <span class="ui-sm-12 establishment-detail">Arrival: <strong>{{ segment.arrivalDate | date:'medium'  }}</strong></span>
                         </p>
                     </div>
                 </p-panel>

@@ -1,6 +1,6 @@
 export class StarFilter {
-    constructor(public Star = 0,
-        public IsCheapest = false,
-        public Cost = 0) { }
+    constructor(public star = 0,
+        public isCheapest = false,
+        public cost = 0) { }
 }
 

@@ -1,10 +1,10 @@
 import { HotelSearchRequestBase } from './hotel-search-request-base';
 export class HotelSearchFilterRequest extends HotelSearchRequestBase {
-    constructor(public Name = '',
-                public Star = 0,
-                public UserRating = 0,
-                public CostMin = 0,
-                public CostMax = 0) {
-        super(Name, Star, UserRating, CostMin, CostMax);
+    constructor(public name = '',
+                public star = 0,
+                public userRating = 0,
+                public costMin = 0,
+                public costMax = 0) {
+        super(name, star, userRating, costMin, costMax);
     }
 }

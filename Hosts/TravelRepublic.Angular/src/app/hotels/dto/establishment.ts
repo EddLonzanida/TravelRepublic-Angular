@@ -1,14 +1,14 @@
 export class Establishment {
-    EstablishmentId: number;
-    Distance: number;
-    Location: string;
-    Name: string;
-    Stars: number;
-    EstablishmentType: string;
-    UserRating: number;
-    UserRatingTitle: string;
-    UserRatingCount: number;
-    ImageUrl: string;
-    ThumbnailUrl: string;
-    MinCost: number;
+    establishmentId: number;
+    distance: number;
+    location: string;
+    name: string;
+    stars: number;
+    establishmentType: string;
+    userRating: number;
+    userRatingTitle: string;
+    userRatingCount: number;
+    imageUrl: string;
+    thumbnailUrl: string;
+    minCost: number;
 }

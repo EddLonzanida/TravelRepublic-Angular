@@ -1,9 +1,9 @@
 
 export class HotelSearchRequestBase {
-    constructor(public Name = '',
-        public Star = 0,
-        public UserRating = 0,
-        public CostMin = 0,
-        public CostMax = 0) {
+    constructor(public name = '',
+        public star = 0,
+        public userRating = 0,
+        public costMin = 0,
+        public costMax = 0) {
     }
 }

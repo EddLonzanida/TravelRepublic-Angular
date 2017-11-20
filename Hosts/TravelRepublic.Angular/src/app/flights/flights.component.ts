@@ -59,13 +59,13 @@ export class FlightsComponent implements OnInit {
 }
 
 interface ISegment {
-  DepartureDate: string;
-  ArrivalDate: string;
-  SegmentType: string;
+  departureDate: string;
+  arrivalDate: string;
+  segmentType: string;
 }
 interface IFlight {
-  Segments: Array<ISegment>;
+  segments: Array<ISegment>;
 }
 interface IAirport {
-  Flights: Array<IFlight>;
+  flights: Array<IFlight>;
 }

@@ -1,6 +1,6 @@
 import { Establishment } from '../dto/establishment';
 export class HotelSearchResponse {
-    constructor(public RecordCount = 0,
-        public RowsPerPage = 0,
-        public Establishments: Establishment[] = []) { }
+    constructor(public recordCount = 0,
+        public rowsPerPage = 0,
+        public establishments: Establishment[] = []) { }
 }
