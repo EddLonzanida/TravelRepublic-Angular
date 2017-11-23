@@ -49,14 +49,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Eml.ClassFactory.Contracts, Version=2.0.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.0.1.2\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
+    <Reference Include="Eml.ClassFactory.Contracts, Version=2.0.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.0.1.4\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Eml.ConfigParser, Version=2.0.0.13, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.ConfigParser.2.0.0.13\lib\net462\Eml.ConfigParser.dll</HintPath>
     </Reference>
     <Reference Include="Eml.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Contracts.2.0.1.23\lib\net462\Eml.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Eml.Contracts.2.0.1.25\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="Eml.ExplicitDispose.Api, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.ExplicitDispose.Api.2.0.0\lib\net462\Eml.ExplicitDispose.Api.dll</HintPath>
@@ -67,8 +67,8 @@
     <Reference Include="Eml.Mediator, Version=2.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.Mediator.2.0.0.4\lib\net462\Eml.Mediator.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.MefBootstrapper, Version=2.0.1.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.MefBootstrapper.2.0.1.26\lib\net462\Eml.MefBootstrapper.dll</HintPath>
+    <Reference Include="Eml.MefBootstrapper, Version=2.0.1.27, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.MefBootstrapper.2.0.1.27\lib\net462\Eml.MefBootstrapper.dll</HintPath>
     </Reference>
     <Reference Include="Eml.MefDependencyResolver.Api, Version=2.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.MefDependencyResolver.Api.2.0.0.2\lib\net462\Eml.MefDependencyResolver.Api.dll</HintPath>

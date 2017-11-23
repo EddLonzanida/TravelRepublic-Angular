@@ -126,12 +126,12 @@ export class SearchResultsComponent implements OnChanges {
     private refillSortOrderList(): void {
         this.sortOrders = [];
         this.sortOrders.push({ label: '-- Select Sorting --', value: null });
-        this.sortOrders.push({ label: 'name Desc', value: HotelSorting.Name });
+        this.sortOrders.push({ label: 'Name Desc', value: HotelSorting.Name });
         this.sortOrders.push({ label: 'Name Asc', value: HotelSorting.Default });
         this.sortOrders.push({ label: 'Farthest', value: HotelSorting.DistanceDesc });
         this.sortOrders.push({ label: 'Nearest', value: HotelSorting.DistanceAsc });
-        this.sortOrders.push({ label: 'stars - Highest', value: HotelSorting.StarsDesc });
-        this.sortOrders.push({ label: 'stars - Lowest', value: HotelSorting.StarsAsc });
+        this.sortOrders.push({ label: 'Stars - Highest', value: HotelSorting.StarsDesc });
+        this.sortOrders.push({ label: 'Stars - Lowest', value: HotelSorting.StarsAsc });
         this.sortOrders.push({ label: 'Cost - Cheapest', value: HotelSorting.CostAsc });
         this.sortOrders.push({ label: 'Cost - Wealthiest', value: HotelSorting.CostDesc });
         this.sortOrders.push({ label: 'Rating - Highest', value: HotelSorting.UserRatingDesc });

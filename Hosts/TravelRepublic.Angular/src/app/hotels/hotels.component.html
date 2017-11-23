@@ -9,7 +9,6 @@
     <div class="ui-g-12 ui-md-8 ui-lg-9 ">
         <p-autoComplete [(ngModel)]="searchName" [suggestions]="searchSuggestions"
                         (completeMethod)="getSuggestions($event)"
-                        (onSelect)="search()"
                         placeholder="Find Cheap Hotels here"
                         [disabled]="searchFlow == searchFlowEnum.SEARCHING"
                         [minLength]="1" [style]="{'width':'100%'}"

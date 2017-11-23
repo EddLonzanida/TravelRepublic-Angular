@@ -102,7 +102,7 @@
           <label *ngIf="hasErrors" class="error-message animated fadeInDown ">Opps.. something went wrong. Please try again.</label>
         </div>
       </div>
-      <div class="ui-g-12 ui-md-3 animated fadeIn">
+      <div class="ui-g-12 ui-md-3">
         <p-dropdown [disabled]="canSort()" [options]="sortOrders" [(ngModel)]="searchRequest.sorting" (onChange)="search()" autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
       </div>
     </div>
@@ -115,17 +115,18 @@
             <div class="ui-g hotel-row">
               <div class="ui-g-12 ui-md-3 ui-lg-1 ">
                 <div class="thumbnail">
-                  <img class="thumbnail-image" [src]='hotel.thumbnailUrl' [alt]='hotel.name' style="cursor: pointer;" (click)="selectEstablishment($event,hotel,selectedEstablishmentOp);">
+                    <img class="thumbnail-image animated fadeIn" [src]='hotel.thumbnailUrl' [alt]='hotel.name'
+                         style="cursor: pointer;" (click)="selectEstablishment($event,hotel,selectedEstablishmentOp);">
                 </div>
               </div>
-              <div class="ui-g-12 ui-md-6 ui-lg-8 ">
+              <div class="ui-g-12 ui-md-6 ui-lg-8  animated fadeIn">
                 <span class="hotel-name">{{hotel.name}}</span>
                 <span class="hotel-location"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{hotel.location}}
                 </span>
                 <p-rating [readonly]="true" [cancel]="false" [(ngModel)]="hotel.stars" [stars]="5"></p-rating>
                 <span class="hotel-rating">{{hotel.userRating}} | {{hotel.userRatingTitle}} <i class="hotel-reviews">({{hotel.userRatingCount}} reviews)</i>  </span>
               </div>
-              <div class="ui-g-12 ui-md-3">
+              <div class="ui-g-12 ui-md-3 animated fadeIn">
                 <div class="hotel-amount-container">
                   <span class="hotel-amount">Rooms for</span>
                   <p class="hotel-amount-price">£{{hotel.minCost | number: '1.2-2' }} </p>
