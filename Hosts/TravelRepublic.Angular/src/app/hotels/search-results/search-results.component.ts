@@ -19,7 +19,7 @@ export class SearchResultsComponent implements OnChanges {
     isInitialized = false;
     isLocalBusy = false; // fix to ExpressionChangedAfterItHasBeenCheckedError
     canShowPager = false;
-    // isReady = false;
+    canFilter = true;
     selectedEstablishment: Establishment;
     hasErrors = false;
     // search parameters
@@ -31,15 +31,21 @@ export class SearchResultsComponent implements OnChanges {
     // Filters
     searchFilterResponse = new HotelSearchFilterResponse();
 
+    //change detection
+    oldStar: number;
+    oldCostMin: number;
+    oldCostMax: number;
+    oldUserRating: number;
+
     // Used with Parent Interaction
     @Input() searchName: string;
     @Input() isBusy: boolean;
     @Input() isStartSearch: boolean;
-    @Output() isBusyChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-    @Output() isStartSearchChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() isBusyChange = new EventEmitter<boolean>();
+    @Output() isStartSearchChange = new EventEmitter<boolean>();
     @Output() restartSearch: EventEmitter<string> = new EventEmitter();
 
-    constructor(private hotelService: HotelService) {
+    constructor(private readonly hotelService: HotelService) {
         this.refillSortOrderList();
     }
 
@@ -65,6 +71,7 @@ export class SearchResultsComponent implements OnChanges {
                 this.isBusyChange.emit(false);
 
                 this.canShowPager = this.searchResponse.recordCount > this.searchResponse.rowsPerPage;
+
             })
             .then(r => {
                 if (this.isInitialized) { return r; }
@@ -76,6 +83,17 @@ export class SearchResultsComponent implements OnChanges {
                         this.costMinMax[1] = f.costMax;
                         this.searchFilterResponse.ratingMin = f.ratingMin * 10;
                         this.searchFilterResponse.ratingMax = f.ratingMax * 10;
+                        this.searchRequest.userRating = f.ratingMin;
+                        if (this.searchFilterResponse.starFilters[0]) {
+                            this.searchRequest.star = this.searchFilterResponse.starFilters[0].star;
+                            this.oldStar = this.searchRequest.star;
+                        }
+                        this.canFilter = this.searchResponse.recordCount > 1;
+
+
+                        this.oldCostMin = this.costMinMax[0];
+                        this.oldCostMax = this.costMinMax[1];
+                        this.oldUserRating = this.searchRequest.userRating;
                     });
             })
             .catch(e => {
@@ -88,12 +106,36 @@ export class SearchResultsComponent implements OnChanges {
                 this.hasErrors = true;
             });
     }
-    onSlideEnd(event) {
-        this.searchRequest.page = 1;
-        this.search();
+    onSlideEnd(event, sender) {
+        let hasChanges = false;
+        if (sender === 'star') {
+            if (event.value !== this.oldStar) {
+                hasChanges = true;
+                this.oldStar = event.value;
+            }
+        } else if (sender === 'costMinMax') {
+            if (this.costMinMax[0] !== this.oldCostMin) {
+                hasChanges = true;
+                this.oldCostMin = this.costMinMax[0];
+            }
+            if (this.costMinMax[1] !== this.oldCostMax) {
+                hasChanges = true;
+                this.oldCostMax = this.costMinMax[1];
+            }
+        } else if (sender === 'userRating') {
+            if (event.value !== this.oldUserRating) {
+                hasChanges = true;
+                this.oldUserRating = event.value;
+            }
+        }
+        if (hasChanges) {
+            this.searchRequest.page = 1;
+            this.search();
+        }
     }
     onSlideCancelled($event) {
-        this.searchRequest.star = 0;
+        this.searchRequest.star = this.searchFilterResponse.starFilters[0].star;
+        this.oldStar = this.searchRequest.star;
         this.search();
     }
     onLazyLoad(event) {
@@ -118,8 +160,12 @@ export class SearchResultsComponent implements OnChanges {
         } else {
         }
     }
+    canResetUserRating(): boolean {
+        return this.searchRequest.userRating !== this.searchFilterResponse.ratingMin;
+    }
     resetUserRating() {
         this.searchRequest.userRating = this.searchFilterResponse.ratingMin;
+        this.oldUserRating = this.searchRequest.userRating;
         this.searchRequest.page = 1;
         this.search();
     }
@@ -151,5 +197,12 @@ export class SearchResultsComponent implements OnChanges {
     }
     canSort(): boolean {
         return this.isLocalBusy || !(this.searchResponse.recordCount > 1);
+    }
+    starClass(): string {
+        const minStar = this.searchFilterResponse.starFilters[0].star;
+        if (this.searchRequest.star === this.searchFilterResponse.starFilters[0].star) {
+            return `disable-star${minStar} noreset`;
+        }
+        return `disable-star${minStar}`;
     }
 }

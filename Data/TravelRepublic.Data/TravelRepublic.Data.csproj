@@ -39,10 +39,10 @@
       <HintPath>..\..\packages\Eml.ConfigParser.2.0.0.13\lib\net462\Eml.ConfigParser.dll</HintPath>
     </Reference>
     <Reference Include="Eml.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Contracts.2.0.1.25\lib\net462\Eml.Contracts.dll</HintPath>
+      <HintPath>..\..\packages\Eml.Contracts.2.0.1.26\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.DataRepository, Version=2.0.0.37, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.37\lib\net462\Eml.DataRepository.dll</HintPath>
+    <Reference Include="Eml.DataRepository, Version=2.0.0.39, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.39\lib\net462\Eml.DataRepository.dll</HintPath>
     </Reference>
     <Reference Include="Eml.SoftDelete, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.SoftDelete.1.0.0.4\lib\net462\Eml.SoftDelete.dll</HintPath>
@@ -58,6 +58,12 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.DotNet.PlatformAbstractions.2.0.3\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyModel.2.0.3\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>

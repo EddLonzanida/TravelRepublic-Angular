@@ -19,10 +19,10 @@
     </div>
 </div>
 <div *ngFor="let flight of airport; let j = index">
-    <h2>Flight {{ j + 1 }} </h2>
+    <h2 class="animated fadeIn">Flight {{ j + 1 }} </h2>
     <div class="ui-g" style="padding-bottom: 12px;">
         <div *ngFor="let segment of flight.segments; let i = index">
-            <div class="" style="margin: 12px;">
+            <div class="animated fadeInRight" style="margin: 12px;">
                 <p-panel header="Segment  {{ segment.segmentType }}">
                     <div style="padding-bottom: 12px;">
                         <p>

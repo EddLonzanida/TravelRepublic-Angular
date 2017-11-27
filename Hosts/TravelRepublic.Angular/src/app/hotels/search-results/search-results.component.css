@@ -48,7 +48,7 @@ font-size: x-large;
 }
 
 .range-slider-container{
-    margin-bottom: 12px;
+    margin-bottom: 0px;
 }
 
 @media (max-width: 40em) {
@@ -119,8 +119,8 @@ font-size: x-large;
 .error-message{
     color: #fc2929 !important;
 }
-.label-uset-rating-reset{
-    color:#0267bf;; 
-    font-size: small;  
-    font-family: "Roboto";  
+
+
+.no-leftpad {
+    padding-left: 0 !important;
 }
