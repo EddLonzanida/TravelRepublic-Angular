@@ -7,35 +7,33 @@ using TravelRepublic.Tests.Integration.BaseClasses;
 
 namespace TravelRepublic.Tests.Integration.RequestEngines
 {
-    [TestFixture]
     public class WhenCallingEngines : IntegrationTestBase
     {
-
         [Test]
         public void AutoComplete_ShouldBeDiscoverable()
         {
-            var exported = classfactory.GetExport<IRequestAsyncEngine<AutoCompleteRequest, AutoCompleteResponse>>();
+            var exported = classFactory.GetExport<IRequestAsyncEngine<AutoCompleteRequest, AutoCompleteResponse>>();
             exported.ShouldNotBeNull();
         }
 
         [Test]
         public void HotelSearchFilter_ShouldBeDiscoverable()
         {
-            var exported = classfactory.GetExport<IRequestAsyncEngine<HotelSearchFilterRequest, HotelSearchFilterResponse>>();
+            var exported = classFactory.GetExport<IRequestAsyncEngine<HotelSearchFilterRequest, HotelSearchFilterResponse>>();
             exported.ShouldNotBeNull();
         }
 
         [Test]
         public void HotelSearch_ShouldBeDiscoverable()
         {
-            var exported = classfactory.GetExport<IRequestAsyncEngine<HotelSearchRequest, HotelSearchResponse>>();
+            var exported = classFactory.GetExport<IRequestAsyncEngine<HotelSearchRequest, HotelSearchResponse>>();
             exported.ShouldNotBeNull();
         }
 
         [Test]
         public void FlightBuilder_ShouldBeDiscoverable()
         {
-            var exported = classfactory.GetExport<IRequestEngine<FlightBuilderRequest, FlightBuilderResponse>>();
+            var exported = classFactory.GetExport<IRequestEngine<FlightBuilderRequest, FlightBuilderResponse>>();
             exported.ShouldNotBeNull();
         }
     }

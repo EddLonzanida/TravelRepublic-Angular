@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using Eml.DataRepository;
-using Newtonsoft.Json;
 using TravelRepublic.Data.Dto;
 
 namespace TravelRepublic.ConsoleHost
@@ -18,7 +17,7 @@ namespace TravelRepublic.ConsoleHost
         static void Main(string[] args)
         {
             var hotel = Seed.GetStub<Hotel>("hotels", JSON_SOURCES);
-            int ctr = 0;
+            var ctr = 0;
             hotel.Establishments.OrderBy(r => r.Name).ToList().ForEach(r =>
             {
                 ctr++;

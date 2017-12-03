@@ -4,21 +4,22 @@ using NUnit.Framework;
 
 namespace TravelRepublic.Tests.Integration.BaseClasses
 {
+    [TestFixture]
     public abstract class IntegrationTestBase
     {
-        protected IClassFactory classfactory;
+        protected IClassFactory classFactory;
 
         [OneTimeSetUp]
         public void Setup()
         {
-            Bootstrapper.Init(new[] { "TravelRepublic*.dll" });
-            classfactory = ClassFactory.MefContainer.GetExportedValue<IClassFactory>();
+            Bootstrapper.Init("TravelRepublic*.dll");
+            classFactory = ClassFactory.Get();
         }
 
         [OneTimeTearDown]
         public void TearDown()
         {
-            ClassFactory.MefContainer?.Dispose();
+            ClassFactory.Dispose();
         }
     }
 }

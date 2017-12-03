@@ -6,9 +6,10 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "sourceRoot": "ClientApp",
-    "sourceMap": false,
-    "allowJs": true,
+    "sourceMap": true,
+    "sourceRoot": "src",
+    "mapRoot": "wwwroot",
+
     "baseUrl": "ClientApp",
     "lib": [
       "es2017",
