@@ -38,14 +38,14 @@
     <Reference Include="Eml.ConfigParser, Version=2.0.0.19, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.ConfigParser.2.0.0.19\lib\net462\Eml.ConfigParser.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Contracts.2.0.1.28\lib\net462\Eml.Contracts.dll</HintPath>
+    <Reference Include="Eml.Contracts, Version=2.0.1.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Contracts.2.0.1.30\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.DataRepository, Version=2.0.0.55, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.55\lib\net462\Eml.DataRepository.dll</HintPath>
+    <Reference Include="Eml.DataRepository, Version=2.0.0.115, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.115\lib\net462\Eml.DataRepository.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.Mediator, Version=2.0.0.22, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Mediator.2.0.0.22\lib\net462\Eml.Mediator.dll</HintPath>
+    <Reference Include="Eml.Mediator, Version=2.0.0.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Mediator.2.0.0.23\lib\net462\Eml.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -56,11 +56,8 @@
     <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.DotNet.PlatformAbstractions.2.0.3\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Extensions.DependencyModel.2.0.3\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -72,20 +69,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engines\RequestEngines\AutoCompleteEngine.cs" />
-    <Compile Include="Engines\RequestEngines\FlightBuilderEngine.cs" />
-    <Compile Include="Engines\RequestEngines\HotelSearchEngine.cs" />
-    <Compile Include="Engines\RequestEngines\HotelSearchFilterEngine.cs" />
-    <Compile Include="Engines\Requests\AutoCompleteRequest.cs" />
-    <Compile Include="Engines\Requests\HotelSearchFilterRequest.cs" />
-    <Compile Include="Engines\Requests\HotelSearchRequest.cs" />
-    <Compile Include="Engines\Requests\HotelSearchRequestBase.cs" />
-    <Compile Include="Engines\Responses\AutoCompleteResponse.cs" />
-    <Compile Include="Engines\Responses\HotelSearchFilterResponse.cs" />
-    <Compile Include="Engines\Responses\HotelSearchResponse.cs" />
+    <Compile Include="RequestEngines\AutoCompleteEngine.cs" />
+    <Compile Include="RequestEngines\FlightBuilderEngine.cs" />
+    <Compile Include="RequestEngines\HotelSearchEngine.cs" />
+    <Compile Include="RequestEngines\HotelSearchFilterEngine.cs" />
+    <Compile Include="Requests\AutoCompleteRequest.cs" />
+    <Compile Include="Requests\HotelSearchFilterRequest.cs" />
+    <Compile Include="Requests\HotelSearchRequest.cs" />
+    <Compile Include="Requests\HotelSearchRequestBase.cs" />
+    <Compile Include="Responses\AutoCompleteResponse.cs" />
+    <Compile Include="Responses\HotelSearchFilterResponse.cs" />
+    <Compile Include="Responses\HotelSearchResponse.cs" />
     <Compile Include="Extensions\FlightExtentions.cs" />
-    <Compile Include="Engines\Requests\FlightBuilderRequest.cs" />
-    <Compile Include="Engines\Responses\FlightBuilderResponse.cs" />
+    <Compile Include="Requests\FlightBuilderRequest.cs" />
+    <Compile Include="Responses\FlightBuilderResponse.cs" />
     <Compile Include="Managers\FlightBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

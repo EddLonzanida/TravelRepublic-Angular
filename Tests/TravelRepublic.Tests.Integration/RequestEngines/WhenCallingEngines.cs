@@ -1,13 +1,8 @@
-﻿using Eml.Mediator.Contracts;
-using NUnit.Framework;
-using Shouldly;
-using TravelRepublic.Business.Engines.Requests;
-using TravelRepublic.Business.Engines.Responses;
-using TravelRepublic.Tests.Integration.BaseClasses;
+﻿using Eml.Mediator.Contracts;using NUnit.Framework;using Shouldly;using TravelRepublic.Business.Requests;using TravelRepublic.Business.Responses;using TravelRepublic.Tests.Integration.BaseClasses;
 
 namespace TravelRepublic.Tests.Integration.RequestEngines
 {
-    public class WhenCallingEngines : IntegrationTestBase
+    public class WhenCallingEngines : IntegrationTestDbBase
     {
         [Test]
         public void AutoComplete_ShouldBeDiscoverable()

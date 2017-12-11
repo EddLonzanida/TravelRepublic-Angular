@@ -1,7 +1,7 @@
 ﻿using Eml.Mediator.Contracts;
-using TravelRepublic.Business.Engines.Responses;
+using TravelRepublic.Business.Responses;
 
-namespace TravelRepublic.Business.Engines.Requests
+namespace TravelRepublic.Business.Requests
 {
     public class HotelSearchFilterRequest : HotelSearchRequestBase, IRequestAsync<HotelSearchFilterRequest, HotelSearchFilterResponse>
     {

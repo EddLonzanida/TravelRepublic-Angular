@@ -45,11 +45,20 @@
     <Reference Include="Eml.ClassFactory.Contracts, Version=2.0.1.7, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.0.1.7\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.Mediator, Version=2.0.0.22, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Mediator.2.0.0.22\lib\net462\Eml.Mediator.dll</HintPath>
+    <Reference Include="Eml.ConfigParser, Version=2.0.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ConfigParser.2.0.0.19\lib\net462\Eml.ConfigParser.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.MefBootstrapper, Version=2.0.1.39, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.MefBootstrapper.2.0.1.39\lib\net462\Eml.MefBootstrapper.dll</HintPath>
+    <Reference Include="Eml.Contracts, Version=2.0.1.30, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Contracts.2.0.1.30\lib\net462\Eml.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Eml.DataRepository, Version=2.0.0.115, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.115\lib\net462\Eml.DataRepository.dll</HintPath>
+    </Reference>
+    <Reference Include="Eml.Mediator, Version=2.0.0.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Mediator.2.0.0.23\lib\net462\Eml.Mediator.dll</HintPath>
+    </Reference>
+    <Reference Include="Eml.MefBootstrapper, Version=2.0.1.41, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.MefBootstrapper.2.0.1.41\lib\net462\Eml.MefBootstrapper.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -67,6 +76,9 @@
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
     </Reference>
@@ -82,10 +94,12 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -161,8 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClasses\IntegrationTestBase.cs" />
+    <Compile Include="BaseClasses\IntegrationTestDbBase.cs" />
+    <Compile Include="Migrations\IntegrationTestConfiguration.cs" />
+    <Compile Include="Migrations\IntegrationTestDbMigrator.cs" />
     <Compile Include="RequestEngines\WhenCallingEngines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WhenDiContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

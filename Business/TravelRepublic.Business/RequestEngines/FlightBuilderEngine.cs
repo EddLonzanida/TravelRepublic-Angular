@@ -5,12 +5,12 @@ using System.Linq;
 using Eml.Contracts.Services;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Dto;
-using TravelRepublic.Business.Engines.Requests;
-using TravelRepublic.Business.Engines.Responses;
 using TravelRepublic.Business.Extensions;
 using TravelRepublic.Business.Managers;
+using TravelRepublic.Business.Requests;
+using TravelRepublic.Business.Responses;
 
-namespace TravelRepublic.Business.Engines.RequestEngines
+namespace TravelRepublic.Business.RequestEngines
 {
     public class FlightBuilderEngine : IRequestEngine<FlightBuilderRequest, FlightBuilderResponse>
     {

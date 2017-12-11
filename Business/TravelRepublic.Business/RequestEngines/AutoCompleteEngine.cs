@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.Composition;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Eml.Contracts.Repositories;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Entities;
-using TravelRepublic.Business.Engines.Requests;
-using TravelRepublic.Business.Engines.Responses;
+using TravelRepublic.Business.Requests;
+using TravelRepublic.Business.Responses;
 
-namespace TravelRepublic.Business.Engines.RequestEngines
+namespace TravelRepublic.Business.RequestEngines
 {
     public class AutoCompleteEngine : IRequestAsyncEngine<AutoCompleteRequest, AutoCompleteResponse>
     {

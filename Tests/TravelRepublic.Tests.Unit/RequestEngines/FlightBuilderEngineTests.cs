@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Eml.Contracts.Services;
-using NSubstitute;
-using NUnit.Framework;
-using Shouldly;
-using TravelRepublic.Business.Common.Dto;
-using TravelRepublic.Business.Engines.RequestEngines;
-using TravelRepublic.Business.Engines.Requests;
-using TravelRepublic.Business.Managers;
-
-namespace TravelRepublic.Tests.Unit.RequestEngines
+﻿using System;using System.Collections.Generic;using Eml.Contracts.Services;using NSubstitute;using NUnit.Framework;using Shouldly;using TravelRepublic.Business.Common.Dto;using TravelRepublic.Business.Managers;using TravelRepublic.Business.RequestEngines;using TravelRepublic.Business.Requests;namespace TravelRepublic.Tests.Unit.RequestEngines
 {
     [TestFixture]
     public class FlightBuilderEngineTests

@@ -9,10 +9,10 @@ using Eml.DataRepository;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Dto;
 using TravelRepublic.Business.Common.Entities;
-using TravelRepublic.Business.Engines.Requests;
-using TravelRepublic.Business.Engines.Responses;
+using TravelRepublic.Business.Requests;
+using TravelRepublic.Business.Responses;
 
-namespace TravelRepublic.Business.Engines.RequestEngines
+namespace TravelRepublic.Business.RequestEngines
 {
     public class HotelSearchFilterEngine : IRequestAsyncEngine<HotelSearchFilterRequest, HotelSearchFilterResponse>
     {

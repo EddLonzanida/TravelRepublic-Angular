@@ -8,8 +8,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Eml.Mediator.Contracts;
 using TravelRepublic.ApiHost.Api.BaseClasses;
-using TravelRepublic.Business.Engines.Requests;
-using TravelRepublic.Business.Engines.Responses;
+using TravelRepublic.Business.Requests;
+using TravelRepublic.Business.Responses;
 
 namespace TravelRepublic.ApiHost.Api.Hotel
 {

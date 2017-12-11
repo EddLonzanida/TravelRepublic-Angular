@@ -1,16 +1,16 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Threading.Tasks;
-using Eml.Mediator.Contracts;
-using TravelRepublic.Business.Common.Entities;
-using TravelRepublic.Business.Engines.Requests;
-using TravelRepublic.Business.Engines.Responses;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Eml.Contracts.Repositories;
 using Eml.DataRepository;
+using Eml.Mediator.Contracts;
+using TravelRepublic.Business.Common.Entities;
+using TravelRepublic.Business.Requests;
+using TravelRepublic.Business.Responses;
 
-namespace TravelRepublic.Business.Engines.RequestEngines
+namespace TravelRepublic.Business.RequestEngines
 {
     public class HotelSearchEngine : IRequestAsyncEngine<HotelSearchRequest, HotelSearchResponse>
     {

@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Eml.Contracts.Services;
-using TravelRepublic.Business.Common.Dto;
-using TravelRepublic.Business.Engines.Requests;
-
-namespace TravelRepublic.Business.Extensions
+﻿using System.Collections.Generic;using System.Linq;using Eml.Contracts.Services;using TravelRepublic.Business.Common.Dto;using TravelRepublic.Business.Requests;namespace TravelRepublic.Business.Extensions
 {
     public static class FlightExtentions
     {
