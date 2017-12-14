@@ -1,35 +1,54 @@
-﻿using Eml.Mediator.Contracts;using NUnit.Framework;using Shouldly;using TravelRepublic.Business.Requests;using TravelRepublic.Business.Responses;using TravelRepublic.Tests.Integration.BaseClasses;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Eml.Mediator.Contracts;using NUnit.Framework;using Shouldly;using TravelRepublic.Business.Requests;using TravelRepublic.Business.Responses;using TravelRepublic.Tests.Integration.BaseClasses;
 
 namespace TravelRepublic.Tests.Integration.RequestEngines
 {
     public class WhenCallingEngines : IntegrationTestDbBase
     {
         [Test]
-        public void AutoComplete_ShouldBeDiscoverable()
+        public async Task  AutoComplete_ShouldBeExecuted()
         {
-            var exported = classFactory.GetExport<IRequestAsyncEngine<AutoCompleteRequest, AutoCompleteResponse>>();
-            exported.ShouldNotBeNull();
+            var request = new AutoCompleteRequest("a");
+
+            var sut = await mediator.GetAsync(request);
+
+            sut.Suggestions.ToList().Count.ShouldBe(15);
         }
 
         [Test]
-        public void HotelSearchFilter_ShouldBeDiscoverable()
+        public async Task HotelSearchFilter_ShouldBeExecuted()
         {
-            var exported = classFactory.GetExport<IRequestAsyncEngine<HotelSearchFilterRequest, HotelSearchFilterResponse>>();
-            exported.ShouldNotBeNull();
+            var request = new HotelSearchRequest("", 0, 0, 0, 0, 1, eHotelSorting.None);
+
+            var sut = await mediator.GetAsync(request);
+
+            sut.RecordCount.ShouldBe(1132);
+            sut.RowsPerPage.ShouldBe(8);
         }
 
         [Test]
-        public void HotelSearch_ShouldBeDiscoverable()
+        public async Task HotelSearch_ShouldBeExecuted()
         {
-            var exported = classFactory.GetExport<IRequestAsyncEngine<HotelSearchRequest, HotelSearchResponse>>();
-            exported.ShouldNotBeNull();
+            var request = new HotelSearchFilterRequest("", 0, 0, 0, 0);
+            
+            var sut = await mediator.GetAsync(request);
+
+            sut.CostMax.ShouldBe(6988);
+            sut.CostMin.ShouldBe(206.15);
+            sut.RatingMin.ShouldBe(0);
+            sut.RatingMax.ShouldBe(10);
+            sut.StarFilters.ToList().Count.ShouldBe(6);
         }
 
         [Test]
-        public void FlightBuilder_ShouldBeDiscoverable()
+        public void FlightBuilder_ShouldBeExecuted()
         {
-            var exported = classFactory.GetExport<IRequestEngine<FlightBuilderRequest, FlightBuilderResponse>>();
-            exported.ShouldNotBeNull();
+            var request = new FlightBuilderRequest(eFlightFilter.None);
+
+            var sut = mediator.Get(request);
+
+            sut.Flights.Count.ShouldBe(6);
         }
     }
 }

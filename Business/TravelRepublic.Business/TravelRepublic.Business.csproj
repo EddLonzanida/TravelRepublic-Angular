@@ -41,8 +41,8 @@
     <Reference Include="Eml.Contracts, Version=2.0.1.30, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.Contracts.2.0.1.30\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.DataRepository, Version=2.0.0.115, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.115\lib\net462\Eml.DataRepository.dll</HintPath>
+    <Reference Include="Eml.DataRepository, Version=2.0.0.120, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.120\lib\net462\Eml.DataRepository.dll</HintPath>
     </Reference>
     <Reference Include="Eml.Mediator, Version=2.0.0.23, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.Mediator.2.0.0.23\lib\net462\Eml.Mediator.dll</HintPath>

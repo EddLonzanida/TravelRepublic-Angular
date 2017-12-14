@@ -3,6 +3,8 @@ using Eml.Contracts.Repositories;
 using Eml.DataRepository;
 using NUnit.Framework;
 using Shouldly;
+using TravelRepublic.ApiHost.Api.Flight;
+using TravelRepublic.ApiHost.Api.Hotel;
 using TravelRepublic.Business.Common.Entities;
 using TravelRepublic.Business.Managers;
 using TravelRepublic.Tests.Integration.BaseClasses;
@@ -36,6 +38,22 @@ namespace TravelRepublic.Tests.Integration
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(value);
+        }
+        
+        [Test]
+        public void FlightController_ShouldBeDiscoverable()
+        {
+            var sut = classFactory.GetExport<FlightController>();
+
+            sut.ShouldNotBeNull();
+        }
+        
+        [Test]
+        public void HotelController_ShouldBeDiscoverable()
+        {
+            var sut = classFactory.GetExport<HotelController>();
+
+            sut.ShouldNotBeNull();
         }
     }
 }
