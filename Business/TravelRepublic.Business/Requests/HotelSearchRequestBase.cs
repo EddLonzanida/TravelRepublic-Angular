@@ -21,10 +21,10 @@
             CostMax = costMax;
 
             if (string.IsNullOrEmpty(Name)) Name = "";
-            if (Star < 0) Star = 0;
-            if (UserRating < 0) UserRating = 0;
-            if (CostMin > CostMax) CostMin = CostMax;
-            if (CostMax < CostMin)
+            if (Star < 0) Star = 0;
+            if (UserRating < 0) UserRating = 0;
+            if (CostMin > CostMax) CostMin = CostMax;
+            if (CostMax < CostMin)
             {
                 var min = CostMin;
                 var max = CostMax;
@@ -32,7 +32,6 @@
                 CostMin = max;
                 CostMax = min;
             }
-
         }
     }
 }

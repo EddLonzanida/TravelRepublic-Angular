@@ -29,6 +29,7 @@ namespace TravelRepublic.Business.Common.Entities
 
         [DataType(DataType.Url)]
         public string ThumbnailUrl { get; set; }
+
         public double MinCost { get; set; }
     }
 }

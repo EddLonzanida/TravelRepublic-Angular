@@ -17,7 +17,7 @@ namespace TravelRepublic.Business.RequestEngines
     public class HotelSearchFilterEngine : IRequestAsyncEngine<HotelSearchFilterRequest, HotelSearchFilterResponse>
     {
         private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
-        private readonly ITableMaintenance<Establishment> tableMaintenanceRepository;
+        private readonly ITableMaintenance<Establishment> tableMaintenanceRepository;
 
         [ImportingConstructor]
         public HotelSearchFilterEngine(IDataRepositorySoftDeleteInt<Establishment> repository)
@@ -60,7 +60,7 @@ namespace TravelRepublic.Business.RequestEngines
                 .ToListAsync();
 
             if (starFilters.Any()) starFilters.Last().IsCheapest = true;
-            starFilters = starFilters
+            starFilters = starFilters
                 .OrderBy(r => r.Star)
                 .ToList();
 
@@ -81,7 +81,7 @@ namespace TravelRepublic.Business.RequestEngines
             var ratingFilterMax = ratingFilter?.Maximum ?? 0;
             var costFilterMin = costFilter?.Minimum ?? 0;
             var costFilterMax = costFilter?.Maximum ?? 0;
-            return new HotelSearchFilterResponse(starFilters, ratingFilterMin, ratingFilterMax, costFilterMin, costFilterMax);
+            return new HotelSearchFilterResponse(starFilters, ratingFilterMin, ratingFilterMax, costFilterMin, costFilterMax);
         }
 
         public void Dispose()

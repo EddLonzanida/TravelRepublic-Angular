@@ -36,6 +36,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
         {
             var request = new HotelSearchRequest(name, star, userRating, costMin, costMax, page, (eHotelSorting)sorting);
             var response = await mediator.GetAsync(request);
+
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
@@ -46,6 +47,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
         {
             var request = new AutoCompleteRequest(search);
             var response = await mediator.GetAsync(request);
+
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
@@ -60,6 +62,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
         {
             var request = new HotelSearchFilterRequest(name, star, userRating, costMin, costMax);
             var response = await mediator.GetAsync(request);
+
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
 

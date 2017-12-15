@@ -13,10 +13,13 @@ namespace TravelRepublic.ApiHost
             //	generate the new keys
             var newPaths = new Dictionary<string, PathItem>();
             var removeKeys = new List<string>();
+
             foreach (var path in paths)
             {
                 var newKey = path.Key.ToLower();
+
                 if (newKey == path.Key) continue;
+
                 removeKeys.Add(path.Key);
                 newPaths.Add(newKey, path.Value);
             }

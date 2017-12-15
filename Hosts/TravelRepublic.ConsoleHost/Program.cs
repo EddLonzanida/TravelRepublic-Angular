@@ -11,20 +11,25 @@ namespace TravelRepublic.ConsoleHost
     public class Program
     {
         private const string JSON_SOURCES = @"Migrations\JsonSources";
+
         private const string THUMBNAILS = @"Images\Thumbnails";
+
         private const string IMAGES = @"Images";
 
         static void Main(string[] args)
         {
             var hotel = Seed.GetStub<Hotel>("hotels", JSON_SOURCES);
             var ctr = 0;
+
             hotel.Establishments.OrderBy(r => r.Name).ToList().ForEach(r =>
             {
                 ctr++;
                 using (var webClient = new WebClient())
                 {
                     var hasError = false;
+
                     Console.WriteLine($"Saving images for {r.Name}..");
+
                     try
                     {
                         webClient.DownloadFile(r.ImageUrl, GetLocalPath(IMAGES, r.ImageUrl));
@@ -33,6 +38,7 @@ namespace TravelRepublic.ConsoleHost
                     {
                         Console.WriteLine(r.ImageUrl);
                         Console.WriteLine(e);
+
                         hasError = true;
                     }
                     try
@@ -43,11 +49,14 @@ namespace TravelRepublic.ConsoleHost
                     {
                         Console.WriteLine(r.ThumbnailUrl);
                         Console.WriteLine(e);
+
                         hasError = true;
                     }
 
                     if (!hasError) return;
+
                     ctr--;
+
                     Console.WriteLine();
                 }
             });
@@ -63,12 +72,14 @@ namespace TravelRepublic.ConsoleHost
             var baseDirectory = Seed.GetBinDirectory();
             var localPath = $@"{baseDirectory}\{relativeDirectory}\{absolutePath.Replace("/", @"\")}";
             var destinationDirectory = Path.GetDirectoryName(localPath);
+
             if (Directory.Exists(destinationDirectory)) return localPath;
 
             if (destinationDirectory != null)
             {
                 Directory.CreateDirectory(destinationDirectory);
             }
+
             return localPath;
         }
     }

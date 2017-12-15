@@ -20,7 +20,7 @@ namespace TravelRepublic.Business.Requests
     public class HotelSearchRequest : HotelSearchRequestBase, IRequestAsync<HotelSearchRequest, HotelSearchResponse>
     {
         public int Page { get; }
-        public eHotelSorting HotelSorting { get; }
+        public eHotelSorting HotelSorting { get; }
 
         public HotelSearchRequest(string name, int star, double userRating, double costMin, double costMax, int page, eHotelSorting hotelSorting)
             : base(name, star, userRating, costMin, costMax)
@@ -29,7 +29,7 @@ namespace TravelRepublic.Business.Requests
             HotelSorting = hotelSorting;
 
             if (Page < 0) Page = 0;
-            if ((int)HotelSorting > 9) HotelSorting = eHotelSorting.None;
+            if ((int)HotelSorting > 9) HotelSorting = eHotelSorting.None;
         }
     }
 }

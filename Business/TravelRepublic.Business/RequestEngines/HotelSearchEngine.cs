@@ -15,7 +15,7 @@ namespace TravelRepublic.Business.RequestEngines
     public class HotelSearchEngine : IRequestAsyncEngine<HotelSearchRequest, HotelSearchResponse>
     {
         private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
-        private readonly ITableMaintenance<Establishment> tableMaintenanceRepository;
+        private readonly ITableMaintenance<Establishment> tableMaintenanceRepository;
 
         [ImportingConstructor]
         public HotelSearchEngine(IDataRepositorySoftDeleteInt<Establishment> repository)
@@ -68,34 +68,34 @@ namespace TravelRepublic.Business.RequestEngines
                 case eHotelSorting.NameDesc:
                     orderBy = r => r.OrderByDescending(x => x.Name);
                     break;
-                case eHotelSorting.DistanceAsc:
+                case eHotelSorting.DistanceAsc:
                     orderBy = r => r.OrderBy(x => x.Distance);
                     break;
-                case eHotelSorting.DistanceDesc:
+                case eHotelSorting.DistanceDesc:
                     orderBy = r => r.OrderByDescending(x => x.Distance);
                     break;
-                case eHotelSorting.StarsAsc:
+                case eHotelSorting.StarsAsc:
                     orderBy = r => r.OrderBy(x => x.Stars);
                     break;
-                case eHotelSorting.StarsDesc:
+                case eHotelSorting.StarsDesc:
                     orderBy = r => r.OrderByDescending(x => x.Stars);
                     break;
-                case eHotelSorting.CostAsc:
+                case eHotelSorting.CostAsc:
                     orderBy = r => r.OrderBy(x => x.MinCost);
                     break;
-                case eHotelSorting.UserRatingAsc:
+                case eHotelSorting.UserRatingAsc:
                     orderBy = r => r.OrderBy(x => x.UserRating);
                     break;
-                case eHotelSorting.UserRatingDesc:
+                case eHotelSorting.UserRatingDesc:
                     orderBy = r => r.OrderByDescending(x => x.UserRating);
                     break;
-                case eHotelSorting.CostDesc:
+                case eHotelSorting.CostDesc:
                     orderBy = r => r.OrderByDescending(x => x.MinCost);
                     break;
-                default:
+                default:
                     throw new ArgumentOutOfRangeException();
             }
-            return orderBy;
+            return orderBy;
         }
     }
 }

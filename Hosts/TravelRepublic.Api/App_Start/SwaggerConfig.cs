@@ -6,7 +6,6 @@ using TravelRepublic;
 using TravelRepublic.ApiHost;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
-
 namespace TravelRepublic
 {
     public class SwaggerConfig

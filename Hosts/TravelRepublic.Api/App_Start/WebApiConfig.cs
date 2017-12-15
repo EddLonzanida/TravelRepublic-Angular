@@ -10,6 +10,7 @@ namespace TravelRepublic.ApiHost
         {
             // Web API configuration and services
             var formatters = config.Formatters;
+
             formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             formatters.Remove(config.Formatters.XmlFormatter);
             formatters.JsonFormatter.Indent = true;

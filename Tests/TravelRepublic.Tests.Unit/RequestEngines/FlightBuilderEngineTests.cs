@@ -4,17 +4,22 @@
     public class FlightBuilderEngineTests
     {
         private FlightBuilderEngine engine;
+
         private IFlightBuilder flightBuilder;
+
         private IClockService clockService;
 
         private Flight normalFlightWithTwoHourDuration;
+
         private Flight normalMultiSegmentFlight;
+
         private Flight flightDepartingInThePast;
+
         private Flight flightThatDepartsBeforeItArrives;
+
         private Flight flightWithMoreThanTwoHoursGroundTime;
+
         private Flight anotherFlightWithMoreThanTwoHoursGroundTime;
-
-
 
         [SetUp]
         public void Setup()
@@ -27,7 +32,6 @@
             clockService.Now().Returns(now);
             clockService.NowAddDays(3).Returns(now.AddDays(3));
             flightBuilder = new FlightBuilder(clockService);
-
             engine = new FlightBuilderEngine(flightBuilder, clockService);
         }
 
@@ -52,10 +56,9 @@
             var response = engine.Get(request);
 
             var flights = response.Flights;
+            var segments = flights.Flatten();
             clockService.Received(1).NowAddDays(3);
             flights.Count.ShouldBe(2);
-
-            var segments = flights.Flatten();
             flightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
             anotherFlightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
         }
@@ -68,10 +71,9 @@
 
             var response = engine.Get(request);
 
+            var segments = response.Flights.Flatten();
             clockService.Received(1).NowAddDays(3);
             response.Flights.Count.ShouldBe(1);
-
-            var segments = response.Flights.Flatten();
             flightThatDepartsBeforeItArrives.Exists(segments).ShouldBeTrue();
         }
 
@@ -83,10 +85,9 @@
 
             var response = engine.Get(request);
 
+            var segments = response.Flights.Flatten();
             clockService.Received(1).NowAddDays(3);
             response.Flights.Count.ShouldBe(3);
-
-            var segments = response.Flights.Flatten();
             flightThatDepartsBeforeItArrives.Exists(segments).ShouldBeTrue();
             flightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
             anotherFlightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
@@ -100,11 +101,10 @@
 
             var response = engine.Get(request);
 
+            var segments = response.Flights.Flatten();
             clockService.Received(1).Now();
             clockService.Received(1).NowAddDays(3);
             response.Flights.Count.ShouldBe(1);
-
-            var segments = response.Flights.Flatten();
             flightDepartingInThePast.Exists(segments).ShouldBeTrue();
         }
 
@@ -116,11 +116,10 @@
 
             var response = engine.Get(request);
 
+            var segments = response.Flights.Flatten();
             clockService.Received(1).Now();
             clockService.Received(1).NowAddDays(3);
             response.Flights.Count.ShouldBe(3);
-
-            var segments = response.Flights.Flatten();
             anotherFlightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
             flightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
             flightDepartingInThePast.Exists(segments).ShouldBeTrue();
@@ -134,11 +133,10 @@
 
             var response = engine.Get(request);
 
+            var segments = response.Flights.Flatten();
             clockService.Received(1).Now();
             clockService.Received(1).NowAddDays(3);
             response.Flights.Count.ShouldBe(2);
-
-            var segments = response.Flights.Flatten();
             flightThatDepartsBeforeItArrives.Exists(segments).ShouldBeTrue();
             flightDepartingInThePast.Exists(segments).ShouldBeTrue();
         }
@@ -151,11 +149,10 @@
 
             var response = engine.Get(request);
 
+            var segments = response.Flights.Flatten();
             clockService.Received(1).Now();
             clockService.Received(1).NowAddDays(3);
             response.Flights.Count.ShouldBe(4);
-
-            var segments = response.Flights.Flatten();
             anotherFlightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
             flightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
             flightThatDepartsBeforeItArrives.Exists(segments).ShouldBeTrue();

@@ -15,7 +15,7 @@ namespace TravelRepublic.Business.RequestEngines
     public class FlightBuilderEngine : IRequestEngine<FlightBuilderRequest, FlightBuilderResponse>
     {
         private readonly IFlightBuilder _flightBuilder;
-        private readonly IClockService _clockService;
+        private readonly IClockService _clockService;
 
         [ImportingConstructor]
         public FlightBuilderEngine(IFlightBuilder flightBuilder, IClockService clockService)
@@ -36,8 +36,8 @@ namespace TravelRepublic.Business.RequestEngines
             {
                 case eFlightFilter.None:
                     filteredFlights = flights.ToList();
-
                     break;
+
                 case eFlightFilter.TwoHoursWaitingTime:
                     filteredFlights = flights.SegmentsWithTwoHoursWaitingTime();
                     break;

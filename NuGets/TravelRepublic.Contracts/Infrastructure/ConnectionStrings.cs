@@ -2,6 +2,6 @@
 {
     public static class ConnectionStrings
     {
-        public const string TravelRepublicKey = "TravelRepublicConnectionString";
+        public const string TravelRepublicKey = "MainDbConnectionString";
     }
 }

@@ -14,22 +14,22 @@
                  }).ToList();
 
             filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.TwoHoursWaitingTime)));
-            return filteredFlights;
+            return filteredFlights;
         }
 
         public static List<Flight> ArrivalBeforeDepartureDate(this IEnumerable<Flight> flights)
         {
             var filteredFlights = flights.Where(r => r.Segments.All(s => s.ArrivalDate < s.DepartureDate)).ToList();
-            filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.ArrivalBeforeDepartureDate)));
-            return filteredFlights;
+            filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.ArrivalBeforeDepartureDate)));
+            return filteredFlights;
         }
 
         public static List<Flight> DepartureBeforeCurrentDate(this IEnumerable<Flight> flights, IClockService clockService)
         {
             var now = clockService.Now();
             var filteredFlights = flights.Where(r => r.Segments.All(s => s.DepartureDate < now)).ToList();
-            filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.DepartureBeforeCurrentDate)));
-            return filteredFlights;
+            filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.DepartureBeforeCurrentDate)));
+            return filteredFlights;
         }
     }
 }

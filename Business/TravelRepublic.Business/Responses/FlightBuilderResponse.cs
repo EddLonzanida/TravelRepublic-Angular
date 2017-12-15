@@ -2,7 +2,7 @@
 {
     public class FlightBuilderResponse : IResponse
     {
-       public IList<Flight> Flights { get; }
+        public IList<Flight> Flights { get; }
 
         public FlightBuilderResponse(IList<Flight> flights)
         {

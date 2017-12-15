@@ -19,6 +19,7 @@ namespace TravelRepublic.Tests.Unit.RequestEngines
         public static bool Exists(this Flight flight, List<Segment> segments)
         {
             var target = flight.Flatten();
+
             return target.All(s => segments.Any(r => r.ArrivalDate == s.ArrivalDate &&
                                                      r.DepartureDate == s.DepartureDate));
         }

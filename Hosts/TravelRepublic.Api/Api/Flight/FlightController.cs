@@ -4,7 +4,6 @@
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class FlightController : ApiControllerBase
     {
-
         [ImportingConstructor]
         protected FlightController(IMediator mediator)
             : base(mediator)
@@ -18,6 +17,7 @@
         {
             var request = new FlightBuilderRequest(searchCode);
             var reponse = mediator.Get(request);
+
             return Request.CreateResponse(HttpStatusCode.OK, reponse.Flights);
         }
 

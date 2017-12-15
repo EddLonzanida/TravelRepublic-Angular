@@ -13,6 +13,7 @@ namespace TravelRepublic.Tests.Integration.BaseClasses
     public abstract class IntegrationTestDbBase
     {
         protected IMediator mediator;
+
         protected IClassFactory classFactory;
 
         private IMigrator dbMigration;
@@ -21,10 +22,11 @@ namespace TravelRepublic.Tests.Integration.BaseClasses
         public void Setup()
         {
             Bootstrapper.Init("TravelRepublic*.dll");
+
             classFactory = ClassFactory.Get();
             mediator = classFactory.GetExport<IMediator>();
-
             dbMigration = classFactory.GetMigrator(Environments.INTEGRATIONTEST);
+
             if (dbMigration == null)
             {
                 throw new NotFoundException("dbMigration not found..");
@@ -32,6 +34,7 @@ namespace TravelRepublic.Tests.Integration.BaseClasses
 
             Console.WriteLine("DestroyDb if any..");
             dbMigration.DestroyDb();
+
             Console.WriteLine("CreateDb..");
             dbMigration.CreateDb();
         }
