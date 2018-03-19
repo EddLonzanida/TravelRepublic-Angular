@@ -5,21 +5,22 @@ using NUnit.Framework;
 namespace TravelRepublic.Tests.Integration.BaseClasses
 {
     [TestFixture]
-    public abstract class IntegrationTestBase
+    public abstract class IntegrationTestDiBase
     {
         protected IClassFactory classFactory;
 
         [OneTimeSetUp]
         public void Setup()
         {
-            Bootstrapper.Init("TravelRepublic*.dll");
-            classFactory = ClassFactory.Get();
+            classFactory = Bootstrapper.Init("TravelRepublic*.dll");
         }
 
         [OneTimeTearDown]
         public void TearDown()
         {
-            ClassFactory.Dispose();
+            var container = classFactory.Container;
+            classFactory = null;
+            container.Dispose();
         }
     }
 }

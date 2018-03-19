@@ -21,9 +21,7 @@ namespace TravelRepublic.Tests.Integration.BaseClasses
         [OneTimeSetUp]
         public void Setup()
         {
-            Bootstrapper.Init("TravelRepublic*.dll");
-
-            classFactory = ClassFactory.Get();
+            classFactory = Bootstrapper.Init("TravelRepublic*.dll");
             mediator = classFactory.GetExport<IMediator>();
             dbMigration = classFactory.GetMigrator(Environments.INTEGRATIONTEST);
 
@@ -43,7 +41,10 @@ namespace TravelRepublic.Tests.Integration.BaseClasses
         public void TearDown()
         {
             dbMigration.DestroyDb();
-            ClassFactory.Dispose();
+
+            var container = classFactory.Container;
+            classFactory = null;
+            container.Dispose();
         }
     }
 }

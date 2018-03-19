@@ -11,7 +11,7 @@ using TravelRepublic.Tests.Integration.BaseClasses;
 
 namespace TravelRepublic.Tests.Integration
 {
-    public class WhenDiContainer : IntegrationTestBase
+    public class WhenDiContainer : IntegrationTestDiBase
     {
         [Test]
         public void EstablishmentRepository_ShouldBeDiscoverable()

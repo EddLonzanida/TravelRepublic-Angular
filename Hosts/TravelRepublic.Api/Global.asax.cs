@@ -25,9 +25,10 @@ namespace TravelRepublic.ApiHost
             try
             {
                 var rootFolder = System.Web.Hosting.HostingEnvironment.MapPath(@"~\bin");
-                Bootstrapper.Init(rootFolder, new[] { "TravelRepublic*.dll" });
-                emlLogger = ClassFactory.MefContainer.GetExportedValue<Eml.Logger.ILogger>();
-                GlobalConfiguration.Configuration.DependencyResolver = new MefDependencyResolver(ClassFactory.MefContainer); // web api controllers
+                var classFactory = Bootstrapper.Init(rootFolder, new[] { "TravelRepublic*.dll" });
+
+                emlLogger = classFactory.GetExport<Eml.Logger.ILogger>();
+                GlobalConfiguration.Configuration.DependencyResolver = new MefDependencyResolver(classFactory.Container); // web api controllers
                 GlobalConfiguration.Configure(WebApiConfig.Register);
 
                 logger.Info("Application started");
