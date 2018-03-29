@@ -33,8 +33,8 @@
     <Reference Include="Eml.ClassFactory.Contracts, Version=2.0.1.12, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.0.1.12\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.Contracts, Version=2.0.1.40, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Contracts.2.0.1.40\lib\net462\Eml.Contracts.dll</HintPath>
+    <Reference Include="Eml.Contracts, Version=2.0.1.62, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Contracts.2.0.1.62\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
