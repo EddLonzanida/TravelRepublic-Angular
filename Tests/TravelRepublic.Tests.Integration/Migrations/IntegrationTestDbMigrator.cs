@@ -12,7 +12,7 @@ namespace TravelRepublic.Tests.Integration.Migrations
     {
         [ImportingConstructor]
         public IntegrationTestDbMigrator(IConfigBase<string, MainDbConnectionString> mainDbConnectionString)
-            :base(mainDbConnectionString.Value, true)
+            :base(mainDbConnectionString.Value)
         {
         }
     }

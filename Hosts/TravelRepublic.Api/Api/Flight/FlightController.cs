@@ -1,4 +1,5 @@
-﻿using System;using System.Collections.Generic;using System.ComponentModel.Composition;using System.Net;using System.Net.Http;using System.Web.Http;using System.Web.Http.Description;using Eml.Mediator.Contracts;using TravelRepublic.ApiHost.Api.BaseClasses;using TravelRepublic.Business.Requests;namespace TravelRepublic.ApiHost.Api.Flight
+﻿using System;using System.Collections.Generic;using System.ComponentModel.Composition;using System.Net;using System.Net.Http;using System.Web.Http;using System.Web.Http.Description;using Eml.ControllerBase;
+using Eml.Mediator.Contracts;using TravelRepublic.Business.Requests;namespace TravelRepublic.ApiHost.Api.Flight
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]

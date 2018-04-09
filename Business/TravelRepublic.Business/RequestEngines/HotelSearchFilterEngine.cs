@@ -4,8 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Eml.Contracts.Repositories;
-using Eml.DataRepository;
+using Eml.DataRepository.Contracts;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Dto;
 using TravelRepublic.Business.Common.Entities;
@@ -17,13 +16,10 @@ namespace TravelRepublic.Business.RequestEngines
     public class HotelSearchFilterEngine : IRequestAsyncEngine<HotelSearchFilterRequest, HotelSearchFilterResponse>
     {
         private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
-        private readonly ITableMaintenance<Establishment> tableMaintenanceRepository;
-
-        [ImportingConstructor]
+        [ImportingConstructor]
         public HotelSearchFilterEngine(IDataRepositorySoftDeleteInt<Establishment> repository)
         {
             this.repository = repository;
-            tableMaintenanceRepository = (ITableMaintenance<Establishment>)repository;
         }
 
         public async Task<HotelSearchFilterResponse> GetAsync(HotelSearchFilterRequest request)
@@ -33,7 +29,7 @@ namespace TravelRepublic.Business.RequestEngines
             var userRating = request.UserRating;
             var costMin = request.CostMin;
             var costMax = request.CostMax;
-            var dbSet = tableMaintenanceRepository.GetDbSet();
+            var dbSet = repository.DbSet;
 
 
             Expression<Func<Establishment, bool>> starFiltersWhereClause = r => (name == "" || r.Name.Contains(name))

@@ -6,8 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Eml.ControllerBase;
 using Eml.Mediator.Contracts;
-using TravelRepublic.ApiHost.Api.BaseClasses;
 using TravelRepublic.Business.Requests;
 using TravelRepublic.Business.Responses;
 
@@ -48,7 +48,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
             var request = new AutoCompleteRequest(search);
             var response = await mediator.GetAsync(request);
 
-            return Request.CreateResponse(HttpStatusCode.OK, response);
+            return Request.CreateResponse(HttpStatusCode.OK, response.Suggestions);
         }
 
         [HttpGet]

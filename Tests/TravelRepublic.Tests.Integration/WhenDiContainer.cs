@@ -1,6 +1,6 @@
 ﻿using Eml.ConfigParser;
-using Eml.Contracts.Repositories;
 using Eml.DataRepository;
+using Eml.DataRepository.Contracts;
 using NUnit.Framework;
 using Shouldly;
 using TravelRepublic.ApiHost.Api.Flight;

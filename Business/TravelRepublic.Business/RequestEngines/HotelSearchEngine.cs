@@ -3,8 +3,8 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Eml.Contracts.Repositories;
 using Eml.DataRepository;
+using Eml.DataRepository.Contracts;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Entities;
 using TravelRepublic.Business.Requests;
@@ -15,13 +15,10 @@ namespace TravelRepublic.Business.RequestEngines
     public class HotelSearchEngine : IRequestAsyncEngine<HotelSearchRequest, HotelSearchResponse>
     {
         private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
-        private readonly ITableMaintenance<Establishment> tableMaintenanceRepository;
-
-        [ImportingConstructor]
+        [ImportingConstructor]
         public HotelSearchEngine(IDataRepositorySoftDeleteInt<Establishment> repository)
         {
             this.repository = repository;
-            tableMaintenanceRepository = (ITableMaintenance<Establishment>)repository;
         }
 
         public async Task<HotelSearchResponse> GetAsync(HotelSearchRequest request)
@@ -46,7 +43,7 @@ namespace TravelRepublic.Business.RequestEngines
             }
 
 
-            var establishments = await tableMaintenanceRepository
+            var establishments = await repository
                 .GetPagedListAsync(currentPage, whereClause,
                 r => orderBy(r));
 

@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.Application;
 
@@ -8,6 +9,8 @@ namespace TravelRepublic.ApiHost
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger());
+
             // Web API configuration and services
             var formatters = config.Formatters;
 
@@ -25,7 +28,7 @@ namespace TravelRepublic.ApiHost
                 handler: new RedirectHandler(SwaggerDocsConfig.DefaultRootUrlResolver, "swagger/ui/index"));
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi2",
+                name: "DefaultApi",
                 routeTemplate: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = RouteParameter.Optional }
             );

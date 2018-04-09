@@ -1,12 +1,13 @@
 ﻿using System.Data.Entity.Migrations;
 using TravelRepublic.Data;
 using TravelRepublic.Data.Migrations;
+using TravelRepublic.Data.Migrations.Seeders;
 
 namespace TravelRepublic.Tests.Integration.Migrations
 {
-    public class IntegrationTestConfiguration: DbMigrationsConfiguration<TravelRepublicDb>
+    public class IntegrationTestConfiguration : DbMigrationsConfiguration<TravelRepublicDb>
     {
-        private const string JSON_SOURCES = @"Migrations\JsonSources";
+        private const string SAMPLE_DATA_SOURCES = @"Migrations\SampleDataSources";
 
         public IntegrationTestConfiguration()
         {
@@ -16,7 +17,7 @@ namespace TravelRepublic.Tests.Integration.Migrations
 
         protected override void Seed(TravelRepublicDb context)
         {
-            HotelData.Seed(context,JSON_SOURCES);
+            HotelSeeder.Seed(context, SAMPLE_DATA_SOURCES);
         }
     }
 }

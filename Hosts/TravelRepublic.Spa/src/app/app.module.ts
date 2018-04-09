@@ -29,6 +29,7 @@ import { SearchHomeComponent } from './hotels/search-home/search-home.component'
 import { BusyIndicatorComponent } from './shared/busy-indicator/busy-indicator.component';
 import { MyDebuggerPipe } from './shared/my-debugger.pipe';
 import { RatingConverterPipe } from './shared/rating-converter.pipe';
+import { SearchService } from './shared/services/search.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/hotels', pathMatch: 'full' },
@@ -66,7 +67,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     SharedModule, OverlayPanelModule
   ],
-  providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl }, HotelService],
+  providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl }, SearchService, HotelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@ namespace TravelRepublic.ApiHost
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        private Eml.Logger.ILogger emlLogger;
+        public static Eml.Logger.ILogger Logger { get; private set; }
 
         protected void Application_Start()
         {
@@ -27,7 +27,7 @@ namespace TravelRepublic.ApiHost
                 var rootFolder = System.Web.Hosting.HostingEnvironment.MapPath(@"~\bin");
                 var classFactory = Bootstrapper.Init(rootFolder, new[] { "TravelRepublic*.dll" });
 
-                emlLogger = classFactory.GetExport<Eml.Logger.ILogger>();
+                Logger = classFactory.GetExport<Eml.Logger.ILogger>();
                 GlobalConfiguration.Configuration.DependencyResolver = new MefDependencyResolver(classFactory.Container); // web api controllers
                 GlobalConfiguration.Configure(WebApiConfig.Register);
 
@@ -47,23 +47,23 @@ namespace TravelRepublic.ApiHost
             if (exception == null) return;
 
             const string msg = "An unhandled exception occurred";
-            if (emlLogger.Log == null)
+            if (Logger.Log == null)
             {
                 var logger = LogManager.GetCurrentClassLogger();
                 logger.Info(msg);
             }
-            else emlLogger.Log.Error(exception, msg);
+            else Logger.Log.Error(exception, msg);
         }
 
         protected void Application_End()
         {
             const string msg = "Application stopping";
-            if (emlLogger.Log == null)
+            if (Logger.Log == null)
             {
                 var logger = LogManager.GetCurrentClassLogger();
                 logger.Info(msg);
             }
-            else emlLogger.Log.Info(msg);
+            else Logger.Log.Info(msg);
         }
 
         private readonly EventHandler<ErrorEventArgs> _serializationErrorHandler = (sender, args) =>

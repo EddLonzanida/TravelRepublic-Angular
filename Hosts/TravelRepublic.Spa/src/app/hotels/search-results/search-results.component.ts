@@ -3,7 +3,6 @@ import { SelectItem, OverlayPanel } from 'primeng/primeng';
 
 import { HotelService } from '../hotel-service';
 import { HotelSearchRequest } from '../requests/hotel-search-request';
-import { HotelSearchFilterRequest } from '../requests/hotel-search-filter-request';
 import { HotelSearchResponse } from '../responses/hotel-search-response';
 import { HotelSearchFilterResponse } from '../responses/hotel-search-filter-response';
 import { HotelSorting } from '../dto/hotel-sorting.enum';
@@ -106,6 +105,7 @@ export class SearchResultsComponent implements OnChanges {
                 this.hasErrors = true;
             });
     }
+
     onSlideEnd(event, sender) {
         let hasChanges = false;
         if (sender === 'star') {
@@ -133,11 +133,13 @@ export class SearchResultsComponent implements OnChanges {
             this.search();
         }
     }
+
     onSlideCancelled($event) {
         this.searchRequest.star = this.searchFilterResponse.starFilters[0].star;
         this.oldStar = this.searchRequest.star;
         this.search();
     }
+
     onLazyLoad(event) {
         if (event && event.first > 0 && event.rows > 0) {
             this.searchRequest.page = (event.first / event.rows) + 1;
@@ -146,13 +148,16 @@ export class SearchResultsComponent implements OnChanges {
         }
         this.search();
     }
+
     restart(): void {
         this.restartSearch.emit();
     }
+
     selectEstablishment(event, item: Establishment, overlaypanel: OverlayPanel) {
         this.selectedEstablishment = item;
         overlaypanel.toggle(event);
     }
+
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.isStartSearch && changes.isStartSearch.currentValue) {
             this.searchRequest.page = 1;
@@ -160,15 +165,18 @@ export class SearchResultsComponent implements OnChanges {
         } else {
         }
     }
+
     canResetUserRating(): boolean {
         return this.searchRequest.userRating !== this.searchFilterResponse.ratingMin;
     }
+
     resetUserRating() {
         this.searchRequest.userRating = this.searchFilterResponse.ratingMin;
         this.oldUserRating = this.searchRequest.userRating;
         this.searchRequest.page = 1;
         this.search();
     }
+
     private refillSortOrderList(): void {
         this.sortOrders = [];
         this.sortOrders.push({ label: '-- Select Sorting --', value: null });
@@ -183,6 +191,7 @@ export class SearchResultsComponent implements OnChanges {
         this.sortOrders.push({ label: 'Rating - Highest', value: HotelSorting.UserRatingDesc });
         this.sortOrders.push({ label: 'Rating - Lowest', value: HotelSorting.UserRatingAsc });
     }
+
     isReady(): boolean {
         let isready = true;
         if (!this.searchResponse) { isready = false; }
@@ -192,12 +201,15 @@ export class SearchResultsComponent implements OnChanges {
         if (this.searchRequest.star >= 0) { } else { return false; }
         return isready;
     }
+
     getStarIndex(star: number): number {
         return this.searchFilterResponse.starFilters.findIndex(filter => filter.star >= star);
     }
+
     canSort(): boolean {
         return this.isLocalBusy || !(this.searchResponse.recordCount > 1);
     }
+
     starClass(): string {
         const minStar = this.searchFilterResponse.starFilters[0].star;
         if (this.searchRequest.star === this.searchFilterResponse.starFilters[0].star) {

@@ -1,6 +1,6 @@
 ﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -73,12 +74,12 @@
     <Content Include=".gitignore" />
     <Content Include="LICENSE.md" />
     <Content Include="package.json" />
-    <None Include="packages.config" />
     <Content Include="README.md" />
     <Content Include="src\assets\.gitkeep" />
     <Content Include="src\tsconfig.json" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
+    <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -103,9 +104,8 @@
     <Content Include="src\app\shared\busy-indicator\busy-indicator.component.html" />
     <Content Include="src\app\shared\eml-checkbox\eml-checkbox.component.css" />
     <Content Include="src\app\shared\eml-checkbox\eml-checkbox.component.html" />
-    <Content Include="src\assets\images\homeheader.png" />
+    <Content Include="src\assets\img\homeheader.png" />
     <Content Include="src\assets\img\logo.png" />
-    <Content Include="src\assets\img\travelrepublic-logo3.png" />
     <Content Include="src\assets\img\travelrepublic-logo9.png" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
@@ -130,9 +130,10 @@
     <TypeScriptCompile Include="src\app\hotels\requests\hotel-search-request.ts" />
     <TypeScriptCompile Include="src\app\hotels\responses\hotel-search-filter-response.ts" />
     <TypeScriptCompile Include="src\app\hotels\responses\hotel-search-response.ts" />
-    <TypeScriptCompile Include="src\app\hotels\search-home\search-home.component.spec.ts" />
     <TypeScriptCompile Include="src\app\hotels\search-home\search-home.component.ts" />
     <TypeScriptCompile Include="src\app\hotels\search-results\search-results.component.ts" />
+    <TypeScriptCompile Include="src\app\shared\responses\search-response.ts" />
+    <TypeScriptCompile Include="src\app\shared\services\search.service.ts" />
     <TypeScriptCompile Include="src\app\shared\busy-indicator\busy-indicator.component.spec.ts" />
     <TypeScriptCompile Include="src\app\shared\busy-indicator\busy-indicator.component.ts" />
     <TypeScriptCompile Include="src\app\shared\eml-checkbox\eml-checkbox.component.ts" />
@@ -148,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\assets\images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -182,7 +186,7 @@
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

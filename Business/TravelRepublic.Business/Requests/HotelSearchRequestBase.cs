@@ -1,6 +1,6 @@
-﻿using TravelRepublic.Contracts.Entities;namespace TravelRepublic.Business.Requests
+﻿namespace TravelRepublic.Business.Requests
 {
-    public abstract class HotelSearchRequestBase : IHotelSearchRequestBase
+    public abstract class HotelSearchRequestBase 
     {
         public string Name { get; }
 

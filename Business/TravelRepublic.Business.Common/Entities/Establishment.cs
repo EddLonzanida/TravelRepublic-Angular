@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TravelRepublic.Business.Common.BaseClasses;
-using TravelRepublic.Contracts.Entities;
+﻿using Eml.EntityBaseClasses;
+using System.ComponentModel.DataAnnotations;
 
 namespace TravelRepublic.Business.Common.Entities
 {
-    public class Establishment : EntityBase, IEstablishment
+    public class Establishment : EntityBaseSoftDeleteInt
     {
         public int EstablishmentId { get; set; }
 

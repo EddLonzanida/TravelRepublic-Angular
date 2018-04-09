@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using Eml.DataRepository;
@@ -10,7 +9,7 @@ namespace TravelRepublic.ConsoleHost
 {
     public class Program
     {
-        private const string JSON_SOURCES = @"Migrations\JsonSources";
+        private const string SAMPLE_DATA_SOURCES = @"Migrations\SampleDataSources";
 
         private const string THUMBNAILS = @"Images\Thumbnails";
 
@@ -18,7 +17,7 @@ namespace TravelRepublic.ConsoleHost
 
         static void Main(string[] args)
         {
-            var hotel = Seed.GetStub<Hotel>("hotels", JSON_SOURCES);
+            var hotel = Seeder.GetJsonStub<Hotel>("hotels", SAMPLE_DATA_SOURCES);
             var ctr = 0;
 
             hotel.Establishments.OrderBy(r => r.Name).ToList().ForEach(r =>
@@ -69,18 +68,20 @@ namespace TravelRepublic.ConsoleHost
         {
             var uri = new Uri(url);
             var absolutePath = uri.AbsolutePath;
-            var baseDirectory = Seed.GetBinDirectory();
-            var localPath = $@"{baseDirectory}\{relativeDirectory}\{absolutePath.Replace("/", @"\")}";
-            var destinationDirectory = Path.GetDirectoryName(localPath);
+            var fn = absolutePath.Replace("/", @"\");
+            var fullPath = Seeder.GetFullPath(fn,relativeDirectory);
+            //var baseDirectory = Seed.GetFullPath(fn,relativeDirectory);
+            //var localPath = $@"{baseDirectory}\{relativeDirectory}\{absolutePath.Replace("/", @"\")}";
+            //var destinationDirectory = Path.GetDirectoryName(localPath);
 
-            if (Directory.Exists(destinationDirectory)) return localPath;
+            //if (Directory.Exists(destinationDirectory)) return localPath;
 
-            if (destinationDirectory != null)
-            {
-                Directory.CreateDirectory(destinationDirectory);
-            }
+            //if (destinationDirectory != null)
+            //{
+            //    Directory.CreateDirectory(destinationDirectory);
+            //}
 
-            return localPath;
+            return fullPath;
         }
     }
 }
