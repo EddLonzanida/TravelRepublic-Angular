@@ -33,6 +33,7 @@ export class HotelsComponent {
         this.searchFlow = SearchFlow.SEARCHING;
         this.isStartSearch = true;
         this.isBusy = true;
+        this.cd.detectChanges();
     }
 
     getSuggestions(event): void {
@@ -43,11 +44,13 @@ export class HotelsComponent {
                 this.cd.detectChanges();
             })
             .catch(e => {
+                console.warn("==getSuggestions error:");
                 console.error(e);
             });
     }
 
     restartSearch(): void {
         this.searchFlow = SearchFlow.HOME;
+        this.cd.detectChanges();
     }
 }

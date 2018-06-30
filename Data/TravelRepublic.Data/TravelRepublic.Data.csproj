@@ -32,23 +32,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Eml.ClassFactory.Contracts, Version=2.0.1.12, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.0.1.12\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
+    <Reference Include="Eml.ClassFactory.Contracts, Version=2.1.0.18, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.1.0.18\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.ConfigParser, Version=2.0.0.21, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.ConfigParser.2.0.0.21\lib\net462\Eml.ConfigParser.dll</HintPath>
+    <Reference Include="Eml.ConfigParser, Version=2.1.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ConfigParser.2.1.0.8\lib\net462\Eml.ConfigParser.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.Contracts, Version=2.0.1.66, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Contracts.2.0.1.66\lib\net462\Eml.Contracts.dll</HintPath>
+    <Reference Include="Eml.Contracts, Version=2.1.0.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Contracts.2.1.0.14\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.DataRepository, Version=2.0.0.172, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.DataRepository.2.0.0.172\lib\net462\Eml.DataRepository.dll</HintPath>
+    <Reference Include="Eml.DataRepository, Version=2.1.0.45, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.DataRepository.2.1.0.45\lib\net462\Eml.DataRepository.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.EntityBaseClasses, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.EntityBaseClasses.1.0.0.17\lib\net462\Eml.EntityBaseClasses.dll</HintPath>
+    <Reference Include="Eml.EntityBaseClasses, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.EntityBaseClasses.2.1.0.15\lib\net462\Eml.EntityBaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.SoftDelete, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.SoftDelete.1.0.0.7\lib\net462\Eml.SoftDelete.dll</HintPath>
+    <Reference Include="Eml.SoftDelete, Version=1.0.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.SoftDelete.1.0.0.9\lib\net462\Eml.SoftDelete.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -76,9 +76,12 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="X.PagedList, Version=7.2.4.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\X.PagedList.7.2.4\lib\net461\X.PagedList.dll</HintPath>
+    <Reference Include="X.PagedList, Version=7.5.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\X.PagedList.7.5.0\lib\net461\X.PagedList.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
