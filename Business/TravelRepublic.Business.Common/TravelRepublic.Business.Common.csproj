@@ -30,14 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Eml.ClassFactory.Contracts, Version=2.1.0.18, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.1.0.18\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
+    <Reference Include="Eml.ClassFactory.Contracts, Version=2.1.0.25, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ClassFactory.Contracts.2.1.0.25\lib\net462\Eml.ClassFactory.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.Contracts, Version=2.1.0.14, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.Contracts.2.1.0.14\lib\net462\Eml.Contracts.dll</HintPath>
+    <Reference Include="Eml.Contracts, Version=2.1.0.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.Contracts.2.1.0.23\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.EntityBaseClasses, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.EntityBaseClasses.2.1.0.15\lib\net462\Eml.EntityBaseClasses.dll</HintPath>
+    <Reference Include="Eml.EntityBaseClasses, Version=2.1.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.EntityBaseClasses.2.1.0.19\lib\net462\Eml.EntityBaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Eml.SoftDelete, Version=1.0.0.9, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.SoftDelete.1.0.0.9\lib\net462\Eml.SoftDelete.dll</HintPath>

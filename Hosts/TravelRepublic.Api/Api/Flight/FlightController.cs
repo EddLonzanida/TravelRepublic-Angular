@@ -3,7 +3,7 @@ using Eml.Mediator.Contracts;using TravelRepublic.Business.Requests;namespace
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class FlightController : ApiControllerBase
+    public class FlightController : ControllerApiBase
     {
         [ImportingConstructor]
         protected FlightController(IMediator mediator)

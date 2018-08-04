@@ -15,7 +15,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class HotelController : ApiControllerBase
+    public class HotelController : ControllerApiBase
     {
         [ImportingConstructor]
         protected HotelController(IMediator mediator)
