@@ -73,7 +73,7 @@ const appRoutes: Routes = [
 export class AppModule { }
 
 export function getBaseUrl() {
-  return 'http://localhost:44340/';
+  return 'http://localhost:44340/api/';
 }
 
 

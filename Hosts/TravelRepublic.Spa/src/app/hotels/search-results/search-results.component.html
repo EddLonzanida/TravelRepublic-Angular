@@ -109,7 +109,7 @@
         </div>
         <div class="ui-g">
             <div class="ui-g-12 ui-md-12 data-list-view">
-                <p-dataList [value]="searchResponse.establishments" [paginator]="canShowPager" [pageLinks]="7" [rows]="searchResponse.rowsPerPage"
+                <p-dataList [value]="searchResponse.items" [paginator]="canShowPager" [pageLinks]="7" [rows]="searchResponse.rowsPerPage"
                             [lazy]="true" (onLazyLoad)="onLazyLoad($event)" [totalRecords]="searchResponse.recordCount" alwaysShowPaginator="false"
                             emptyMessage="">
                     <ng-template let-hotel pTemplate="item">

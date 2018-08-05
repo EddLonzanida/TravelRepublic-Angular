@@ -29,7 +29,7 @@ namespace TravelRepublic.ApiHost
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "{controller}/{action}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = RouteParameter.Optional }
             );
         }
