@@ -19,6 +19,8 @@ namespace TravelRepublic.ApiHost
             formatters.JsonFormatter.Indent = true;
             formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
+            config.MapHttpAttributeRoutes();
+
             // Redirect root to Swagger UI
             config.Routes.MapHttpRoute(
                 name: "Swagger UI",
@@ -26,12 +28,6 @@ namespace TravelRepublic.ApiHost
                 defaults: null,
                 constraints: null,
                 handler: new RedirectHandler(SwaggerDocsConfig.DefaultRootUrlResolver, "swagger/ui/index"));
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = RouteParameter.Optional }
-            );
         }
     }
 }

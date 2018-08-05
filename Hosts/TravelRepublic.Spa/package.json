@@ -6,7 +6,7 @@
   "scripts": {
     "404": "copy dist\\index.html dist\\404.html",
     "ng": "ng",
-    "start": "ng serve --port 8081 -o",
+    "start": "ng serve --port 8089 -o",
     "lint": "ng lint"
   },
   "private": true,

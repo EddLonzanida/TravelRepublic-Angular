@@ -52,8 +52,8 @@
     <Reference Include="Eml.Contracts, Version=2.1.0.23, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.Contracts.2.1.0.23\lib\net462\Eml.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Eml.ControllerBase, Version=2.1.0.37, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Eml.ControllerBase.2.1.0.37\lib\net462\Eml.ControllerBase.dll</HintPath>
+    <Reference Include="Eml.ControllerBase, Version=2.1.0.42, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Eml.ControllerBase.2.1.0.42\lib\net462\Eml.ControllerBase.dll</HintPath>
     </Reference>
     <Reference Include="Eml.DataRepository, Version=2.1.0.55, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Eml.DataRepository.2.1.0.55\lib\net462\Eml.DataRepository.dll</HintPath>

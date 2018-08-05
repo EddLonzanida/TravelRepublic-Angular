@@ -12,15 +12,15 @@ export class HotelService {
     }
 
     getSuggestions(query: string) {
-        const controller = "hotel";
-
-        return this.searchService.getSuggestions(controller, query);
+        const route = "hotel";
+        
+        return this.searchService.getSuggestions(route, query);
     }
 
     search(request: HotelSearchRequest) {
         const controller = 'hotel';
         const action = 'establishments';
-        const route =`${controller}/${action}`;
+        const route = `${controller}/${action}`;
         const cleanedRequest = this.cleanBaseParameters(request);
 
         cleanedRequest.page = request.page;

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -17,7 +15,7 @@ using TravelRepublic.Business.Responses;
 
 namespace TravelRepublic.ApiHost.Api.Hotel
 {
-    [RoutePrefix("api/")]
+    [RoutePrefix("Hotel")]
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class HotelController : CrudControllerApiBase<int, Establishment, HotelSearchRequest>
@@ -35,7 +33,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("Establishments")]
         [ResponseType(typeof(HotelSearchResponse))]
         public async Task<IHttpActionResult> Establishments(string name = "",
                                                             int star = 0,
@@ -52,7 +50,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("Suggestions")]
         [ResponseType(typeof(IList<string>))]
         public override async Task<IHttpActionResult> Suggestions(string search = "")
         {
@@ -62,7 +60,7 @@ namespace TravelRepublic.ApiHost.Api.Hotel
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("Filter")]
         [ResponseType(typeof(HotelSearchFilterResponse))]
         public async Task<IHttpActionResult> Filter(string name = "",
                                                     int star = 0,
