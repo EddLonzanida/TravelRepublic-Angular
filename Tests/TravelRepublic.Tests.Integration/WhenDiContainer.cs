@@ -1,19 +1,17 @@
 ﻿using Eml.ConfigParser;
 using Eml.DataRepository;
 using Eml.DataRepository.Contracts;
-using NUnit.Framework;
 using Shouldly;
-using TravelRepublic.ApiHost.Api.Flight;
-using TravelRepublic.ApiHost.Api.Hotel;
 using TravelRepublic.Business.Common.Entities;
 using TravelRepublic.Business.Managers;
 using TravelRepublic.Tests.Integration.BaseClasses;
+using Xunit;
 
 namespace TravelRepublic.Tests.Integration
 {
     public class WhenDiContainer : IntegrationTestDiBase
     {
-        [Test]
+        [Fact]
         public void EstablishmentRepository_ShouldBeDiscoverable()
         {
             var sut = classFactory.GetExport<IDataRepositorySoftDeleteInt<Establishment>>();
@@ -21,39 +19,39 @@ namespace TravelRepublic.Tests.Integration
             sut.ShouldNotBeNull();
         }
 
-        [Test]
+        [Fact]
         public void IFlightBuilder_ShouldBeDiscoverable()
         {
             var sut = classFactory.GetExport<IFlightBuilder>();
 
             sut.ShouldNotBeNull();
         }
-        
-        [Test]
+
+        [Fact]
         public void MainDbConnectionString_ShouldBeDiscoverable()
         {
-            const string value = @"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=IntegrationTestDb;Integrated Security=True" ;
-            
+            const string value = @"Server=(LocalDB)\MSSQLLocalDB;Database=TravelRepublicIntegrationTest;MultipleActiveResultSets=true;Integrated Security=True";
+
             var config = classFactory.GetExport<IConfigBase<string, MainDbConnectionString>>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(value);
         }
-        
-        [Test]
-        public void FlightController_ShouldBeDiscoverable()
-        {
-            var sut = classFactory.GetExport<FlightController>();
 
-            sut.ShouldNotBeNull();
-        }
-        
-        [Test]
-        public void HotelController_ShouldBeDiscoverable()
-        {
-            var sut = classFactory.GetExport<HotelController>();
+        //[Fact]
+        //public void FlightController_ShouldBeDiscoverable()
+        //{
+        //    var sut = classFactory.GetExport<FlightController>();
 
-            sut.ShouldNotBeNull();
-        }
+        //    sut.ShouldNotBeNull();
+        //}
+
+        //[Fact]
+        //public void HotelController_ShouldBeDiscoverable()
+        //{
+        //    var sut = classFactory.GetExport<HotelController>();
+
+        //    sut.ShouldNotBeNull();
+        //}
     }
 }

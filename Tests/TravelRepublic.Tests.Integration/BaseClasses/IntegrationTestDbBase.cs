@@ -1,50 +1,24 @@
-﻿using System;
-using Eml.ClassFactory.Contracts;
-using Eml.Contracts.Exceptions;
-using Eml.DataRepository.Attributes;
-using Eml.DataRepository.Extensions;
 using Eml.Mediator.Contracts;
-using Eml.Mef;
-using NUnit.Framework;
+using Eml.ClassFactory.Contracts;
+using Xunit;
+using Eml.Extensions;
 
 namespace TravelRepublic.Tests.Integration.BaseClasses
 {
-    [TestFixture]
+    [Collection(IntegrationTestDbFixture.COLLECTION_DEFINITION)]
     public abstract class IntegrationTestDbBase
     {
-        protected IMediator mediator;
+        protected readonly IMediator mediator;
 
-        protected IClassFactory classFactory;
+        protected readonly IClassFactory classFactory;
 
-        private IMigrator dbMigration;
-
-        [OneTimeSetUp]
-        public void Setup()
+        protected IntegrationTestDbBase()
         {
-            classFactory = Bootstrapper.Init("TravelRepublic*.dll");
+            classFactory = IntegrationTestDbFixture.ClassFactory;
+
+            classFactory.CheckNotNull("classFactory");
+
             mediator = classFactory.GetExport<IMediator>();
-            dbMigration = classFactory.GetMigrator(Environments.INTEGRATIONTEST);
-
-            if (dbMigration == null)
-            {
-                throw new NotFoundException("dbMigration not found..");
-            }
-
-            Console.WriteLine("DestroyDb if any..");
-            dbMigration.DestroyDb();
-
-            Console.WriteLine("CreateDb..");
-            dbMigration.CreateDb();
-        }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            dbMigration.DestroyDb();
-
-            var container = classFactory.Container;
-            classFactory = null;
-            container.Dispose();
         }
     }
 }

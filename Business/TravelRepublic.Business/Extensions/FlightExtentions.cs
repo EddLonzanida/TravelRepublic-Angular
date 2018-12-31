@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;using System.Linq;using Eml.Contracts.Services;using TravelRepublic.Business.Common.Dto;using TravelRepublic.Business.Requests;namespace TravelRepublic.Business.Extensions
+﻿using Eml.Contracts.Services;using System.Collections.Generic;using System.Linq;using TravelRepublic.Business.Common.Dto;using TravelRepublic.Business.Common.Requests;
+namespace TravelRepublic.Business.Extensions
 {
     public static class FlightExtentions
     {
@@ -8,10 +9,11 @@
                  {
                      var waitingTime = r.Segments
                          .Zip(r.Segments.Skip(1), (x, y) => (y.DepartureDate - x.ArrivalDate).Hours);
-
                      var totalHrs = waitingTime.Sum(x => x);
+
                      return totalHrs > 2;
-                 }).ToList();
+                 })
+                 .ToList();
 
             filteredFlights.ForEach(r => r.Segments.ForEach(x => x.SegmentType = nameof(eFlightFilter.TwoHoursWaitingTime)));
             return filteredFlights;

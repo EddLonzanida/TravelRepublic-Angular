@@ -18,9 +18,9 @@
     </div>
     <div class="ui-g-12 ui-md-4 ui-lg-3">
         <div [ngSwitch]="searchFlow">
-            <button *ngSwitchCase="searchFlowEnum.HOME" pButton type="button" (click)="search()" icon="fa-search-plus" label="Search Now"
+            <button *ngSwitchCase="searchFlowEnum.HOME" pButton type="button" (click)="search()" icon="fa fa-search-plus" label="Search Now"
                     class="ui-g-12 ui-button-warning" item-width="100%"></button>
-            <button *ngSwitchCase="searchFlowEnum.SEARCHING" pButton type="button" icon="fa-refresh" (click)="restartSearch()" label="Restart"
+            <button *ngSwitchCase="searchFlowEnum.SEARCHING" pButton type="button" icon="fa fa-refresh" (click)="restartSearch()" label="Restart"
                     class="ui-g-12 ui-button-warning" item-width="100%"></button>
         </div>
     </div>

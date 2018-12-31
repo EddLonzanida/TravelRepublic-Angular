@@ -1,26 +1,19 @@
-﻿using Eml.ClassFactory.Contracts;
-using Eml.Mef;
-using NUnit.Framework;
+using Eml.ClassFactory.Contracts;
+using Eml.Extensions;
+using Xunit;
 
 namespace TravelRepublic.Tests.Integration.BaseClasses
 {
-    [TestFixture]
+    [Collection(IntegrationTestDiFixture.COLLECTION_DEFINITION)]
     public abstract class IntegrationTestDiBase
     {
-        protected IClassFactory classFactory;
+        protected readonly IClassFactory classFactory;
 
-        [OneTimeSetUp]
-        public void Setup()
+        protected IntegrationTestDiBase()
         {
-            classFactory = Bootstrapper.Init("TravelRepublic*.dll");
-        }
+            classFactory = IntegrationTestDiFixture.ClassFactory;
 
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            var container = classFactory.Container;
-            classFactory = null;
-            container.Dispose();
+            classFactory.CheckNotNull("classFactory");
         }
     }
 }

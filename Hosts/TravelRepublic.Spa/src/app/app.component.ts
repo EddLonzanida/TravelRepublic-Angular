@@ -34,8 +34,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     this.menuItems = [
-      {label: 'Hotels', icon: 'fa-bed', routerLink: ['/hotels'], command: (event) => handleSelected(event)},
-      {label: 'Flights', icon: 'fa-plane', routerLink: ['/flights'], command: (event) => handleSelected(event)},
+      {label: 'Hotels', icon: 'fa fa-bed', routerLink: ['/hotels'], command: (event) => handleSelected(event)},
+      {label: 'Flights', icon: 'fa fa-plane', routerLink: ['/flights'], command: (event) => handleSelected(event)},
     ]
 
     this.miniMenuItems = [];
@@ -47,10 +47,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   selectInitialMenuItemBasedOnUrl() {
+    
     let path = document.location.pathname;
     let menuItem = this.menuItems.find( (item) => { return item.routerLink[0] == path });
+   
     if (menuItem) {
-      let selectedIcon = this.bigMenu.container.querySelector(`.${menuItem.icon}`);
+      let selectedIcon = this.bigMenu.containerViewChild.nativeElement.querySelector(`.${menuItem.icon}`);
+
       jQuery(selectedIcon).closest('li').addClass('menu-selected');
     }
   }
@@ -58,7 +61,4 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.selectInitialMenuItemBasedOnUrl();
   }
-
-
-
 }

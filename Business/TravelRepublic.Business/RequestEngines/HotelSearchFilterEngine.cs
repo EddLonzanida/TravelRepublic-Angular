@@ -1,28 +1,29 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Data.Entity;
+﻿using Eml.DataRepository.Contracts;
+using Eml.Mediator.Contracts;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Eml.DataRepository.Contracts;
-using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Dto;
 using TravelRepublic.Business.Common.Entities;
-using TravelRepublic.Business.Requests;
-using TravelRepublic.Business.Responses;
+using TravelRepublic.Business.Common.Requests;
+using TravelRepublic.Business.Common.Responses;
 
 namespace TravelRepublic.Business.RequestEngines
 {
-    public class HotelSearchFilterEngine : IRequestAsyncEngine<HotelSearchFilterRequest, HotelSearchFilterResponse>
+    public class HotelSearchFilterEngine : IRequestAsyncEngine<HotelSearchFilterAsyncRequest, HotelSearchFilterResponse>
     {
         private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
-        [ImportingConstructor]
+
+        [ImportingConstructor]
         public HotelSearchFilterEngine(IDataRepositorySoftDeleteInt<Establishment> repository)
         {
             this.repository = repository;
         }
 
-        public async Task<HotelSearchFilterResponse> GetAsync(HotelSearchFilterRequest request)
+        public async Task<HotelSearchFilterResponse> GetAsync(HotelSearchFilterAsyncRequest request)
         {
             var name = request.Name.ToLower();
             var stars = request.Star;
@@ -30,7 +31,6 @@ namespace TravelRepublic.Business.RequestEngines
             var costMin = request.CostMin;
             var costMax = request.CostMax;
             var dbSet = repository.DbSet;
-
 
             Expression<Func<Establishment, bool>> starFiltersWhereClause = r => (name == "" || r.Name.Contains(name))
                                                                                 && r.UserRating >= userRating

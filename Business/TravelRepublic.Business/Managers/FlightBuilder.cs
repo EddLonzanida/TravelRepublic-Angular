@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Eml.Contracts.Services;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
+using System.Composition;
 using System.Linq;
-using Eml.Contracts.Services;
 using TravelRepublic.Business.Common.Dto;
 
 namespace TravelRepublic.Business.Managers
@@ -15,7 +15,7 @@ namespace TravelRepublic.Business.Managers
     [Export(typeof(IFlightBuilder))]
     public class FlightBuilder : IFlightBuilder
     {
-        private DateTime _threeDaysFromNow;
+        private readonly DateTime _threeDaysFromNow;
 
         [ImportingConstructor]
         public FlightBuilder(IClockService clockService)

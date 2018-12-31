@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using Eml.Contracts.Services;
+﻿using Eml.Contracts.Services;
 using Eml.Mediator.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Composition;
+using System.Linq;
 using TravelRepublic.Business.Common.Dto;
+using TravelRepublic.Business.Common.Requests;
+using TravelRepublic.Business.Common.Responses;
 using TravelRepublic.Business.Extensions;
 using TravelRepublic.Business.Managers;
-using TravelRepublic.Business.Requests;
-using TravelRepublic.Business.Responses;
 
 namespace TravelRepublic.Business.RequestEngines
 {
@@ -28,6 +28,7 @@ namespace TravelRepublic.Business.RequestEngines
         {
             var flights = _flightBuilder.GetFlights();
             var filteredFlights = new List<Flight>();
+
             List<Flight> arrivalBeforeDepartureDate;
             List<Flight> twoHoursWaitingTime;
             List<Flight> departureBeforeCurrentDate;

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\TravelRepublic.Contracts\TravelRepublic.Contracts.csproj" />
+    <ProjectReference Include="..\TravelRepublic.Data\TravelRepublic.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SampleDataSources\hotels.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	  <LangVersion>latest</LangVersion>
+	  <NoWarn>1701;1702;1705;CS1591</NoWarn>
+	  <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\TravelRepublic.DataMigration.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>

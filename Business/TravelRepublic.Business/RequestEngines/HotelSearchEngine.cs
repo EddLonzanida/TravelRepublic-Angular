@@ -1,27 +1,27 @@
 ﻿using System;
-using System.ComponentModel.Composition;
+using System.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Eml.DataRepository;
 using Eml.DataRepository.Contracts;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Entities;
-using TravelRepublic.Business.Requests;
-using TravelRepublic.Business.Responses;
+using TravelRepublic.Business.Common.Requests;
+using TravelRepublic.Business.Common.Responses;
 
 namespace TravelRepublic.Business.RequestEngines
 {
-    public class HotelSearchEngine : IRequestAsyncEngine<HotelSearchRequest, HotelSearchResponse>
+    public class HotelSearchEngine : IRequestAsyncEngine<HotelSearchAsyncRequest, HotelSearchResponse>
     {
         private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
-        [ImportingConstructor]
+
+        [ImportingConstructor]
         public HotelSearchEngine(IDataRepositorySoftDeleteInt<Establishment> repository)
         {
             this.repository = repository;
         }
 
-        public async Task<HotelSearchResponse> GetAsync(HotelSearchRequest request)
+        public async Task<HotelSearchResponse> GetAsync(HotelSearchAsyncRequest request)
         {
             var name = request.Name.ToLower();
             var currentPage = request.Page;
@@ -44,19 +44,14 @@ namespace TravelRepublic.Business.RequestEngines
 
 
             var establishments = await repository
-                .GetPagedListAsync(currentPage, whereClause,
-                r => orderBy(r));
+                .GetPagedListAsync(currentPage, whereClause, orderBy);
 
             return new HotelSearchResponse(establishments.ToList(), establishments.TotalItemCount, repository.PageSize);
         }
 
-        public void Dispose()
+        public static Func<IQueryable<Establishment>, IOrderedQueryable<Establishment>> GetOrderBy(eHotelSorting sorting)
         {
-        }
-
-        public static Func<IQueryable<Establishment>, IQueryable<Establishment>> GetOrderBy(eHotelSorting sorting)
-        {
-            Func<IQueryable<Establishment>, IQueryable<Establishment>> orderBy = r => r.OrderBy(x => x.Name);
+            Func<IQueryable<Establishment>, IOrderedQueryable<Establishment>> orderBy = r => r.OrderBy(x => x.Name);
 
             switch (sorting)
             {
@@ -93,6 +88,9 @@ namespace TravelRepublic.Business.RequestEngines
                     throw new ArgumentOutOfRangeException();
             }
             return orderBy;
+        }
+        public void Dispose()
+        {
         }
     }
 }

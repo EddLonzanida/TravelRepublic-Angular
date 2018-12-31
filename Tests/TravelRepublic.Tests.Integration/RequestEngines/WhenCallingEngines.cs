@@ -1,40 +1,40 @@
-﻿using System.Linq;
+﻿using Shouldly;
+using System.Linq;
 using System.Threading.Tasks;
-using NUnit.Framework;
-using Shouldly;
-using TravelRepublic.Business.Requests;
+using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Tests.Integration.BaseClasses;
+using Xunit;
 
 namespace TravelRepublic.Tests.Integration.RequestEngines
 {
     public class WhenCallingEngines : IntegrationTestDbBase
     {
-        [Test]
-        public async Task  AutoComplete_ShouldBeExecuted()
+        [Fact]
+        public async Task AutoComplete_ShouldBeExecuted()
         {
-            var request = new AutoCompleteRequest("a");
+            var request = new AutoCompleteAsyncRequest("a");
 
             var sut = await mediator.GetAsync(request);
 
             sut.Suggestions.ToList().Count.ShouldBe(15);
         }
 
-        [Test]
+        [Fact]
         public async Task HotelSearchFilter_ShouldBeExecuted()
         {
-            var request = new HotelSearchRequest("", 0, 0, 0, 0, 1, eHotelSorting.None);
+            var request = new HotelSearchAsyncRequest("", 0, 0, 0, 0, 1, eHotelSorting.None);
 
             var sut = await mediator.GetAsync(request);
 
             sut.RecordCount.ShouldBe(1132);
-            sut.RowsPerPage.ShouldBe(8);
+            sut.RowsPerPage.ShouldBe(10);
         }
 
-        [Test]
+        [Fact]
         public async Task HotelSearch_ShouldBeExecuted()
         {
-            var request = new HotelSearchFilterRequest("", 0, 0, 0, 0);
-            
+            var request = new HotelSearchFilterAsyncRequest("", 0, 0, 0, 0);
+
             var sut = await mediator.GetAsync(request);
 
             sut.CostMax.ShouldBe(6988);
@@ -44,7 +44,7 @@ namespace TravelRepublic.Tests.Integration.RequestEngines
             sut.StarFilters.ToList().Count.ShouldBe(6);
         }
 
-        [Test]
+        [Fact]
         public void FlightBuilder_ShouldBeExecuted()
         {
             var request = new FlightBuilderRequest(eFlightFilter.None);

@@ -1,6 +1,8 @@
-﻿using System;using System.Collections.Generic;using Eml.Contracts.Services;using NSubstitute;using NUnit.Framework;using Shouldly;using TravelRepublic.Business.Common.Dto;using TravelRepublic.Business.Managers;using TravelRepublic.Business.RequestEngines;using TravelRepublic.Business.Requests;namespace TravelRepublic.Tests.Unit.RequestEngines
+﻿using Eml.Contracts.Services;using NSubstitute;using Shouldly;using System;using System.Collections.Generic;using TravelRepublic.Business.Common.Dto;using TravelRepublic.Business.Common.Requests;
+using TravelRepublic.Business.Managers;using TravelRepublic.Business.RequestEngines;using Xunit;
+
+namespace TravelRepublic.Tests.Unit.RequestEngines
 {
-    [TestFixture]
     public class FlightBuilderEngineTests
     {
         private FlightBuilderEngine engine;
@@ -21,8 +23,7 @@
 
         private Flight anotherFlightWithMoreThanTwoHoursGroundTime;
 
-        [SetUp]
-        public void Setup()
+        public FlightBuilderEngineTests()
         {
             SetupExpectedFlights();
 
@@ -35,7 +36,7 @@
             engine = new FlightBuilderEngine(flightBuilder, clockService);
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeAll()
         {
             const eFlightFilter searchCode = eFlightFilter.None;
@@ -47,7 +48,7 @@
             response.Flights.Count.ShouldBe(6);
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeNormalFlightWithTwoHoursWaitingTime()
         {
             const eFlightFilter searchCode = eFlightFilter.TwoHoursWaitingTime;
@@ -63,7 +64,7 @@
             anotherFlightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeFlightsThatDepartsBeforeItArrives()
         {
             const eFlightFilter searchCode = eFlightFilter.ArrivalBeforeDepartureDate;
@@ -77,7 +78,7 @@
             flightThatDepartsBeforeItArrives.Exists(segments).ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeArrivalBeforeDepartureDateTwoHoursWaitingTime()
         {
             const eFlightFilter searchCode = eFlightFilter.ArrivalBeforeDepartureDateTwoHoursWaitingTime;
@@ -93,7 +94,7 @@
             anotherFlightWithMoreThanTwoHoursGroundTime.Exists(segments).ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeFlightsDepartingInThePast()
         {
             const eFlightFilter searchCode = eFlightFilter.DepartureBeforeCurrentDate;
@@ -108,7 +109,7 @@
             flightDepartingInThePast.Exists(segments).ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeFlightsDepartingInThePastAndTwoHoursWaitingTime()
         {
             const eFlightFilter searchCode = eFlightFilter.DepartureBeforeCurrentDateTwoHoursWaitingTime;
@@ -125,7 +126,7 @@
             flightDepartingInThePast.Exists(segments).ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeFlightsDepartingInThePastAndArrivalBeforeDepartureDate()
         {
             const eFlightFilter searchCode = eFlightFilter.DepartureBeforeCurrentDateArrivalBeforeDepartureDate;
@@ -141,7 +142,7 @@
             flightDepartingInThePast.Exists(segments).ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void Response_ShouldBeBeFlightsDepartingInThePastAndArrivalBeforeDepartureDateAndTwoHoursWaitingTime()
         {
             const eFlightFilter searchCode = eFlightFilter.DepartureBeforeCurrentDateArrivalBeforeDepartureDateTwoHoursWaitingTime;
@@ -212,7 +213,6 @@
                     new Segment { DepartureDate = DateTime.Parse("2017-07-27T23:31:10.3003561+08:00"), ArrivalDate = DateTime.Parse("2017-07-28T00:31:10.3003561+08:00") }
                 }
             };
-
         }
     }
 }

@@ -26,10 +26,10 @@ export class HotelService {
         cleanedRequest.page = request.page;
         cleanedRequest.sorting = request.sorting;
 
-        if (cleanedRequest.page > 1) { } else { cleanedRequest.page = undefined; }
-        if (cleanedRequest.sorting > 0) { } else { cleanedRequest.sorting = undefined; }
+        if (cleanedRequest.page > 1) { } else { cleanedRequest.page = null; }
+        if (cleanedRequest.sorting > 0) { } else { cleanedRequest.sorting = null; }
 
-        return this.searchService.request<HotelSearchResponse>(route, cleanedRequest);
+        return this.searchService.request<HotelSearchResponse>('HotelService.search', route, cleanedRequest);
     }
 
     getFilters(request: HotelSearchRequestBase) {
@@ -37,22 +37,22 @@ export class HotelService {
         const action = 'filter';
         const route =`${controller}/${action}`;
         const cleanedRequest = this.cleanBaseParameters(request);
+        
+        cleanedRequest.page = null;
+        cleanedRequest.sorting = null;
 
-        cleanedRequest.page = undefined;
-        cleanedRequest.sorting = undefined;
-
-        return this.searchService.request<HotelSearchFilterResponse>(route, cleanedRequest);
+        return this.searchService.request<HotelSearchFilterResponse>('HotelService.getFilters', route, cleanedRequest);
     }
 
     private cleanBaseParameters(request: HotelSearchRequestBase): HotelSearchRequest {
         const cleanedRequest = new HotelSearchRequest(request.name, request.star, request.userRating, request.costMin, request.costMax);
-        if (cleanedRequest.name === '') { cleanedRequest.name = undefined; }
-        if (cleanedRequest.star > 0) { } else { cleanedRequest.star = undefined; }
+        if (cleanedRequest.name === '') { cleanedRequest.name = null; }
+        if (cleanedRequest.star > 0) { } else { cleanedRequest.star = null; }
         if (cleanedRequest.userRating > 0) {
             cleanedRequest.userRating = request.userRating / 10;
-        } else { cleanedRequest.userRating = undefined; }
-        if (cleanedRequest.costMin > 0) { } else { cleanedRequest.costMin = undefined; }
-        if (cleanedRequest.costMax > 0) { } else { cleanedRequest.costMax = undefined; }
+        } else { cleanedRequest.userRating = null; }
+        if (cleanedRequest.costMin > 0) { } else { cleanedRequest.costMin = null; }
+        if (cleanedRequest.costMax > 0) { } else { cleanedRequest.costMax = null; }
 
         return cleanedRequest;
     }

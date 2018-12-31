@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.Composition;
-using System.Linq;
+﻿using System.Composition;
 using System.Threading.Tasks;
 using Eml.DataRepository.Contracts;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Entities;
-using TravelRepublic.Business.Requests;
-using TravelRepublic.Business.Responses;
+using TravelRepublic.Business.Common.Requests;
+using TravelRepublic.Business.Common.Responses;
 
 namespace TravelRepublic.Business.RequestEngines
 {
-    public class AutoCompleteEngine : IRequestAsyncEngine<AutoCompleteRequest, AutoCompleteResponse>
+    public class AutoCompleteEngine : IRequestAsyncEngine<AutoCompleteAsyncRequest, AutoCompleteResponse>
     {
         private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
 
@@ -19,12 +18,11 @@ namespace TravelRepublic.Business.RequestEngines
             this.repository = repository;
         }
 
-        public async Task<AutoCompleteResponse> GetAsync(AutoCompleteRequest request)
+        public async Task<AutoCompleteResponse> GetAsync(AutoCompleteAsyncRequest request)
         {
             var searchTerm = request.SearchTerm; //) request.SearchTerm.ToLower();
             var suggestions = await repository
-                .GetAutoCompleteIntellisenseAsync(r => searchTerm == "" || r.Name.Contains(searchTerm), 
-                r => r.OrderBy(s => s.Name),
+                .GetAutoCompleteIntellisenseAsync(r => searchTerm == "" || r.Name.Contains(searchTerm),
                 r => r.Name);
 
             return new AutoCompleteResponse(suggestions);
@@ -32,7 +30,6 @@ namespace TravelRepublic.Business.RequestEngines
 
         public void Dispose()
         {
-            repository?.Dispose();
         }
     }
 }

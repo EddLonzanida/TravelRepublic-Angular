@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MenuModule,
@@ -27,7 +26,7 @@ import { HotelService } from './hotels/hotel-service';
 import { SearchResultsComponent } from './hotels/search-results/search-results.component';
 import { SearchHomeComponent } from './hotels/search-home/search-home.component';
 import { BusyIndicatorComponent } from './shared/busy-indicator/busy-indicator.component';
-import { MyDebuggerPipe } from './shared/my-debugger.pipe';
+import { DebuggerPipe } from './shared/debugger.pipe';
 import { RatingConverterPipe } from './shared/rating-converter.pipe';
 import { SearchService } from './shared/services/search.service';
 
@@ -46,11 +45,12 @@ const appRoutes: Routes = [
     SearchResultsComponent,
     SearchHomeComponent,
     BusyIndicatorComponent,
-    MyDebuggerPipe,
+    DebuggerPipe,
     RatingConverterPipe
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
@@ -63,9 +63,9 @@ const appRoutes: Routes = [
     CheckboxModule,
     AutoCompleteModule,
     DataListModule,
-    HttpModule,
     HttpClientModule,
-    SharedModule, OverlayPanelModule
+    SharedModule, 
+    OverlayPanelModule
   ],
   providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl }, SearchService, HotelService],
   bootstrap: [AppComponent]
@@ -73,9 +73,5 @@ const appRoutes: Routes = [
 export class AppModule { }
 
 export function getBaseUrl() {
-  return 'http://localhost:44340/api/';
+  return 'https://localhost:44329/api/';
 }
-
-
-
-

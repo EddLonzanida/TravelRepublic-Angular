@@ -1,9 +1,10 @@
-﻿using Eml.EntityBaseClasses;
+﻿using Eml.Contracts.Entities;
+using Eml.EntityBaseClasses;
 using System.ComponentModel.DataAnnotations;
 
 namespace TravelRepublic.Business.Common.Entities
 {
-    public class Establishment : EntityBaseSoftDeleteInt
+    public class Establishment : EntityBaseSoftDeleteInt, ISearchableName
     {
         public int EstablishmentId { get; set; }
 
@@ -30,5 +31,7 @@ namespace TravelRepublic.Business.Common.Entities
         public string ThumbnailUrl { get; set; }
 
         public double MinCost { get; set; }
+
+        public string SearchableName => Name;
     }
 }

@@ -49,10 +49,14 @@ export class SearchResultsComponent implements OnChanges {
     }
 
     search(): void {
+    
         if (this.isLocalBusy) {
+    
             console.warn('======BUSY Please wait...');
+    
             return;
         }
+    
         this.isLocalBusy = true;
         this.isBusy = true;
         this.isBusyChange.emit(true);
@@ -60,117 +64,138 @@ export class SearchResultsComponent implements OnChanges {
         this.searchRequest.costMin = this.costMinMax[0];
         this.searchRequest.costMax = this.costMinMax[1];
         this.hasErrors = false;
-        this.hotelService.search(this.searchRequest)
-            .then(r => {
-                this.searchResponse = r;
-                this.isStartSearch = false;
-                this.isStartSearchChange.emit(false);
-                this.isLocalBusy = false;
-                this.isBusy = false;
-                this.isBusyChange.emit(false);
+        this.hotelService.search(this.searchRequest).subscribe(r => {
 
-                this.canShowPager = this.searchResponse.recordCount > this.searchResponse.rowsPerPage;
+            this.searchResponse = r;
+            this.isStartSearch = false;
+            this.isStartSearchChange.emit(false);
+            this.isLocalBusy = false;
+            this.isBusy = false;
+            this.isBusyChange.emit(false);
+            this.canShowPager = this.searchResponse.recordCount > this.searchResponse.rowsPerPage;
+                
+            if (!this.isInitialized) {
 
-            })
-            .then(r => {
-                if (this.isInitialized) { return r; }
-                this.hotelService.getFilters(this.searchRequest)
-                    .then(f => {
-                        this.searchFilterResponse = f;
-                        this.isInitialized = true;
-                        this.costMinMax[0] = f.costMin;
-                        this.costMinMax[1] = f.costMax;
-                        this.searchFilterResponse.ratingMin = f.ratingMin * 10;
-                        this.searchFilterResponse.ratingMax = f.ratingMax * 10;
-                        this.searchRequest.userRating = f.ratingMin;
-                        if (this.searchFilterResponse.starFilters[0]) {
-                            this.searchRequest.star = this.searchFilterResponse.starFilters[0].star;
-                            this.oldStar = this.searchRequest.star;
-                        }
-                        this.canFilter = this.searchResponse.recordCount > 1;
+                this.hotelService.getFilters(this.searchRequest).subscribe(f => {
+                this.searchFilterResponse = f;
+                this.isInitialized = true;
+                this.costMinMax[0] = f.costMin;
+                this.costMinMax[1] = f.costMax;
+                this.searchFilterResponse.ratingMin = f.ratingMin * 10;
+                this.searchFilterResponse.ratingMax = f.ratingMax * 10;
+                this.searchRequest.userRating = f.ratingMin;
+                
+                if (this.searchFilterResponse.starFilters[0]) {
+    
+                    this.searchRequest.star = this.searchFilterResponse.starFilters[0].star;
+                    this.oldStar = this.searchRequest.star;
+                
+                }
+                
+                this.canFilter = this.searchResponse.recordCount > 1;
+                this.oldCostMin = this.costMinMax[0];
+                this.oldCostMax = this.costMinMax[1];
+                this.oldUserRating = this.searchRequest.userRating;
 
-
-                        this.oldCostMin = this.costMinMax[0];
-                        this.oldCostMax = this.costMinMax[1];
-                        this.oldUserRating = this.searchRequest.userRating;
-                    });
-            })
-            .catch(e => {
-                this.isStartSearch = false;
-                this.isStartSearchChange.emit(false);
-                this.isBusy = false;
-                this.isBusyChange.emit(false);
-                this.isLocalBusy = false;
-                this.isInitialized = false;
-                this.hasErrors = true;
-            });
+                }, error => this.handleError());
+            }
+        }, error => this.handleError());
     }
-
+    
     onSlideEnd(event, sender) {
+    
         let hasChanges = false;
+    
         if (sender === 'star') {
+    
             if (event.value !== this.oldStar) {
+    
                 hasChanges = true;
                 this.oldStar = event.value;
+    
             }
         } else if (sender === 'costMinMax') {
+    
             if (this.costMinMax[0] !== this.oldCostMin) {
+    
                 hasChanges = true;
                 this.oldCostMin = this.costMinMax[0];
+    
             }
+    
             if (this.costMinMax[1] !== this.oldCostMax) {
+    
                 hasChanges = true;
                 this.oldCostMax = this.costMinMax[1];
+    
             }
         } else if (sender === 'userRating') {
+    
             if (event.value !== this.oldUserRating) {
+    
                 hasChanges = true;
                 this.oldUserRating = event.value;
+    
             }
         }
         if (hasChanges) {
+    
             this.searchRequest.page = 1;
             this.search();
         }
     }
 
     onSlideCancelled($event) {
+    
         this.searchRequest.star = this.searchFilterResponse.starFilters[0].star;
         this.oldStar = this.searchRequest.star;
         this.search();
     }
 
     onLazyLoad(event) {
+    
         if (event && event.first > 0 && event.rows > 0) {
+    
             this.searchRequest.page = (event.first / event.rows) + 1;
+    
         } else {
+    
             this.searchRequest.page = 1;
+    
         }
+    
         this.search();
     }
 
     restart(): void {
+    
         this.restartSearch.emit();
     }
 
     selectEstablishment(event, item: Establishment, overlaypanel: OverlayPanel) {
+    
         this.selectedEstablishment = item;
+    
         overlaypanel.toggle(event);
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+    
         if (changes.isStartSearch && changes.isStartSearch.currentValue) {
+    
             this.searchRequest.page = 1;
             this.search();
-        } else {
-        }
+    
+        } else {}
     }
 
     canResetUserRating(): boolean {
+
         return this.searchRequest.userRating !== this.searchFilterResponse.ratingMin;
     }
 
     resetUserRating() {
+
         this.searchRequest.userRating = this.searchFilterResponse.ratingMin;
         this.oldUserRating = this.searchRequest.userRating;
         this.searchRequest.page = 1;
@@ -178,6 +203,7 @@ export class SearchResultsComponent implements OnChanges {
     }
 
     private refillSortOrderList(): void {
+
         this.sortOrders = [];
         this.sortOrders.push({ label: '-- Select Sorting --', value: null });
         this.sortOrders.push({ label: 'Name Desc', value: HotelSorting.Name });
@@ -193,28 +219,50 @@ export class SearchResultsComponent implements OnChanges {
     }
 
     isReady(): boolean {
+
         let isready = true;
+
         if (!this.searchResponse) { isready = false; }
         if (!this.searchFilterResponse) { isready = false; }
         if (!this.searchFilterResponse.starFilters) { return false; }
         if (this.searchFilterResponse.starFilters.length === 0) { return false; }
         if (this.searchRequest.star >= 0) { } else { return false; }
+
         return isready;
     }
 
     getStarIndex(star: number): number {
+
         return this.searchFilterResponse.starFilters.findIndex(filter => filter.star >= star);
     }
 
     canSort(): boolean {
+    
         return this.isLocalBusy || !(this.searchResponse.recordCount > 1);
     }
 
     starClass(): string {
+    
         const minStar = this.searchFilterResponse.starFilters[0].star;
+        
         if (this.searchRequest.star === this.searchFilterResponse.starFilters[0].star) {
+    
             return `disable-star${minStar} noreset`;
+    
         }
-        return `disable-star${minStar}`;
+    
+        return `disable-star${this.searchRequest.star}`;
+    }
+
+    private handleError(){
+    
+        this.isStartSearch = false;
+        this.isStartSearchChange.emit(false);
+        this.isBusy = false;
+        this.isBusyChange.emit(false);
+        this.isLocalBusy = false;
+        this.isInitialized = false;
+        this.hasErrors = true;
+    
     }
 }

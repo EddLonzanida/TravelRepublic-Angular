@@ -30,6 +30,7 @@ export class HotelsComponent {
     }
 
     search(): void {
+    
         this.searchFlow = SearchFlow.SEARCHING;
         this.isStartSearch = true;
         this.isBusy = true;
@@ -37,19 +38,19 @@ export class HotelsComponent {
     }
 
     getSuggestions(event): void {
+
         const query = event.query;
-        this.hotelService.getSuggestions(query)
-            .then(suggestions => {
-                this.searchSuggestions = suggestions;
-                this.cd.detectChanges();
-            })
-            .catch(e => {
-                console.warn("==getSuggestions error:");
-                console.error(e);
-            });
+
+        this.hotelService.getSuggestions(query).subscribe(data => {
+
+            this.searchSuggestions = data;
+            this.cd.detectChanges();
+
+        });
     }
 
     restartSearch(): void {
+
         this.searchFlow = SearchFlow.HOME;
         this.cd.detectChanges();
     }
