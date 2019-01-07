@@ -1,6 +1,4 @@
 ﻿using Eml.Contracts.Response;
-using Eml.ControllerBase;
-using Eml.DataRepository.Contracts;
 using Eml.Mediator.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,14 +6,17 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelRepublic.Api.Controllers.BaseClasses;
 using TravelRepublic.Business.Common.Entities;
 using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Business.Common.Responses;
+using TravelRepublic.Data;
+using TravelRepublic.Data.Contracts;
 
 namespace TravelRepublic.Api.Controllers
 {
     [Export]
-    public class HotelController : CrudControllerApiBase<int, Establishment, HotelSearchAsyncRequest>
+    public class HotelController : CrudControllerApiBase<Establishment, HotelSearchAsyncRequest>
     {
         [ImportingConstructor]
         public HotelController(IMediator mediator, IDataRepositorySoftDeleteInt<Establishment> repository)
@@ -119,6 +120,11 @@ namespace TravelRepublic.Api.Controllers
             var response = await mediator.GetAsync(request);
 
             return response;
+        }
+
+        protected override async Task<Establishment> DeleteItemAsync(TravelRepublicDb db, int id, string reason)
+        {
+            return await repository.DeleteAsync(db, id);
         }
 
         protected override void RegisterIDisposable(List<IDisposable> disposables)

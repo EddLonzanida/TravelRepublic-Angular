@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCoreRateLimit" Version="2.1.0" />
-    <PackageReference Include="Eml.ControllerBase" Version="2.2.0.2" />
+    <PackageReference Include="Eml.ControllerBase" Version="2.2.0.14" />
     <PackageReference Include="Eml.MefDependencyResolver.Api" Version="2.2.0" />
     <PackageReference Include="IdentityServer4" Version="2.3.2" />
     <PackageReference Include="Marvin.Cache.Headers" Version="3.0.0" />

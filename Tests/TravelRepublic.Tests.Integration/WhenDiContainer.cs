@@ -1,9 +1,9 @@
 ﻿using Eml.ConfigParser;
 using Eml.DataRepository;
-using Eml.DataRepository.Contracts;
 using Shouldly;
 using TravelRepublic.Business.Common.Entities;
 using TravelRepublic.Business.Managers;
+using TravelRepublic.Data.Contracts;
 using TravelRepublic.Tests.Integration.BaseClasses;
 using Xunit;
 

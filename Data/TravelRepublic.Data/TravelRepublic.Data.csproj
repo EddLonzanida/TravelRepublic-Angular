@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\TravelRepublic.Contracts\TravelRepublic.Contracts.csproj" />
     <ProjectReference Include="..\..\Business\TravelRepublic.Business.Common\TravelRepublic.Business.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eml.DataRepository" Version="2.2.0.6" />
   </ItemGroup>
 
   <PropertyGroup>

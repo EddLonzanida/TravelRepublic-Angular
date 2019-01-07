@@ -1,12 +1,12 @@
 import { Injectable, Inject } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams  } from "@angular/common/http";
+import { Observable, of, throwError } from "rxjs";
+import { catchError, map, tap } from "rxjs/operators";
 
-import { MessageService } from './message.service';
+import { MessageService } from "./message.service";
 import { SearchResponse } from "../responses/search-response";
 
-@Injectable({ providedIn: 'root' })
+@Injectable(({ providedIn: "root" }) as any)
 export class SearchService {
     private readonly baseUrl: string;
 
@@ -22,14 +22,14 @@ export class SearchService {
         const route = `${controller}/${action}`;
         const param = {search: query};
 
-        return this.request<string[]>('getSuggestions', route, param);
+        return this.request<string[]>("getSuggestions", route, param);
     }
 
     search<TRequest, TResponse>(route: string, request: TRequest) {
 
         const config = { params: request }
 
-        return this.request<SearchResponse<TResponse>>('search', route, config);
+        return this.request<SearchResponse<TResponse>>("search", route, config);
 
     }
 
@@ -45,7 +45,7 @@ export class SearchService {
             catchError(error => {
                 
                 this.log(`${operation} failed: ${error.message}`);
-                console.log('Handling error locally and rethrowing it...', error);
+                console.log("Handling error locally and rethrowing it...", error);
 
                 //return Observable.throw(error);
                 return throwError(error);
@@ -76,7 +76,7 @@ export class SearchService {
         return params;
     }
 
-    private handleError<T> (operation = 'operation', result?: T) {
+    private handleError<T> (operation = "operation", result?: T) {
 
         return (error: any): Observable<T> => {
        

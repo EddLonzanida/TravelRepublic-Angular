@@ -1,13 +1,13 @@
 using System.Composition;
 using Eml.Contracts.Entities;
 using Eml.DataRepository;
-using Eml.DataRepository.Contracts;
 using Microsoft.Extensions.Configuration;
+using TravelRepublic.Data.Contracts;
 
 namespace TravelRepublic.Data.Repositories
 {
-    [Export(typeof(IDataRepositoryInt<>))] //If using GUID, change to [Export(typeof(IDataRepositoryGuid<>))]
-    public class DataRepositoryInt<T> : DataRepositoryInt<T, TravelRepublicDb>
+    [Export(typeof(IDataRepositoryInt<>))] 
+    public class DataRepositoryInt<T> : DataRepositoryInt<T, TravelRepublicDb>, IDataRepositoryInt<T>
         where T : class, IEntityBase<int>
     {
         [ImportingConstructor]

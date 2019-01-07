@@ -49,7 +49,7 @@ namespace TravelRepublic.Business.Managers
 
         private static Flight CreateFlight(params DateTime[] dates)
         {
-            if (dates.Length % 2 != 0) throw new ArgumentException("You must pass an even number of dates,", "dates");
+            if (dates.Length % 2 != 0) throw new ArgumentException("You must pass an even number of dates,", nameof(dates));
 
             var departureDates = dates.Where((date, index) => index % 2 == 0);
             var arrivalDates = dates.Where((date, index) => index % 2 == 1);

@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\TravelRepublic.Data\TravelRepublic.Data.csproj" />
     <ProjectReference Include="..\..\Infrastructure\TravelRepublic.Contracts\TravelRepublic.Contracts.csproj" />
-    <ProjectReference Include="..\TravelRepublic.Business.Common\TravelRepublic.Business.Common.csproj" />
+    <!--<ProjectReference Include="..\TravelRepublic.Business.Common\TravelRepublic.Business.Common.csproj" />-->
   </ItemGroup>
 
   <PropertyGroup>

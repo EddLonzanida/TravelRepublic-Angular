@@ -1,10 +1,10 @@
-﻿using System.Composition;
+﻿using Eml.Mediator.Contracts;
+using System.Composition;
 using System.Threading.Tasks;
-using Eml.DataRepository.Contracts;
-using Eml.Mediator.Contracts;
 using TravelRepublic.Business.Common.Entities;
 using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Business.Common.Responses;
+using TravelRepublic.Data.Contracts;
 
 namespace TravelRepublic.Business.RequestEngines
 {
