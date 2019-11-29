@@ -1,134 +1,233 @@
-﻿using Eml.Contracts.Response;
-using Eml.Mediator.Contracts;
+﻿using Eml.Contracts.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TravelRepublic.Api.Controllers.BaseClasses;
-using TravelRepublic.Business.Common.Entities;
+using TravelRepublic.Api.Controllers.BaseClasses.TravelRepublicDb;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb.EntityHelpers;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb.SortEnums;
+using TravelRepublic.Business.Common.Entities.TravelRepublicDb;
 using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Business.Common.Responses;
-using TravelRepublic.Data;
-using TravelRepublic.Data.Contracts;
+using TravelRepublic.Data.Repositories.TravelRepublicDb.Contracts;
 
 namespace TravelRepublic.Api.Controllers
 {
     [Export]
-    public class HotelController : CrudControllerApiBase<Establishment, HotelSearchAsyncRequest>
+    public class HotelController : CrudControllerApiSoftDeletableIntBase<Establishment
+        , EstablishmentIndexRequest
+        , EstablishmentIndexResponse
+        , EstablishmentEditCreateRequest
+        , EstablishmentDetailsCreateResponse
+        , ITravelRepublicDataRepositorySoftDeleteInt<Establishment>>
     {
         [ImportingConstructor]
-        public HotelController(IMediator mediator, IDataRepositorySoftDeleteInt<Establishment> repository)
-            : base(mediator, repository)
+        public HotelController(ITravelRepublicDataRepositorySoftDeleteInt<Establishment> repository)
+            : base(repository)
         {
         }
 
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public override Task<IActionResult> Index(int? page = 1, bool? desc = false, int? sortColumn = 0, string search = "")
+        [HttpGet("Filters")]
+        public async Task<ActionResult<HotelSearchFilterResponse>> GetFilters([FromQuery]HotelSearchFilterAsyncRequest request)
         {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        [Route("Establishments")]
-        [Produces(typeof(HotelSearchResponse))]
-        public async Task<IActionResult> Establishments(string name = "",
-                                                            int star = 0,
-                                                            double userRating = 0,
-                                                            double costMin = 0,
-                                                            double costMax = 0,
-                                                            int page = 1,
-                                                            int sorting = 0)
-        {
-            var request = new HotelSearchAsyncRequest(name, star, userRating, costMin, costMax, page, (eHotelSorting)sorting);
-            var response = await DoIndexAsync(request);
+            var response = await mediator.GetAsync(HotelSearchFilterAsyncRequest.GetNormalValues(request));
 
             return Ok(response);
         }
 
+        #region CRUD
         [HttpGet]
-        [Route("Suggestions")]
-        [Produces(typeof(IList<string>))]
-        public override async Task<IActionResult> Suggestions(string search = "")
+        public override async Task<ActionResult<EstablishmentIndexResponse>> Index([FromQuery]EstablishmentIndexRequest request)
         {
-            var suggestions = await GetSuggestionsAsync(search);
-
-            return Ok(suggestions);
+            return await DoIndexAsync(EstablishmentIndexRequest.GetNormalValues(request));
         }
 
-        [HttpGet]
-        [Route("Filter")]
-        [Produces(typeof(HotelSearchFilterResponse))]
-        public async Task<IActionResult> Filter(string name = "",
-                                                    int star = 0,
-                                                    double userRating = 0,
-                                                    double costMin = 0,
-                                                    double costMax = 0)
+        [HttpGet("Suggestions")]
+        public override async Task<ActionResult<List<string>>> Suggestions(string search = "")
         {
-            var request = new HotelSearchFilterAsyncRequest(name, star, userRating, costMin, costMax);
-            var response = await mediator.GetAsync(request);
-
-            return Ok(response);
+            return await DoSuggestionsAsync(search);
         }
 
-
-        [Route("{id}")]
-        [HttpGet]
-        [Produces(typeof(Establishment))]
-        public override async Task<IActionResult> Details(int id)
+        [HttpGet("{id}")]
+        public override async Task<ActionResult<EstablishmentDetailsCreateResponse>> Details([FromRoute]int id)
         {
             return await DoDetailsAsync(id);
         }
 
-        [Route("{id}")]
-        [HttpPut]
-        public override async Task<IActionResult> Edit(int id, [FromBody]Establishment item)
-        {
-            return await DoEditAsync(id, item);
-        }
-
         [HttpPost]
-        [Produces(typeof(Establishment))]
-        public override async Task<IActionResult> Create([FromBody]Establishment item)
+        public override async Task<ActionResult<EstablishmentDetailsCreateResponse>> Create([FromBody]EstablishmentEditCreateRequest request)
         {
-            return await DoCreateAsync(item);
+            return await DoCreateAsync(request);
         }
 
-        [Route("{id}")]
-        [HttpDelete]
-        public override async Task<IActionResult> Delete(int id, string reason = "")
+        [HttpPut]
+        public override async Task<ActionResult> Edit([FromBody]EstablishmentEditCreateRequest request)
+        {
+            return await DoEditAsync(request);
+        }
+
+        [HttpDelete("{id}")]
+        public override async Task<ActionResult> Delete([FromRoute]int id, [FromBody]string reason)
         {
             return await DoDeleteAsync(id, reason);
+        }
+        #endregion // CRUD
+
+        #region CRUD HELPERS
+        protected override async Task<EstablishmentDetailsCreateResponse> EditItemAsync(EstablishmentEditCreateRequest request)
+        {
+            var entity = request.ToEntity();
+
+            await repository.UpdateAsync(entity);
+
+            //return new EstablishmentDetailsCreateResponse();
+            return entity.ToDto();
+        }
+
+        protected override async Task<EstablishmentDetailsCreateResponse> AddItemAsync(EstablishmentEditCreateRequest request)
+        {
+            var entity = request.ToEntity();
+
+            entity.Id = default;
+
+            var newEntity = await repository.AddAsync(entity);
+
+            return newEntity.ToDto();
         }
 
         protected override async Task<List<string>> GetSuggestionsAsync(string search = "")
         {
-            var request = new AutoCompleteAsyncRequest(search);
-            var response = await mediator.GetAsync(request);
+            search = string.IsNullOrWhiteSpace(search) ? string.Empty : search.ToLower();
 
-            return response.Suggestions.ToList();
+            return await repository
+                .GetAutoCompleteIntellisenseAsync(r => search == "" || r.Name.ToLower().Contains(search)
+                    , r => r.Name);
         }
 
-        protected override Func<IQueryable<Establishment>, IOrderedQueryable<Establishment>> GetOrderBy(int sortColumn, bool isDesc)
+        protected override async Task<EstablishmentDetailsCreateResponse> GetItemAsync(int id)
         {
-            throw new NotImplementedException();
+            var item = await repository.GetAsync(id);
+
+            return item?.ToDto();
         }
 
-        protected override async Task<ISearchResponse<Establishment>> GetItemsAsync(HotelSearchAsyncRequest request)
+        protected override async Task<EstablishmentIndexResponse> GetItemsAsync(EstablishmentIndexRequest request)
         {
-            var response = await mediator.GetAsync(request);
+            var search = request.Search.ToLower();
+            var stars = request.Star;
+            var userRating = request.UserRating;
+            var costMin = request.CostMin;
+            var costMax = request.CostMax;
+
+            Expression<Func<Establishment, bool>> whereClause = r => (search == "" || r.Name.ToLower().Contains(search))
+                                                                     && r.Stars >= stars
+                                                                     && r.UserRating >= userRating;
+            if (costMax > costMin)
+            {
+                whereClause = r => (search == "" || r.Name.ToLower().Contains(search))
+                                   && r.Stars >= stars
+                                   && r.UserRating >= userRating
+                                   && r.MinCost >= costMin && r.MinCost <= costMax;
+            }
+
+            var items = await GetItemsAsync(request, whereClause);
+
+            return new EstablishmentIndexResponse(items.Items, items.RecordCount, items.RowsPerPage);
+        }
+
+        protected async Task<SearchResponse<Establishment>> GetItemsAsync(EstablishmentIndexRequest request, Expression<Func<Establishment, bool>> whereClause)
+        {
+            var orderBy = GetOrderBy(request.SortColumn, request.IsDescending);
+            var result = await repository.GetPagedListAsync(request.Page, whereClause, orderBy);
+            var response = new SearchResponse<Establishment>(result.ToList(), result.TotalItemCount, result.PageSize);
 
             return response;
         }
 
-        protected override async Task<Establishment> DeleteItemAsync(TravelRepublicDb db, int id, string reason)
+        protected Func<IQueryable<Establishment>, IOrderedQueryable<Establishment>> GetOrderBy(string sortColumn, bool isDesc)
         {
-            return await repository.DeleteAsync(db, id);
-        }
+            Func<IQueryable<Establishment>, IOrderedQueryable<Establishment>> orderBy;
 
-        protected override void RegisterIDisposable(List<IDisposable> disposables)
-        {
+            if (string.IsNullOrWhiteSpace(sortColumn))
+            {
+                sortColumn = "Name"; //Default sort column
+            }
+
+            var eSortColumn = (eEstablishment)Enum.Parse(typeof(eEstablishment), sortColumn, true);
+
+            if (isDesc)
+            {
+                switch (eSortColumn)
+                {
+                    case eEstablishment.Name:
+
+                        orderBy = r => r.OrderByDescending(x => x.Name);
+                        break;
+
+                    case eEstablishment.Distance:
+
+                        orderBy = r => r.OrderByDescending(x => x.Distance);
+                        break;
+
+                    case eEstablishment.Stars:
+
+                        orderBy = r => r.OrderByDescending(x => x.Stars);
+                        break;
+
+                    case eEstablishment.MinCost:
+
+                        orderBy = r => r.OrderByDescending(x => x.MinCost);
+                        break;
+
+                    case eEstablishment.UserRating:
+
+                        orderBy = r => r.OrderByDescending(x => x.UserRating);
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException($"sortColumn: [{sortColumn}] is not supported.");
+                }
+
+                return orderBy;
+            }
+
+            switch (eSortColumn)
+            {
+                case eEstablishment.Name:
+
+                    orderBy = r => r.OrderBy(x => x.Name);
+                    break;
+
+                case eEstablishment.Distance:
+
+                    orderBy = r => r.OrderBy(x => x.Distance);
+                    break;
+
+                case eEstablishment.Stars:
+
+                    orderBy = r => r.OrderBy(x => x.Stars);
+                    break;
+
+                case eEstablishment.MinCost:
+
+                    orderBy = r => r.OrderBy(x => x.MinCost);
+                    break;
+
+                case eEstablishment.UserRating:
+
+                    orderBy = r => r.OrderBy(x => x.UserRating);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException($"sortColumn: [{sortColumn}] is not supported.");
+            }
+
+            return orderBy;
         }
+        #endregion // CRUD HELPERS
     }
 }

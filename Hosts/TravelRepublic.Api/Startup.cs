@@ -2,13 +2,9 @@ using Eml.ClassFactory.Contracts;
 using Eml.ControllerBase;
 using Eml.Mef;
 using Eml.MefDependencyResolver.Api;
-using TravelRepublic.Api.Configurations;
-using TravelRepublic.Api.Helpers;
-using TravelRepublic.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
@@ -18,6 +14,10 @@ using System;
 using System.Collections.Generic;
 using System.Composition.Hosting;
 using System.Composition.Hosting.Core;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using TravelRepublic.Api.Helpers;
+using TravelRepublic.Infrastructure;
 
 namespace TravelRepublic.Api
 {
@@ -25,65 +25,82 @@ namespace TravelRepublic.Api
     {
         private const string SWAGGER_DOC_VERSION = "v1";
 
-        private const string API_NAME = "TravelRepublic";
-
         private const string LAUNCH_URL = "docs";
-
-        public static IConfiguration Configuration { get; private set; }
 
         public static ILoggerFactory LoggerFactory { get; private set; }
 
         public static IClassFactory ClassFactory { get; private set; }
 
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public Startup(ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;
             LoggerFactory = loggerFactory;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHealthChecks();
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var actionExecutingContext = actionContext as ActionExecutingContext;
+
+                    if (actionExecutingContext?.ModelState.ErrorCount > 0
+                        && actionExecutingContext?.ActionArguments.Count == actionContext.ActionDescriptor.Parameters.Count)
+                    {
+                        return new UnprocessableEntityObjectResult(actionContext.ModelState);
+                    }
+
+                    return new BadRequestObjectResult(actionContext.ModelState);
+                };
+            });
             services.AddMvc(options =>
                 {
                     options.ReturnHttpNotAcceptable = true;
                     options.OutputFormatters.RemoveType<StringOutputFormatter>();
                     options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
                 })
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });
+				.AddJsonOptions(options =>
+				{
+					options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+					options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore; //optional
+				});
+
+            var assemblyVersion = typeof(Startup).Assembly.GetName().Version.ToString();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(SWAGGER_DOC_VERSION,
                     new Info
                     {
-                        Title = API_NAME,
-                        Version = SWAGGER_DOC_VERSION,
+                        Title = Constants.ApplicationId,
+                        Version = $"Build: {assemblyVersion}",
                         Contact = new Contact { Name = "Eddie Lonzanida", Email = "EddieLonzanida@hotmail.com" },
-                        Description = "SOA Solution using .Net Core 2.2. Featuring Angular7, Etags, RateLimits, IoC/DI using MEF, EFCore, DataMigrations, SwaggerUI, XUnit , DataRepository & Mediator pattern, NLog, HealthChecks and more.."
+                        Description = "SOA Solution using .Net Core 2.2. Featuring Angular8, Etags, RateLimits, IoC/DI using MEF, EFCore, DataMigrations, SwaggerUI, XUnit , DataRepository & Mediator pattern, NLog, HealthChecks and more.."
                     });
                
                 c.OperationFilter<SwashbuckleSummaryOperationFilter>();
                 c.DocumentFilter<LowercaseDocumentFilter>();
                 c.DocumentFilter<SortOperationDocumentFilter>();
+                c.DescribeAllParametersInCamelCase();
+                c.DescribeStringEnumsInCamelCase();
             });
 
             ClassFactory = services.AddMef(() =>
             {
+				// Any changes here should also be reflected in the integration test fixtures.
                 // Register instances as shared.
                 var instanceRegistrations = new List<Func<ContainerConfiguration, ExportDescriptorProvider>>
                 {
                     r => r.WithInstance(LoggerFactory),
-                    r => r.WithInstance(Configuration)
+                    r => r.WithInstance(ApplicationSettings.Configuration)
                 };
 
                 // Create Mef container
-                return Bootstrapper.Init(API_NAME, instanceRegistrations);
+                return Bootstrapper.Init(Constants.ApplicationId, instanceRegistrations);
             });
 
-			services.AddHealthChecks().AddDbContextCheck<TravelRepublicDb>();
+			//services.AddHealthChecks().AddDbContextCheck<TravelRepublicDb>();
 
             // var rateLimits = ClassFactory.GetExport<RateLimitsConfig>();
 
@@ -117,19 +134,23 @@ namespace TravelRepublic.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint($"/swagger/{SWAGGER_DOC_VERSION}/swagger.json", API_NAME);
+                c.SwaggerEndpoint($"/swagger/{SWAGGER_DOC_VERSION}/swagger.json", Constants.ApplicationId);
                 c.RoutePrefix = LAUNCH_URL;
                 c.EnableFilter();
                 c.DocExpansion(DocExpansion.None);
             });
 
-            // Check the port in TravelRepublic.Spa -> Properties -> launchSettings.json and update TravelRepublic.Api -> appsettings.json -> WhiteList entry
-            var whiteListConfig = new WhiteListConfig(Configuration);
-
-            app.UseCors(builder => builder.WithOrigins(whiteListConfig.Value.ToArray())
-                 .AllowAnyOrigin()
-                 .AllowAnyHeader()
-                 .AllowAnyMethod());
+#if DEBUG
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+#else
+            // Ports can be modified in TravelRepublic.Spa -> Properties -> launchSettings.json and update TravelRepublic.Api -> appsettings.json -> WhiteList entry
+            var whiteListConfig = ApplicationSettings.Config.WhiteList;
+           
+			app.UseCors(builder => builder.WithOrigins(whiteListConfig.ToArray()));
+#endif
 
             // app.UseResponseCaching();
             // app.UseHttpCacheHeaders(); 

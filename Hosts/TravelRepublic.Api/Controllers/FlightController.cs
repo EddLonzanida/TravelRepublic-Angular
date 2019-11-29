@@ -1,7 +1,9 @@
 ﻿using Eml.ControllerBase;
-using Eml.Mediator.Contracts;using Microsoft.AspNetCore.Mvc;
-using System;using System.Collections.Generic;using System.Composition;
-using TravelRepublic.Business.Common.Dto;
+using Eml.Mediator.Contracts;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Composition;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
 using TravelRepublic.Business.Common.Requests;
 
 namespace TravelRepublic.Api.Controllers
@@ -10,24 +12,18 @@ namespace TravelRepublic.Api.Controllers
     public class FlightController : ControllerApiBase
     {
         [ImportingConstructor]
-        public FlightController(IMediator mediator) 
+        public FlightController(IMediator mediator)
             : base(mediator)
         {
         }
 
         [HttpGet]
-        [Route("Segments")]
-        [Produces(typeof(IEnumerable<Flight>))]
-        public IActionResult Segments(eFlightFilter searchCode)
+        public ActionResult<List<Flight>> GetFlightSegments(eFlightFilter searchCode)
         {
             var request = new FlightBuilderRequest(searchCode);
             var response = mediator.Get(request);
 
             return Ok(response.Flights);
-        }
-
-        protected override void RegisterIDisposable(List<IDisposable> disposables)
-        {
         }
     }
 }

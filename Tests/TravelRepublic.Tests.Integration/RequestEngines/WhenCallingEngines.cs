@@ -1,6 +1,7 @@
 ﻿using Shouldly;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
 using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Tests.Integration.BaseClasses;
 using Xunit;
@@ -9,33 +10,23 @@ namespace TravelRepublic.Tests.Integration.RequestEngines
 {
     public class WhenCallingEngines : IntegrationTestDbBase
     {
-        [Fact]
-        public async Task AutoComplete_ShouldBeExecuted()
-        {
-            var request = new AutoCompleteAsyncRequest("a");
+        //[Fact]
+        //public async Task HotelSearchFilter_ShouldBeExecuted()
+        //{
+        //    var request = new EstablishmentIndexRequest();
 
-            var sut = await mediator.GetAsync(request);
+        //    var sut = await mediator.GetAsync(EstablishmentIndexRequest.GetNormalValues(request));
 
-            sut.Suggestions.ToList().Count.ShouldBe(15);
-        }
-
-        [Fact]
-        public async Task HotelSearchFilter_ShouldBeExecuted()
-        {
-            var request = new HotelSearchAsyncRequest("", 0, 0, 0, 0, 1, eHotelSorting.None);
-
-            var sut = await mediator.GetAsync(request);
-
-            sut.RecordCount.ShouldBe(1132);
-            sut.RowsPerPage.ShouldBe(10);
-        }
+        //    sut.RecordCount.ShouldBe(1132);
+        //    sut.RowsPerPage.ShouldBe(10);
+        //}
 
         [Fact]
         public async Task HotelSearch_ShouldBeExecuted()
         {
-            var request = new HotelSearchFilterAsyncRequest("", 0, 0, 0, 0);
+            var request = new HotelSearchFilterAsyncRequest();
 
-            var sut = await mediator.GetAsync(request);
+            var sut = await mediator.GetAsync(HotelSearchFilterAsyncRequest.GetNormalValues(request));
 
             sut.CostMax.ShouldBe(6988);
             sut.CostMin.ShouldBe(206.15);

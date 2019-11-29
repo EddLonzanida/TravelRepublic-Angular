@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using TravelRepublic.Business.Common.Dto;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
 
 namespace TravelRepublic.Business.Managers
 {

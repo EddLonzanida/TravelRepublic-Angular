@@ -18,7 +18,7 @@ namespace TravelRepublic.Business.Common.Requests
     public class FlightBuilderRequest : IRequest<FlightBuilderRequest, FlightBuilderResponse>
     {
         /// <summary>
-        /// This request will be processed by <see cref="FlightBuilderEngine"/>.
+        /// This request will be processed by FlightBuilderEngine.
         /// </summary>
         public eFlightFilter SearchCode { get; }
 
@@ -26,6 +26,5 @@ namespace TravelRepublic.Business.Common.Requests
         {
             SearchCode = searchCode;
         }
-
     }
 }

@@ -1,15 +1,19 @@
-﻿using Eml.Contracts.Services;using NSubstitute;using Shouldly;using System;using System.Collections.Generic;using TravelRepublic.Business.Common.Dto;using TravelRepublic.Business.Common.Requests;
+﻿using Eml.Contracts.Services;
+using NSubstitute;
+using Shouldly;
+using System;
+using System.Collections.Generic;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
+using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Business.Managers;using TravelRepublic.Business.RequestEngines;using Xunit;
 
 namespace TravelRepublic.Tests.Unit.RequestEngines
 {
     public class FlightBuilderEngineTests
     {
-        private FlightBuilderEngine engine;
+        private readonly FlightBuilderEngine engine;
 
-        private IFlightBuilder flightBuilder;
-
-        private IClockService clockService;
+        private readonly IClockService clockService;
 
         private Flight normalFlightWithTwoHourDuration;
 
@@ -32,7 +36,7 @@ namespace TravelRepublic.Tests.Unit.RequestEngines
             clockService = Substitute.For<IClockService>();
             clockService.Now().Returns(now);
             clockService.NowAddDays(3).Returns(now.AddDays(3));
-            flightBuilder = new FlightBuilder(clockService);
+            IFlightBuilder flightBuilder = new FlightBuilder(clockService);
             engine = new FlightBuilderEngine(flightBuilder, clockService);
         }
 

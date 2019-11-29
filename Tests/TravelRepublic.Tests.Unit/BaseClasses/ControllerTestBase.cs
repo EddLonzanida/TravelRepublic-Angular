@@ -9,7 +9,7 @@ namespace TravelRepublic.Tests.Unit.BaseClasses
 {
     [Collection(ControllerTestBaseFixture.COLLECTION_DEFINITION)]
     public abstract class ControllerTestBase<T> : IDisposable
-        where T : Controller
+        where T : ControllerBase
     {
         protected readonly IMediator mediator;
 
@@ -28,7 +28,6 @@ namespace TravelRepublic.Tests.Unit.BaseClasses
 
         public void Dispose()
         {
-            controller?.Dispose();
         }
     }
 }

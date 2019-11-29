@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Linq;
 using TravelRepublic.Business.Common.Dto;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
 using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Business.Common.Responses;
 using TravelRepublic.Business.Extensions;

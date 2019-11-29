@@ -1,7 +1,11 @@
 ﻿using Eml.ConfigParser.Helpers;
-using Eml.DataRepository;
 using Microsoft.EntityFrameworkCore;
-using TravelRepublic.Business.Common.Entities;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using TravelRepublic.Business.Common.Entities.TravelRepublicDb;
+using TravelRepublic.Infrastructure;
+using TravelRepublic.Infrastructure.Configurations;
 
 namespace TravelRepublic.Data
 {
@@ -11,10 +15,31 @@ namespace TravelRepublic.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var config = ConfigBuilder.GetConfiguration();
-            var mainDbConnectionString = new MainDbConnectionString(config);
+            var connString = ConnectionStrings.TravelRepublicDb;
 
-            optionsBuilder.UseSqlServer(mainDbConnectionString.Value);
+            if (string.IsNullOrWhiteSpace(connString))
+            {
+                var configuration = ConfigBuilder.GetConfiguration(Constants.CurrentEnvironment)
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                using (var config = new TravelRepublicConnectionStringParser(configuration))
+                {
+                    connString = config.Value;
+                }
+            }
+
+            optionsBuilder.UseSqlServer(connString);
         }
     }
 }
+//Add-Migration InitialCreate -OutputDir TravelRepublicDbMigrations -Context TravelRepublicDb
+//Add-Migration InitialSeed -OutputDir TravelRepublicDbMigrations -Context TravelRepublicDb
+//Update-Database -verbose -Context TravelRepublicDb
+//Update-Database LastGoodMigration -verbose -Context TravelRepublicDb  // Revert a migration. Note: Migrations onwards will be deleted except LastGoodMigration
+
+//Using console or terminal:
+//navigate to TravelRepublic.Net folder
+//dotnet ef migrations add InitialCreate -o TravelRepublicDbMigrations -c TravelRepublicDb -p Data/TravelRepublic.Net.DataMigration -s Hosts/TravelRepublic.Net.Api -v
+//dotnet ef migrations add InitialStoredProcedures -o TravelRepublicDbMigrations -c TravelRepublicDb -p Data/TravelRepublic.Net.DataMigration -s Hosts/TravelRepublic.Net.Api -v
+//dotnet ef database update -c TravelRepublicDb -p Data/TravelRepublic.Net.DataMigration -s Hosts/TravelRepublic.Net.Api -v

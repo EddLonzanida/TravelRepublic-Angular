@@ -1,11 +1,10 @@
 using Eml.Extensions;
-using TravelRepublic.Tests.Integration.BaseClasses;
-using TravelRepublic.Tests.Integration.ClassData;
+using Shouldly;
 using System;
 using System.Composition;
-using Shouldly;
+using TravelRepublic.Tests.Integration.BaseClasses;
+using TravelRepublic.Tests.Utils.ClassData.Conventions;
 using Xunit;
-using Xunit.Sdk;
 
 namespace TravelRepublic.Tests.Integration.Controllers
 {

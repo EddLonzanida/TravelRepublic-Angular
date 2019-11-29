@@ -1,6 +1,7 @@
 using Eml.ConfigParser.Helpers;
-using Eml.DataRepository;
 using TravelRepublic.Tests.Unit.Stubs;
+using TravelRepublic.Infrastructure;
+using TravelRepublic.Infrastructure.Configurations;
 using System;
 using Xunit;
 
@@ -12,13 +13,13 @@ namespace TravelRepublic.Tests.Unit.BaseClasses
 
         public static RepositoryStubs RepositoryStub { get; private set; }
 
-        public static MainDbConnectionString MainDbConnectionString { get; private set; }
+        public static TravelRepublicConnectionStringParser TravelRepublicConnectionString { get; private set; }
 
         public EngineTestBaseFixture()
         {
-            var configuration = ConfigBuilder.GetConfiguration();
+            var configuration = ConfigBuilder.GetConfiguration(Constants.CurrentEnvironment).Build();
 
-            MainDbConnectionString = new MainDbConnectionString(configuration);
+            TravelRepublicConnectionString = new TravelRepublicConnectionStringParser(configuration);
             RepositoryStub = new RepositoryStubs();
         }
 

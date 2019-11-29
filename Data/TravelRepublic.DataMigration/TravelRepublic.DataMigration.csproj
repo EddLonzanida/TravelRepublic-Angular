@@ -1,13 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\TravelRepublic.Contracts\TravelRepublic.Contracts.csproj" />
     <ProjectReference Include="..\TravelRepublic.Data\TravelRepublic.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="SampleDataSources\hotels.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

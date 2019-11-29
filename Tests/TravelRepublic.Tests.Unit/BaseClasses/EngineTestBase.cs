@@ -1,9 +1,10 @@
-using Eml.DataRepository;
 using Eml.Mediator.Contracts;
 using TravelRepublic.Tests.Unit.Stubs;
+using TravelRepublic.Infrastructure.Configurations;
 using System;
 using Eml.Extensions;
 using Xunit;
+
 
 namespace TravelRepublic.Tests.Unit.BaseClasses
 {
@@ -15,15 +16,15 @@ namespace TravelRepublic.Tests.Unit.BaseClasses
 
         protected readonly RepositoryStubs repositoryStub;
 
-        protected readonly MainDbConnectionString mainDbConnectionString;
+        protected readonly TravelRepublicConnectionStringParser connectionString;
 
         protected EngineTestBase()
         {
             repositoryStub = EngineTestBaseFixture.RepositoryStub;
-            mainDbConnectionString = EngineTestBaseFixture.MainDbConnectionString;
+            connectionString = EngineTestBaseFixture.TravelRepublicConnectionString;
 
             repositoryStub.CheckNotNull("repositoryStub");
-            mainDbConnectionString.CheckNotNull("mainDbConnectionString");
+            connectionString.CheckNotNull("connectionString");
         }
 
         public void Dispose()

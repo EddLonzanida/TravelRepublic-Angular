@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TravelRepublic.Business.Common.Dto;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
 
 namespace TravelRepublic.Tests.Unit.RequestEngines
 {

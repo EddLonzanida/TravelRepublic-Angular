@@ -1,9 +1,9 @@
 ﻿using Eml.ConfigParser;
-using Eml.DataRepository;
 using Shouldly;
-using TravelRepublic.Business.Common.Entities;
+using TravelRepublic.Business.Common.Entities.TravelRepublicDb;
 using TravelRepublic.Business.Managers;
-using TravelRepublic.Data.Contracts;
+using TravelRepublic.Data.Repositories.TravelRepublicDb.Contracts;
+using TravelRepublic.Infrastructure.Configurations;
 using TravelRepublic.Tests.Integration.BaseClasses;
 using Xunit;
 
@@ -14,7 +14,7 @@ namespace TravelRepublic.Tests.Integration
         [Fact]
         public void EstablishmentRepository_ShouldBeDiscoverable()
         {
-            var sut = classFactory.GetExport<IDataRepositorySoftDeleteInt<Establishment>>();
+            var sut = classFactory.GetExport<ITravelRepublicDataRepositorySoftDeleteInt<Establishment>>();
 
             sut.ShouldNotBeNull();
         }
@@ -32,7 +32,7 @@ namespace TravelRepublic.Tests.Integration
         {
             const string value = @"Server=(LocalDB)\MSSQLLocalDB;Database=TravelRepublicIntegrationTest;MultipleActiveResultSets=true;Integrated Security=True";
 
-            var config = classFactory.GetExport<IConfigBase<string, MainDbConnectionString>>();
+            var config = classFactory.GetExport<IConfigParserBase<string, TravelRepublicConnectionStringParser>>();
 
             config.ShouldNotBeNull();
             config.Value.ShouldBe(value);

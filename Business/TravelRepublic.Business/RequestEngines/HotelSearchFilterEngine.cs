@@ -1,25 +1,24 @@
-﻿using Eml.DataRepository.Contracts;
-using Eml.Mediator.Contracts;
+﻿using Eml.Mediator.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Composition;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TravelRepublic.Business.Common.Dto;
-using TravelRepublic.Business.Common.Entities;
+using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
+using TravelRepublic.Business.Common.Entities.TravelRepublicDb;
 using TravelRepublic.Business.Common.Requests;
 using TravelRepublic.Business.Common.Responses;
-using TravelRepublic.Data.Contracts;
+using TravelRepublic.Data.Repositories.TravelRepublicDb.Contracts;
 
 namespace TravelRepublic.Business.RequestEngines
 {
     public class HotelSearchFilterEngine : IRequestAsyncEngine<HotelSearchFilterAsyncRequest, HotelSearchFilterResponse>
     {
-        private readonly IDataRepositorySoftDeleteInt<Establishment> repository;
+        private readonly ITravelRepublicDataRepositorySoftDeleteInt<Establishment> repository;
 
         [ImportingConstructor]
-        public HotelSearchFilterEngine(IDataRepositorySoftDeleteInt<Establishment> repository)
+        public HotelSearchFilterEngine(ITravelRepublicDataRepositorySoftDeleteInt<Establishment> repository)
         {
             this.repository = repository;
         }
@@ -32,7 +31,7 @@ namespace TravelRepublic.Business.RequestEngines
             var costMin = request.CostMin;
             var costMax = request.CostMax;
 
-            return await repository.ExecuteDbSetAsync(async dbSet =>
+            return await repository.ExecuteAsync(async dbSet =>
             {
                 Expression<Func<Establishment, bool>> starFiltersWhereClause = r => (name == "" || r.Name.Contains(name))
                                                                                && r.UserRating >= userRating
@@ -81,7 +80,7 @@ namespace TravelRepublic.Business.RequestEngines
                 var costFilterMin = costFilter?.Minimum ?? 0;
                 var costFilterMax = costFilter?.Maximum ?? 0;
 
-                return new HotelSearchFilterResponse(starFilters, ratingFilterMin, ratingFilterMax, costFilterMin, costFilterMax); 
+                return new HotelSearchFilterResponse(starFilters, ratingFilterMin, ratingFilterMax, costFilterMin, costFilterMax);
             });
         }
 

@@ -1,8 +1,11 @@
-using System;
+using Eml.ConfigParser.Helpers;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using System;
+using TravelRepublic.Infrastructure;
 
 namespace TravelRepublic.Api
 {
@@ -14,9 +17,18 @@ namespace TravelRepublic.Api
 
             try
             {
-                logger.Debug("Application Started...");
+                var webHostBuilder = WebHostBuilder(args);
 
-                BuildWebHost(args).Run();
+                Constants.CurrentEnvironment = webHostBuilder.GetSetting("environment");
+
+				var loggerConnectionString = GetLoggerConnectionString(Constants.CurrentEnvironment);
+
+                //Key should match Nlog.config key: connectionString = "${gdc:item=TravelRepublicConnectionString}"
+                NLog.GlobalDiagnosticsContext.Set(ConnectionStrings.TravelRepublicDbKey, loggerConnectionString);
+
+                webHostBuilder
+                    .Build()
+                    .Run();
             }
             catch (Exception e)
             {
@@ -30,15 +42,27 @@ namespace TravelRepublic.Api
             }
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder WebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args).ConfigureLogging(builder =>
-                {
-                    builder.SetMinimumLevel(LogLevel.Trace);
-                    builder.AddConsole();
-                    builder.AddDebug();
-                    builder.AddNLog();
-                })
-                .UseStartup<Startup>()
+            {
+                builder.SetMinimumLevel(LogLevel.Trace);
+                builder.AddConsole();
+                builder.AddDebug();
+                builder.AddNLog();
+            })
+            .UseStartup<Startup>();
+
+        private static string GetLoggerConnectionString(string currentEnvironment)
+        {
+           var configuration = ConfigBuilder.GetConfiguration(currentEnvironment)
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
                 .Build();
+
+            ConnectionStrings.SetOneTime(configuration);
+            ApplicationSettings.SetOneTime(configuration);
+
+            return ConnectionStrings.TravelRepublicDb;
+        }
     }
 }

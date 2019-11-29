@@ -1,10 +1,14 @@
 using Eml.ClassFactory.Contracts;
 using Eml.Mef;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Composition.Hosting;
 using System.Composition.Hosting.Core;
 using Eml.ConfigParser.Helpers;
+using Microsoft.Extensions.Configuration;
 using Xunit;
+using TravelRepublic.Infrastructure;
 
 namespace TravelRepublic.Tests.Integration.BaseClasses
 {
@@ -12,17 +16,28 @@ namespace TravelRepublic.Tests.Integration.BaseClasses
     {
         public const string COLLECTION_DEFINITION = "IntegrationTestDiFixture CollectionDefinition";
 
-        public const string APP_PREFIX = "TravelRepublic";
+        private const string APP_PREFIX = Constants.ApplicationId;
 
         public static IClassFactory ClassFactory { get; private set; }
 
         public IntegrationTestDiFixture()
         {
-            var configuration = ConfigBuilder.GetConfiguration();
+            var loggerFactory = new LoggerFactory();
+            var configuration = ConfigBuilder.GetConfiguration(Constants.CurrentEnvironment)
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
 
-            ExportDescriptorProvider InstanceRegistration(ContainerConfiguration r) => r.WithInstance(configuration);
+            ConnectionStrings.SetOneTime(configuration);
+            ApplicationSettings.SetOneTime(configuration);
 
-            ClassFactory = Bootstrapper.Init(APP_PREFIX, InstanceRegistration);
+            var instanceRegistrations = new List<Func<ContainerConfiguration, ExportDescriptorProvider>>
+            {
+                r => r.WithInstance(loggerFactory),
+                r => r.WithInstance(configuration)
+            };
+
+            ClassFactory = Bootstrapper.Init(APP_PREFIX, instanceRegistrations);
         }
 
         public void Dispose()

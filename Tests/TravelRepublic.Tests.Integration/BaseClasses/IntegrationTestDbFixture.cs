@@ -1,13 +1,17 @@
+using Eml.ClassFactory.Contracts;
+using Eml.ConfigParser.Helpers;
+using Eml.DataRepository.Attributes;
+using Eml.DataRepository.Extensions;
+using Eml.Mef;
+using TravelRepublic.Infrastructure;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Composition.Hosting;
 using System.Composition.Hosting.Core;
+using System.Data;
+using Microsoft.Extensions.Configuration;
 using Xunit;
-using Eml.ClassFactory.Contracts;
-using Eml.Mef;
-using Eml.ConfigParser.Helpers;
-using Eml.DataRepository.Extensions;
-using Eml.DataRepository.Attributes;
 
 namespace TravelRepublic.Tests.Integration.BaseClasses
 {
@@ -15,42 +19,47 @@ namespace TravelRepublic.Tests.Integration.BaseClasses
     {
         public const string COLLECTION_DEFINITION = "IntegrationTestDbFixture CollectionDefinition";
 
-        public const string APP_PREFIX = "TravelRepublic";
-
-        private const string DB_DIRECTORY = "DataBase";
+        public const string APP_PREFIX = Constants.ApplicationId;
 
         public static IClassFactory ClassFactory { get; private set; }
 
-        private readonly IMigrator migrator;
-
         public IntegrationTestDbFixture()
         {
-            var configuration = ConfigBuilder.GetConfiguration();
+            var loggerFactory = new LoggerFactory();
+            var configuration = ConfigBuilder.GetConfiguration()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+                
+            ConnectionStrings.SetOneTime(configuration);
+            ApplicationSettings.SetOneTime(configuration);
 
-            ExportDescriptorProvider InstanceRegistration(ContainerConfiguration r) => r.WithInstance(configuration);
+            var instanceRegistrations = new List<Func<ContainerConfiguration, ExportDescriptorProvider>>
+            {
+                r => r.WithInstance(loggerFactory),
+                r => r.WithInstance(configuration)
+            };
 
-            ClassFactory = Bootstrapper.Init(APP_PREFIX, InstanceRegistration);
+            ClassFactory = Bootstrapper.Init(APP_PREFIX, instanceRegistrations);
 
-            migrator = GetTestDbMigration();
+            var migrator = GetTestDbMigration();
 
             if (migrator == null)
             {
                 throw new NoNullAllowedException("dbMigration not found..");
             }
 
-            migrator.Execute(DB_DIRECTORY, false);
+            migrator.Execute();
         }
 
         public void Dispose()
         {
-            //migrator?.DestroyDb();
-
             Eml.Mef.ClassFactory.Dispose(ClassFactory);
         }
 
         private static IMigrator GetTestDbMigration()
         {
-            return ClassFactory.GetMigrator(Environments.PRODUCTION);
+            return ClassFactory.GetMigrator(DbNames.TravelRepublic);
         }
     }
 

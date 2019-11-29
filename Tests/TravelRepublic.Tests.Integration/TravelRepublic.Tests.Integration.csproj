@@ -1,14 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\TravelRepublic.Contracts\TravelRepublic.Contracts.csproj" />
-    <ProjectReference Include="..\..\Hosts\TravelRepublic.Api\TravelRepublic.Api.csproj" />
-  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+	  <LangVersion>latest</LangVersion>
+  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NSubstitute" Version="3.1.0" />
-    <PackageReference Include="Shouldly" Version="3.0.2" />
-    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="xunit.runner.console" Version="2.4.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -19,16 +17,22 @@
     </PackageReference>
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-	  <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TravelRepublic.Tests.Utils\TravelRepublic.Tests.Utils.csproj" />
+  </ItemGroup>
 
 
-					<ItemGroup>
-						<None Update="appsettings.json">
-							<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-						</None>
-					</ItemGroup>
-					
+    <ItemGroup>
+        <Content Remove="appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="appsettings.Development.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="appsettings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 </Project>
