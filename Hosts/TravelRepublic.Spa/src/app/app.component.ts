@@ -15,8 +15,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     menuItems: MenuItem[];
     miniMenuItems: MenuItem[];
 
-    @ViewChild('bigMenu') bigMenu: Menu;
-    @ViewChild('smallMenu') smallMenu: Menu;
+    @ViewChild('bigMenu', {static: false}) bigMenu: Menu;
+    @ViewChild('smallMenu', {static: false}) smallMenu: Menu;
 
     constructor(private router: Router) {
     }
