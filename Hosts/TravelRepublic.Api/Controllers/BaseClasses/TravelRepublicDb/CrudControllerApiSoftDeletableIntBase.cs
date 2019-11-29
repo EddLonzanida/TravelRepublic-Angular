@@ -1,12 +1,12 @@
 ﻿using Eml.Contracts.Entities;
-using Eml.ControllerBase;
 using Eml.Contracts.Requests;
 using Eml.Contracts.Responses;
+using Eml.ControllerBase;
 using Eml.DataRepository.MsSql.Contracts;
-using TravelRepublic.Infrastructure.Contracts;
-using TravelRepublic.Api.Helpers;
-using System;
+using Eml.Mediator.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using TravelRepublic.Api.Helpers;
+using TravelRepublic.Infrastructure.Contracts;
 
 namespace TravelRepublic.Api.Controllers.BaseClasses.TravelRepublicDb
 {
@@ -25,6 +25,10 @@ namespace TravelRepublic.Api.Controllers.BaseClasses.TravelRepublicDb
     {
         protected CrudControllerApiSoftDeletableIntBase(TRepository repository)
             : base(repository)
+        {
+        }
+        protected CrudControllerApiSoftDeletableIntBase(IMediator mediator, TRepository repository)
+            : base(mediator, repository)
         {
         }
 

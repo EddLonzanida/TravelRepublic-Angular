@@ -19,34 +19,34 @@ export class HotelService {
 
     search(request: HotelSearchRequest) {
         const controller = 'hotel';
-        const action = 'establishments';
-        const route = `${controller}/${action}`;
+        const route = `${controller}`;
         const cleanedRequest = this.cleanBaseParameters(request);
 
         cleanedRequest.page = request.page;
-        cleanedRequest.sorting = request.sorting;
-
+        cleanedRequest.sortColumn = request.sortColumn;
+        cleanedRequest.isDescending = request.isDescending;
+        
         if (cleanedRequest.page > 1) { } else { cleanedRequest.page = null; }
-        if (cleanedRequest.sorting > 0) { } else { cleanedRequest.sorting = null; }
+        if (cleanedRequest.isDescending) { } else { cleanedRequest.isDescending = null; }
 
         return this.searchService.request<HotelSearchResponse>('HotelService.search', route, cleanedRequest);
     }
 
     getFilters(request: HotelSearchRequestBase) {
         const controller = 'hotel';
-        const action = 'filter';
+        const action = 'filters';
         const route =`${controller}/${action}`;
         const cleanedRequest = this.cleanBaseParameters(request);
         
         cleanedRequest.page = null;
-        cleanedRequest.sorting = null;
+        cleanedRequest.isDescending = null;
 
         return this.searchService.request<HotelSearchFilterResponse>('HotelService.getFilters', route, cleanedRequest);
     }
 
     private cleanBaseParameters(request: HotelSearchRequestBase): HotelSearchRequest {
-        const cleanedRequest = new HotelSearchRequest(request.name, request.star, request.userRating, request.costMin, request.costMax);
-        if (cleanedRequest.name === '') { cleanedRequest.name = null; }
+        const cleanedRequest = new HotelSearchRequest(request.search, request.star, request.userRating, request.costMin, request.costMax);
+        if (cleanedRequest.search === '') { cleanedRequest.search = null; }
         if (cleanedRequest.star > 0) { } else { cleanedRequest.star = null; }
         if (cleanedRequest.userRating > 0) {
             cleanedRequest.userRating = request.userRating / 10;

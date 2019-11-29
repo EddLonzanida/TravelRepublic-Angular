@@ -5,33 +5,38 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{4C8A6E14-8A5B-4415-9ACC-C09E4E2EA17B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Api", "Hosts\TravelRepublic.Api\TravelRepublic.Api.csproj", "{D3948C9C-3D22-4F2B-BAA7-DF8C2BE90254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Api", "Hosts\TravelRepublic.Api\TravelRepublic.Api.csproj", "{D3948C9C-3D22-4F2B-BAA7-DF8C2BE90254}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{39717382-3787-485C-86AA-CB4F2B74F149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Infrastructure", "Infrastructure\TravelRepublic.Infrastructure\TravelRepublic.Infrastructure.csproj", "{30DAD3CC-8DCF-475C-8238-BF391441EAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Infrastructure", "Infrastructure\TravelRepublic.Infrastructure\TravelRepublic.Infrastructure.csproj", "{30DAD3CC-8DCF-475C-8238-BF391441EAAA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{1BD58A6B-1050-42FE-BCF0-128C0C226A37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Business.Common", "Business\TravelRepublic.Business.Common\TravelRepublic.Business.Common.csproj", "{5CF0C276-BD62-4390-B6B5-ED71FF0EBA91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Business.Common", "Business\TravelRepublic.Business.Common\TravelRepublic.Business.Common.csproj", "{5CF0C276-BD62-4390-B6B5-ED71FF0EBA91}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{30E1F32A-1392-4047-B8E9-439C42304F50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Data", "Data\TravelRepublic.Data\TravelRepublic.Data.csproj", "{5D7097CF-598D-44B9-BC6F-8E12CC9BF158}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Data", "Data\TravelRepublic.Data\TravelRepublic.Data.csproj", "{5D7097CF-598D-44B9-BC6F-8E12CC9BF158}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.DataMigration", "Data\TravelRepublic.DataMigration\TravelRepublic.DataMigration.csproj", "{BEF91219-87C8-4076-B204-90389868A036}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.DataMigration", "Data\TravelRepublic.DataMigration\TravelRepublic.DataMigration.csproj", "{BEF91219-87C8-4076-B204-90389868A036}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Business", "Business\TravelRepublic.Business\TravelRepublic.Business.csproj", "{0723969A-FBCC-4077-B70A-7FC7CD1B494C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Business", "Business\TravelRepublic.Business\TravelRepublic.Business.csproj", "{0723969A-FBCC-4077-B70A-7FC7CD1B494C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8395111A-6459-47A8-AC2D-2FC0C4E00B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Tests.Utils", "Tests\TravelRepublic.Tests.Utils\TravelRepublic.Tests.Utils.csproj", "{A6BA9F6C-6855-4BA0-BD60-FCFBBA47BE8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Tests.Utils", "Tests\TravelRepublic.Tests.Utils\TravelRepublic.Tests.Utils.csproj", "{A6BA9F6C-6855-4BA0-BD60-FCFBBA47BE8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Tests.Integration", "Tests\TravelRepublic.Tests.Integration\TravelRepublic.Tests.Integration.csproj", "{FDF193C9-FC82-476C-B311-F36DF7D39D17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Tests.Integration", "Tests\TravelRepublic.Tests.Integration\TravelRepublic.Tests.Integration.csproj", "{FDF193C9-FC82-476C-B311-F36DF7D39D17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Tests.Unit", "Tests\TravelRepublic.Tests.Unit\TravelRepublic.Tests.Unit.csproj", "{EAABBD33-D527-475F-B691-F2727E9EEA75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Tests.Unit", "Tests\TravelRepublic.Tests.Unit\TravelRepublic.Tests.Unit.csproj", "{EAABBD33-D527-475F-B691-F2727E9EEA75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelRepublic.Spa", "Hosts\TravelRepublic.Spa\TravelRepublic.Spa.csproj", "{DC2A6F4C-D3ED-4C60-B8AB-E1DD8733C3CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelRepublic.Spa", "Hosts\TravelRepublic.Spa\TravelRepublic.Spa.csproj", "{DC2A6F4C-D3ED-4C60-B8AB-E1DD8733C3CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7558003-11C7-4926-9D7E-B2D9CBA264D8}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +46,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D3948C9C-3D22-4F2B-BAA7-DF8C2BE90254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -167,6 +169,9 @@ Global
 		{DC2A6F4C-D3ED-4C60-B8AB-E1DD8733C3CB}.Release|x86.ActiveCfg = Release|Any CPU
 		{DC2A6F4C-D3ED-4C60-B8AB-E1DD8733C3CB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D3948C9C-3D22-4F2B-BAA7-DF8C2BE90254} = {4C8A6E14-8A5B-4415-9ACC-C09E4E2EA17B}
 		{30DAD3CC-8DCF-475C-8238-BF391441EAAA} = {39717382-3787-485C-86AA-CB4F2B74F149}
@@ -178,5 +183,8 @@ Global
 		{FDF193C9-FC82-476C-B311-F36DF7D39D17} = {8395111A-6459-47A8-AC2D-2FC0C4E00B40}
 		{EAABBD33-D527-475F-B691-F2727E9EEA75} = {8395111A-6459-47A8-AC2D-2FC0C4E00B40}
 		{DC2A6F4C-D3ED-4C60-B8AB-E1DD8733C3CB} = {4C8A6E14-8A5B-4415-9ACC-C09E4E2EA17B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32F34592-640B-44FC-BB8F-62986795E675}
 	EndGlobalSection
 EndGlobal

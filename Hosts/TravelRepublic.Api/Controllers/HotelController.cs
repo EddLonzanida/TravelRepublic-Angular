@@ -1,4 +1,5 @@
 ﻿using Eml.Contracts.Responses;
+using Eml.Mediator.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,15 +27,17 @@ namespace TravelRepublic.Api.Controllers
         , ITravelRepublicDataRepositorySoftDeleteInt<Establishment>>
     {
         [ImportingConstructor]
-        public HotelController(ITravelRepublicDataRepositorySoftDeleteInt<Establishment> repository)
-            : base(repository)
+        public HotelController(IMediator mediator, ITravelRepublicDataRepositorySoftDeleteInt<Establishment> repository)
+            : base(mediator, repository)
         {
         }
 
         [HttpGet("Filters")]
         public async Task<ActionResult<HotelSearchFilterResponse>> GetFilters([FromQuery]HotelSearchFilterAsyncRequest request)
         {
-            var response = await mediator.GetAsync(HotelSearchFilterAsyncRequest.GetNormalValues(request));
+            var filters = HotelSearchFilterAsyncRequest.GetNormalValues(request);
+
+            var response = await mediator.GetAsync(filters);
 
             return Ok(response);
         }

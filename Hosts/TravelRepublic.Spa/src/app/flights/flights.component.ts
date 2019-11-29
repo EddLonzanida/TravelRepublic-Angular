@@ -21,8 +21,7 @@ export class FlightsComponent implements OnInit {
     async search(): Promise<void> {
 
         const controller = 'flight';
-        const action = 'segments';
-        const route = `${controller}/${action}`;
+        const route = `${controller}`;
         const searchCode = this.getSearchCode();
         const parameter = { searchCode: searchCode };
 

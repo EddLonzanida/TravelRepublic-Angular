@@ -1,7 +1,7 @@
 # TravelRepublic
 * Sample SOA using .NetCore2.2 with Angular7 on the front-end. Featuring hotels and booking style searches.
 * Demo app using [Eml*](https://www.nuget.org/packages?q=EddLonzanida) NuGets.
-* Check out [EmlExtensions.vsix](https://marketplace.visualstudio.com/items?itemName=eDuDeTification.EmlExtensions) to automate the creation of controllers, views, seeders, and more!.
+* Check out [EmlExtensions](https://marketplace.visualstudio.com/search?term=EddLonzanida&target=VS&category=Tools&vsVersion=&subCategory=All&sortBy=Relevances) to automate the creation of controllers, views, seeders, and more!.
 
 ## Seed the database
 1. Open the solution using Visual Studio 2017, compile and build (don't run yet)

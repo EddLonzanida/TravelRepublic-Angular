@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="ui-g-12 ui-md-3">
-                <p-dropdown [disabled]="isBusy || canSort()" [options]="sortOrders" [(ngModel)]="searchRequest.sorting" (onChange)="search()" autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
+                <p-dropdown [disabled]="isBusy || canSort()" [options]="sortOrders" [(ngModel)]="selectedSortOrder" (onChange)="search()" autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
             </div>
         </div>
         <div class="ui-g">
