@@ -46,7 +46,7 @@ namespace TravelRepublic.Api.Controllers
         [HttpGet]
         public override async Task<ActionResult<EstablishmentIndexResponse>> Index([FromQuery]EstablishmentIndexRequest request)
         {
-            return await DoIndexAsync(EstablishmentIndexRequest.GetNormalValues(request));
+            return await DoIndexAsync(request);
         }
 
         [HttpGet("Suggestions")]
@@ -87,7 +87,6 @@ namespace TravelRepublic.Api.Controllers
 
             await repository.UpdateAsync(entity);
 
-            //return new EstablishmentDetailsCreateResponse();
             return entity.ToDto();
         }
 
@@ -120,6 +119,8 @@ namespace TravelRepublic.Api.Controllers
 
         protected override async Task<EstablishmentIndexResponse> GetItemsAsync(EstablishmentIndexRequest request)
         {
+            request = EstablishmentIndexRequest.GetNormalValues(request);
+
             var search = request.Search.ToLower();
             var stars = request.Star;
             var userRating = request.UserRating;

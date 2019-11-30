@@ -52,6 +52,7 @@ namespace TravelRepublic.Business.Common.Dto.TravelRepublicDb
                 IsDescending = dto.IsDescending,
                 Search = search,
                 HasParent = dto.HasParent,
+
                 Star = star,
                 UserRating = userRating,
                 CostMin = costMin,
