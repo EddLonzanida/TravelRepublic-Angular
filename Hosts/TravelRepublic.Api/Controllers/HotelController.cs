@@ -33,9 +33,9 @@ namespace TravelRepublic.Api.Controllers
         }
 
         [HttpGet("Filters")]
-        public async Task<ActionResult<HotelSearchFilterResponse>> GetFilters([FromQuery]HotelSearchFilterAsyncRequest request)
+        public async Task<ActionResult<HotelFiltersResponse>> GetFilters([FromQuery]HotelFiltersAsyncRequest request)
         {
-            var filters = HotelSearchFilterAsyncRequest.GetNormalValues(request);
+            var filters = HotelFiltersAsyncRequest.GetNormalValues(request);
 
             var response = await mediator.GetAsync(filters);
 
@@ -94,8 +94,6 @@ namespace TravelRepublic.Api.Controllers
         {
             var entity = request.ToEntity();
 
-            entity.Id = default;
-
             var newEntity = await repository.AddAsync(entity);
 
             return newEntity.ToDto();
@@ -103,18 +101,11 @@ namespace TravelRepublic.Api.Controllers
 
         protected override async Task<List<string>> GetSuggestionsAsync(string search = "")
         {
-            search = string.IsNullOrWhiteSpace(search) ? string.Empty : search.ToLower();
+            search = string.IsNullOrWhiteSpace(search) ? string.Empty : search;
 
             return await repository
-                .GetAutoCompleteIntellisenseAsync(r => search == "" || r.Name.ToLower().Contains(search)
+                .GetAutoCompleteIntellisenseAsync(r => search == "" || r.Name.Contains(search)
                     , r => r.Name);
-        }
-
-        protected override async Task<EstablishmentDetailsCreateResponse> GetItemAsync(int id)
-        {
-            var item = await repository.GetAsync(id);
-
-            return item?.ToDto();
         }
 
         protected override async Task<EstablishmentIndexResponse> GetItemsAsync(EstablishmentIndexRequest request)
@@ -231,6 +222,13 @@ namespace TravelRepublic.Api.Controllers
             }
 
             return orderBy;
+        }
+
+        protected override async Task<EstablishmentDetailsCreateResponse> GetItemAsync(int id)
+        {
+            var item = await repository.GetAsync(id);
+
+            return item?.ToDto();
         }
         #endregion // CRUD HELPERS
     }

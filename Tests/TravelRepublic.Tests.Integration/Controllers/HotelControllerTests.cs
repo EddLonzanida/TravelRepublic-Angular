@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,25 @@ namespace TravelRepublic.Tests.Integration.Controllers
     public class HotelControllerTests : IntegrationTestDbBase
     {
         [Fact]
+        public async Task HotelController_ShouldGetFilters()
+        {
+            var controller = classFactory.GetExport<HotelController>();
+
+            var sut = await controller.GetFilters(null);
+
+            sut.ShouldNotBeNull();
+
+            var response = sut.GetValue();
+
+            response.ShouldNotBeNull();
+            response.CostMax.ShouldBe(6988);
+            response.CostMin.ShouldBe(206.15);
+            response.RatingMin.ShouldBe(0);
+            response.RatingMax.ShouldBe(10);
+            response.StarFilters.ToList().Count.ShouldBe(6);
+        }
+
+        [Fact]
         public async Task HotelController_ShouldGetItems()
         {
             var controller = classFactory.GetExport<HotelController>();
@@ -23,7 +43,9 @@ namespace TravelRepublic.Tests.Integration.Controllers
             var sut = await controller.Index(null);
 
             sut.ShouldNotBeNull();
+
             var response = sut.GetValue();
+
             response.ShouldNotBeNull();
             response.RecordCount.ShouldBe(1132);
             response.RowsPerPage.ShouldBe(10);
@@ -37,7 +59,9 @@ namespace TravelRepublic.Tests.Integration.Controllers
             var sut = await controller.Suggestions(null);
 
             sut.ShouldNotBeNull();
+
             var response = sut.GetValue();
+
             response.ShouldNotBeNull();
             response.Count.ShouldBe(ApplicationSettings.Config.IntellisenseCount);
         }
@@ -50,22 +74,8 @@ namespace TravelRepublic.Tests.Integration.Controllers
             const int DEFAULT_ID = default;
 
             //ensure no remnants of failed tests
-            var repository = classFactory.GetExport<ITravelRepublicDataRepositorySoftDeleteInt<Establishment>>();
-            var context = await repository.GetDb();
-
-            using (var connection = context.Database.GetDbConnection())
-            {
-                await connection.OpenAsync();
-
-                using (var command = connection.CreateCommand())
-                {
-                    var sql = $"DELETE FROM Establishments WHERE [Name] LIKE '%{NAME}%';";
-
-                    command.CommandText = sql;
-
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
+            await EnsureNoCrudRemnants(NAME);
+            await EnsureNoCrudRemnants(NAME_UPDATED);
 
             //CREATE
             var createEstablishmentRequest = new EstablishmentEditCreateRequest { Name = NAME };
@@ -149,6 +159,30 @@ namespace TravelRepublic.Tests.Integration.Controllers
             var deletedItem = sutDetailsCreate.GetValue();
 
             deletedItem.ShouldBeNull();
+
+            await EnsureNoCrudRemnants(NAME);
+            await EnsureNoCrudRemnants(NAME_UPDATED);
+        }
+
+        private async Task EnsureNoCrudRemnants(string searchableText)
+        {
+            //ensure no remnants of failed tests
+            var repository = classFactory.GetExport<ITravelRepublicDataRepositorySoftDeleteInt<Establishment>>();
+            var context = await repository.GetDb();
+
+            using (var connection = context.Database.GetDbConnection())
+            {
+                await connection.OpenAsync();
+
+                using (var command = connection.CreateCommand())
+                {
+                    var sql = $"DELETE FROM Establishments WHERE [Name] LIKE '%{searchableText}%';";
+
+                    command.CommandText = sql;
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }

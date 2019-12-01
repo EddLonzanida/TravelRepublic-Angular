@@ -4,7 +4,7 @@ using TravelRepublic.Business.Common.Entities.TravelRepublicDb;
 
 namespace TravelRepublic.Business.Common.Dto.TravelRepublicDb
 {
-    public class EstablishmentEditCreateRequest : Establishment, IEntityBase<int>
+    public class EstablishmentEditCreateRequest : Establishment
     {
     }
 }

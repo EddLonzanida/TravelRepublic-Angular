@@ -24,9 +24,7 @@ namespace TravelRepublic.Tests.Integration.RequestEngines
         [Fact]
         public async Task HotelSearch_ShouldBeExecuted()
         {
-            var request = new HotelSearchFilterAsyncRequest();
-
-            var sut = await mediator.GetAsync(HotelSearchFilterAsyncRequest.GetNormalValues(request));
+            var sut = await mediator.GetAsync(HotelFiltersAsyncRequest.GetNormalValues(null));
 
             sut.CostMax.ShouldBe(6988);
             sut.CostMin.ShouldBe(206.15);

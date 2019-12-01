@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace TravelRepublic.Business.Common.Entities.TravelRepublicDb
 {
-    public class Establishment : EntitySoftDeletableIntBase, ISearchableName, ITravelRepublicDbEntity
+    public class Establishment : EntitySoftDeletableIntBase, ITravelRepublicDbEntity
     {
         public int EstablishmentId { get; set; }
 

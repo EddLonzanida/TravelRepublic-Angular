@@ -16,8 +16,8 @@ namespace TravelRepublic.Api.Controllers.BaseClasses.TravelRepublicDb
 	[ApiConventionType(typeof(CustomApiConventions))]
     public abstract class CrudControllerApiSoftDeletableIntBase<T, TIndexRequest, TIndexResponse, TEditCreateRequest, TDetailsCreateResponse, TRepository>
         : CrudControllerApiSoftDeletableBase<int, T, TIndexRequest, TIndexResponse, TEditCreateRequest, TDetailsCreateResponse, Data.TravelRepublicDb, TRepository>
-        where T : class, IEntityBase<int>, ISearchableName, IEntitySoftdeletableBase, ITravelRepublicDbEntity
-        where TIndexRequest : IIndexRequest
+        where T : class, IEntityBase<int>, IEntitySoftdeletableBase, ITravelRepublicDbEntity
+        where TIndexRequest : IIndexRequest, new()
         where TIndexResponse : ISearchResponse<T>
         where TEditCreateRequest : class, IEntityBase<int>
         where TDetailsCreateResponse : class, IEntityBase<int>

@@ -3,7 +3,10 @@ using TravelRepublic.Business.Common.Responses;
 
 namespace TravelRepublic.Business.Common.Requests
 {
-    public class HotelSearchFilterAsyncRequest : IRequestAsync<HotelSearchFilterAsyncRequest, HotelSearchFilterResponse>
+    /// <summary>
+    /// This request will be processed by HotelSearchFilterEngine.
+    /// </summary>
+    public class HotelFiltersAsyncRequest : IRequestAsync<HotelFiltersAsyncRequest, HotelFiltersResponse>
     {
         public string Name { get; set; }
 
@@ -15,15 +18,13 @@ namespace TravelRepublic.Business.Common.Requests
 
         public double CostMax { get; set; }
 
-        /// <summary>
-        /// This request will be processed by HotelSearchFilterEngine.
-        /// </summary>
-        public HotelSearchFilterAsyncRequest()
+        public static HotelFiltersAsyncRequest GetNormalValues(HotelFiltersAsyncRequest dto)
         {
-        }
+            if (dto == null)
+            {
+                dto = new HotelFiltersAsyncRequest();
+            }
 
-        public static HotelSearchFilterAsyncRequest GetNormalValues(HotelSearchFilterAsyncRequest dto)
-        {
             var name = dto.Name;
             var star = dto.Star;
             var userRating = dto.UserRating;
@@ -48,7 +49,7 @@ namespace TravelRepublic.Business.Common.Requests
                 costMax = min;
             }
 
-            return new HotelSearchFilterAsyncRequest
+            return new HotelFiltersAsyncRequest
             {
                 Name = name,
                 Star = star,
