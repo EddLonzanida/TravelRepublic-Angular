@@ -1,8 +1,6 @@
 ﻿using Eml.ConfigParser.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using TravelRepublic.Business.Common.Entities.TravelRepublicDb;
 using TravelRepublic.Infrastructure;
 using TravelRepublic.Infrastructure.Configurations;

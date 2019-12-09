@@ -76,7 +76,7 @@ namespace TravelRepublic.Api
                         Title = Constants.ApplicationId,
                         Version = $"Build: {assemblyVersion}",
                         Contact = new Contact { Name = "Eddie Lonzanida", Email = "EddieLonzanida@hotmail.com" },
-                        Description = "SOA Solution using .Net Core 2.2. Featuring Angular8, Etags, RateLimits, IoC/DI using MEF, EFCore, DataMigrations, SwaggerUI, XUnit , DataRepository & Mediator pattern, NLog, HealthChecks and more.."
+                        Description = "SOA Solution using .Net Core 2.2. Featuring Angular8, ETags, RateLimits, IoC/DI using MEF, EFCore, DataMigrations, SwaggerUI, XUnit , DataRepository & Mediator pattern, NLog, HealthChecks and more.."
                     });
                
                 c.OperationFilter<SwashbuckleSummaryOperationFilter>();

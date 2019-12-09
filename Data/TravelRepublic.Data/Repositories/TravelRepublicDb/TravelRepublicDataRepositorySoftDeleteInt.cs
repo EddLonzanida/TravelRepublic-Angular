@@ -2,7 +2,6 @@
 using TravelRepublic.Data.Repositories.TravelRepublicDb.BaseClasses;
 using TravelRepublic.Data.Repositories.TravelRepublicDb.Contracts;
 using TravelRepublic.Infrastructure.Contracts;
-using System;
 using System.Composition;
 
 namespace TravelRepublic.Data.Repositories.TravelRepublicDb

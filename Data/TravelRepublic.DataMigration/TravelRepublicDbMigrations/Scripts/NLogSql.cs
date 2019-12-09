@@ -1,23 +1,23 @@
-﻿namespace TravelRepublic.DataMigration.TravelRepublicDbMigrations
+namespace TravelRepublic.DataMigration.TravelRepublicDbMigrations.Scripts
 {
-    public sealed class NLogSql
+	public sealed class NLogSql
     {
-        public static string GetCreateLogTable(int datePrecision)
+        public static string GetCreateLogTable()
         {
             var createLogTableSql = @"
               SET ANSI_NULLS ON
               SET QUOTED_IDENTIFIER ON
               CREATE TABLE Logs(
 	                Id int IDENTITY(1,1) NOT NULL,
-	                MachineName NVARCHAR(200) NOT NULL,
-	                LogLevel NVARCHAR(32) NULL,
-	                CallSite NVARCHAR(512) NULL,
-	                Type NVARCHAR(32) NULL,
+	                Created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	                Message NVARCHAR(MAX) NULL,
 	                StackTrace NVARCHAR(MAX) NULL,
 	                InnerException NVARCHAR(MAX) NULL,
+	                LogLevel NVARCHAR(32) NULL,
+	                MachineName NVARCHAR(200) NOT NULL,
+	                CallSite NVARCHAR(512) NULL,
+	                Type NVARCHAR(32) NULL,
 	                AdditionalInfo NVARCHAR(MAX) NULL,
-	                Created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 CONSTRAINT [PK_dbo.Logs] PRIMARY KEY CLUSTERED (Id ASC)
                   WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
               ) ON [PRIMARY]";

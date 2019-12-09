@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System;
+using System.IO;
+using Eml.Extensions;
+using NLog.Common;
 using TravelRepublic.Infrastructure;
 
 namespace TravelRepublic.Api
@@ -13,6 +16,12 @@ namespace TravelRepublic.Api
     {
         public static void Main(string[] args)
         {
+            var today = DateTime.Today.ToString("yyyy-MM-dd");
+            var binDirectory = TypeExtensions.GetBinDirectory<Program>();
+            var nLogInternalFullPath = Path.Combine(binDirectory, "NLog", $"{today}-internal.log");
+
+            InternalLogger.LogFile = nLogInternalFullPath;
+
             var logger = NLog.LogManager.LoadConfiguration("NLog.config").GetCurrentClassLogger();
 
             try
@@ -23,7 +32,7 @@ namespace TravelRepublic.Api
 
 				var loggerConnectionString = GetLoggerConnectionString(Constants.CurrentEnvironment);
 
-                //Key should match Nlog.config key: connectionString = "${gdc:item=TravelRepublicConnectionString}"
+                //Key should match NLog.config key: connectionString = "${gdc:item=TravelRepublicConnectionString}"
                 NLog.GlobalDiagnosticsContext.Set(ConnectionStrings.TravelRepublicDbKey, loggerConnectionString);
 
                 webHostBuilder

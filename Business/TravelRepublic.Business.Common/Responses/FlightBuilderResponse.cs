@@ -1,6 +1,5 @@
 ﻿using Eml.Mediator.Contracts;
 using System.Collections.Generic;
-using TravelRepublic.Business.Common.Dto;
 using TravelRepublic.Business.Common.Dto.TravelRepublicDb;
 
 namespace TravelRepublic.Business.Common.Responses

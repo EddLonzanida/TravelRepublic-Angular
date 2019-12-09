@@ -1,7 +1,5 @@
-﻿using Eml.Contracts.Entities;
-using TravelRepublic.Business.Common.BaseClasses;
+﻿using TravelRepublic.Business.Common.BaseClasses;
 using TravelRepublic.Infrastructure.Contracts;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;

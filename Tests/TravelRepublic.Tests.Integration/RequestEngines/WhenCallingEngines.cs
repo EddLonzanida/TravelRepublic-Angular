@@ -10,19 +10,8 @@ namespace TravelRepublic.Tests.Integration.RequestEngines
 {
     public class WhenCallingEngines : IntegrationTestDbBase
     {
-        //[Fact]
-        //public async Task HotelSearchFilter_ShouldBeExecuted()
-        //{
-        //    var request = new EstablishmentIndexRequest();
-
-        //    var sut = await mediator.GetAsync(EstablishmentIndexRequest.GetNormalValues(request));
-
-        //    sut.RecordCount.ShouldBe(1132);
-        //    sut.RowsPerPage.ShouldBe(10);
-        //}
-
         [Fact]
-        public async Task HotelSearch_ShouldBeExecuted()
+        public async Task HotelSearchFilter_ShouldBeExecuted()
         {
             var sut = await mediator.GetAsync(HotelFiltersAsyncRequest.GetNormalValues(null));
 

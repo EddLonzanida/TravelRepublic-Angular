@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using TravelRepublic.DataMigration.TravelRepublicDbMigrations.Scripts;
 
 namespace TravelRepublic.DataMigration.TravelRepublicDbMigrations
 {
@@ -34,9 +35,9 @@ namespace TravelRepublic.DataMigration.TravelRepublicDbMigrations
                 {
                     table.PrimaryKey("PK_Establishments", x => x.Id);
                 });
-            
+
             //NLog
-            migrationBuilder.Sql(NLogSql.GetCreateLogTable(3));
+            migrationBuilder.Sql(NLogSql.GetCreateLogTable());
             migrationBuilder.Sql(NLogSql.GetInsertLogSp());
         }
 

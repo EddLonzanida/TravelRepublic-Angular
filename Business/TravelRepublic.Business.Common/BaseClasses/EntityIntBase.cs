@@ -1,5 +1,4 @@
-﻿using System;
-using Eml.Contracts.Entities;
+﻿using Eml.Contracts.Entities;
 
 namespace TravelRepublic.Business.Common.BaseClasses
 {
