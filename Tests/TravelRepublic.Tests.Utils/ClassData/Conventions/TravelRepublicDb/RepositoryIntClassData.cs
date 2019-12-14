@@ -19,13 +19,14 @@ namespace TravelRepublic.Tests.Utils.ClassData.Conventions.TravelRepublicDb
                 var dataRepositoryInt = typeof(ITravelRepublicDataRepositoryInt<>);
 
                 return _repositories ?? (_repositories = typeof(EntityIntBase).Assembly
-                           .GetClasses(type => typeof(ITravelRepublicDbEntity).IsAssignableFrom(type) 
+                           .GetClasses(type => typeof(ITravelRepublicDbEntity).IsAssignableFrom(type)
+                                               && !type.IsAbstract
                                                && !type.IsEnum
                                                && type.Namespace != null
                                                && type.Namespace.Contains("Business.Common.Entities"))
                            .Select(type =>
                            {
-                               Type[] typeArgs = {type};
+                               Type[] typeArgs = { type };
 
                                return dataRepositoryInt.MakeGenericType(typeArgs);
                            })
