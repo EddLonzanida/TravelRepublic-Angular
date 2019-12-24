@@ -11,9 +11,6 @@ export class ModulesComponent implements OnInit {
   menuItems: MenuItem[];
   miniMenuItems: MenuItem[];
 
-  constructor() {
-  }
-
   ngOnInit() {
 
     this.menuItems = [
@@ -24,7 +21,7 @@ export class ModulesComponent implements OnInit {
     this.miniMenuItems = [];
     this.menuItems.forEach((item: MenuItem) => {
 
-      const miniItem = { icon: item.icon, routerLink: item.routerLink };
+      const miniItem = { icon: item.icon, routerLink: item.routerLink, routerLinkActiveOptions: item.routerLinkActiveOptions };
 
       this.miniMenuItems.push(miniItem);
     });
