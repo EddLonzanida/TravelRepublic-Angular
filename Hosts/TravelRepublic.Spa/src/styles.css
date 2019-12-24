@@ -2,107 +2,122 @@ body {
     background-color: #D9E0E7 !important;
     margin: 0;
     font-size: 1em !important;
-  }
-  
-  .ui-panel-titlebar {
+}
+
+.ui-panel-titlebar {
     background-color: #2F8EE5 !important;
     color: white !important;
-  }
-  
-  .ui-menu {
+}
+
+.ui-menu {
     width: 100% !important;
     margin: 0 !important;
     border: none !important;
     background-color: #2D353C !important;
-  }
-  
-  .ui-menuitem-text {
+}
+
+.ui-menuitem-text {
     color: white !important;
-  }
-  
-  .ui-menuitem-icon {
+}
+
+.ui-menuitem-icon {
     color: white !important;
     font-size: large !important;
     margin-right: 1em;
-  }
-  
-  .menu-selected {
+}
+
+.menu-selected {
     background-color: #F15B2A !important;
     color: #ffffff;
-  }
-  .ui-slider .ui-slider-range{
-    background-color: #FF7802!important;
-  }
-  .ui-slider-horizontal {
-      height: .3em !important;
-      cursor: text;
-  }
-  .ui-slider-handle {
-      top: -.3em !important;
-  }
-  .ui-slider .ui-slider-handle {
-      width: .8em !important;
-      height: .8em !important;
-      cursor: pointer;
-  }
+}
 
-  .text-nowrap{
+.ui-state-active {
+    background-color: #F15B2A !important;
+    color: #ffffff;
+}
+
+.ui-slider .ui-slider-range {
+    background-color: #FF7802!important;
+}
+
+.ui-slider-horizontal {
+    height: .3em !important;
+    cursor: text;
+}
+
+.ui-slider-handle {
+    top: -.3em !important;
+}
+
+.ui-slider .ui-slider-handle {
+    width: .8em !important;
+    height: .8em !important;
+    cursor: pointer;
+}
+
+.text-nowrap {
     width: 100px;
     display: block;
     float: left;
     white-space: nowrap;
-  }
-  
-  .label-user-rating-reset {
-      color: #0267bf;
-      font-size: small;
-      font-family: "Roboto";
-      cursor: pointer;
-  }
-  
-  .disabled {
-      color: grey !important;
-      cursor: none !important;
-      pointer-events: none !important;
-      text-decoration: none !important;
-  }
+}
 
-  .ui-rating a {
+.label-user-rating-reset {
+    color: #0267bf;
+    font-size: small;
+    font-family: "Roboto";
+    cursor: pointer;
+}
+
+.disabled {
+    color: grey !important;
+    cursor: none !important;
+    pointer-events: none !important;
+    text-decoration: none !important;
+}
+
+.ui-rating a {
     color: #F7C815 !important;
     text-decoration: none;
     letter-spacing: 5px;
     cursor: pointer;
-  }
+}
+
 p-rating.disable-star1 div.ui-rating a:nth-child(2) {
     color: #F7C815 !important;
     pointer-events: none !important;
     text-decoration: none !important;
     cursor: pointer;
 }
+
 p-rating.disable-star2 div.ui-rating a:nth-child(n+2):nth-child(-n+2) {
     color: #F7C815 !important;
     pointer-events: none !important;
     text-decoration: none !important;
     cursor: pointer;
 }
+
 p-rating.disable-star3 div.ui-rating a:nth-child(n+2):nth-child(-n+3) {
     color: #F7C815 !important;
     pointer-events: none !important;
     text-decoration: none !important;
     cursor: pointer;
 }
+
 p-rating.disable-star4 div.ui-rating a:nth-child(n+2):nth-child(-n+4) {
     color: #F7C815 !important;
     pointer-events: none !important;
     text-decoration: none !important;
     cursor: pointer;
 }
+
 p-rating.disable-star5 div.ui-rating a:nth-child(-n+1) {
     color: #F7C815 !important;
     pointer-events: none !important;
     text-decoration: none !important;
     cursor: pointer;
 }
+
 p-rating.noreset div.ui-rating a:first-child {
     color: darkgray !important;
     pointer-events: none !important;
@@ -110,11 +125,12 @@ p-rating.noreset div.ui-rating a:first-child {
     cursor: pointer;
 }
 
-.ui-button-warning{
+.ui-button-warning {
     background-color: #f0ad4e!important;
     border-color: #f0ad4e!important;
     color: #ffffff!important;
 }
-a.ui-paginator-page{
+
+a.ui-paginator-page {
     display: inline!important;
 }

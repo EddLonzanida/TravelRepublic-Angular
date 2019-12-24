@@ -1,0 +1,38 @@
+.home-promise {
+    background-color: #F6F5F5;
+    font-family: "Roboto";
+    color: #005EB8;
+    text-align: center;
+}
+
+.home-title {
+    background-color: #eae9e7;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.profile {
+    background-color: white;
+    font-family: "Roboto";
+}
+
+.header {
+    padding: 1em;
+    background-color: #0275D8;
+    margin-bottom: 1em;
+}
+
+.home-header {
+    /* background: url(./homeheader.png) no-repeat;
+    height: 280px;  
+   background-size:contain;
+   background-repeat:no-repeat;
+   background-position:center; */
+    text-align: center;
+}
+
+.home-header-image {
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+}

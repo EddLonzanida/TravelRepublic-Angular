@@ -1,65 +1,52 @@
-import { Injectable, Inject } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Observable, of, throwError } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { appSettings } from 'src/environments/environment';
+import { SearchResponse } from '../responses/search-response';
 
-import { SearchResponse } from "../responses/search-response";
-
-@Injectable(({ providedIn: "root" }) as any)
+@Injectable(({ providedIn: 'root' }) as any)
 export class SearchService {
   private readonly baseUrl: string;
 
-  constructor(private readonly httpClient: HttpClient, @Inject("BASE_URL") baseUrl: string) {
-
-    this.baseUrl = baseUrl;
-
+  constructor(private readonly httpClient: HttpClient) {
+    this.baseUrl = appSettings.apiRoot;
   }
 
   getSuggestions(controller: string, query: string) {
-
-    const action = "suggestions";
+    const action = 'suggestions';
     const route = `${controller}/${action}`;
     const param = { search: query };
 
-    return this.request<string[]>("getSuggestions", route, param);
+    return this.request<string[]>('getSuggestions', route, param);
   }
 
   search<TRequest, TResponse>(route: string, request: TRequest) {
-
-    return this.request<SearchResponse<TResponse>>("search", route, request);
-
+    return this.request<SearchResponse<TResponse>>('search', route, request);
   }
 
   request<TResponse>(operation: string, route: string, params?: any): Observable<TResponse> {
-
     const httpParams = this.toHttpParams(params);
-    const config = { params: httpParams }
+    const config = { params: httpParams };
     const url = `${this.baseUrl}${route}`;
 
     return this.httpClient.get<TResponse>(url, config).pipe(
-
       catchError(this.handleError<TResponse>(operation, {} as TResponse))
-      
     );
   }
 
-
   private toHttpParams(obj: Object): HttpParams {
-
     let params = new HttpParams();
 
-    if (!obj) return params;
+    if (!obj) { return params; }
 
     for (const key in obj) {
-
       if (obj.hasOwnProperty(key)) {
 
         const val = obj[key];
 
         if (val !== null && val !== undefined) {
-
           params = params.append(key, val.toString());
-
         }
       }
     }
@@ -67,16 +54,11 @@ export class SearchService {
   }
 
   private log(message: string) {
-
     console.log(message);
-
   }
 
-
-  private handleError<T>(operation = "operation", result?: T) {
-
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       // console.error(error); // log to console instead
 
@@ -86,7 +68,6 @@ export class SearchService {
       // Let the app keep running by returning an empty result.
       // return of(result as T);
       return throwError(error);
-
     };
   }
 }

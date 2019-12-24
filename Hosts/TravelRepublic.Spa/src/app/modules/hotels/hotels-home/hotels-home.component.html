@@ -1,0 +1,29 @@
+<div *ngIf="searchFlow == searchFlowEnum.HOME" class="ui-g">
+    <div class="ui-g-12 animated fadeIn">
+        <div class="home-header">
+            <img class="home-header-image" src="assets/img/homeheader.png">
+        </div>
+    </div>
+</div>
+<div class="profile header ui-g">
+    <div class="ui-g-12 ui-md-8 ui-lg-9 ">
+        <p-autoComplete [(ngModel)]="searchName" [suggestions]="searchSuggestions" (completeMethod)="getSuggestions($event)" placeholder="Find Cheap Hotels here" [disabled]="searchFlow == searchFlowEnum.SEARCHING" [minLength]="1" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+            class="p-autocomplete"></p-autoComplete>
+
+    </div>
+    <div class="ui-g-12 ui-md-4 ui-lg-3">
+        <div [ngSwitch]="searchFlow">
+            <button *ngSwitchCase="searchFlowEnum.HOME" pButton type="button" (click)="search()" icon="fa fa-search-plus" label="Search Now" class="ui-g-12 ui-button-warning" item-width="100%"></button>
+            <button *ngSwitchCase="searchFlowEnum.SEARCHING" pButton type="button" icon="fa fa-refresh" (click)="restartSearch()" label="Restart" class="ui-g-12 ui-button-warning" item-width="100%"></button>
+        </div>
+    </div>
+</div>
+<div [ngSwitch]="searchFlow">
+    <div *ngSwitchCase="searchFlowEnum.HOME">
+        <app-hotels-home-contents></app-hotels-home-contents>
+    </div>
+    <div *ngSwitchCase="searchFlowEnum.SEARCHING">
+        <app-busy-indicator [isBusy]="isBusy" title="Searching.."></app-busy-indicator>
+        <app-hotel-search [(searchName)]="searchName" [(isStartSearch)]="isStartSearch" [(isBusy)]="isBusy" (restartSearch)="restartSearch()"></app-hotel-search>
+    </div>
+</div>
