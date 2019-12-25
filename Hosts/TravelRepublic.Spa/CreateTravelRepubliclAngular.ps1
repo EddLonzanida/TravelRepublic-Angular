@@ -19,15 +19,11 @@ function DeleteFile($path){
             Remove-Item -Path "$path" -Force -ErrorAction SilentlyContinue
             Write-Host " "
         
-            return $true
         }
         catch {
             $_
             return $false
         }	
-    }
-    else {
-        return $true
     }
 }
 
@@ -40,16 +36,12 @@ function DeleteDirectory($path) {
             Remove-Item -Path "$path" -Force -Recurse -ErrorAction SilentlyContinue
             Write-Host " "
     
-            return $true
         }
         catch {
     
             $_
             return $false
         }	
-    }
-    else {
-        return $true
     }
 }
 
@@ -91,84 +83,82 @@ function CreateLaunchJson($path) {
 function CreateSearchService($path) {
     
     $dest = "$path\src\app\shared\services"
-	$fn = "$dest\search.service.ts"
-   
+    $fn = "$dest\search.service.ts"
     DeleteFile $fn
-   
     $code = 
-'import { Injectable } from "@angular/core";
-import { HttpClient,HttpParams } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { SearchResponseBase } from "../responses/search-response-base";
-import { appSettings } from "src/environments/environment";
+    "import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { SearchResponseBase } from '../responses/search-response-base';
+import { appSettings } from 'src/environments/environment';
 
-@Injectable(({ providedIn: "root" }) as any)
+@Injectable(({ providedIn: 'root' }) as any)
 export class SearchService {
-    private readonly baseUrl: string;
+  private readonly baseUrl: string;
 
-    constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient) {
     this.baseUrl = appSettings.apiRoot;
-    }
+  }
 
-    getSuggestions(controller: string, query: string) {
-    const action = "suggestions";
-    const route = `${controller}/${action}`;
+  getSuggestions(controller: string, query: string) {
+    const action = 'suggestions';
+    const route = ```${controller}/suggestions```;
     const param = { search: query };
 
-    return this.request<string[]>("getSuggestions", route, param);
-    }
+    return this.request<string[]>('getSuggestions', route, param);
+  }
 
-    search<TRequest, TResponse>(route: string, request: TRequest) {
-    return this.request<SearchResponseBase<TResponse>>("search", route, request);
-    }
+  search<TRequest, TResponse>(route: string, request: TRequest) {
+    return this.request<SearchResponseBase<TResponse>>('search', route, request);
+  }
 
-    request<TResponse>(operation: string, route: string, params?: any): Observable<TResponse> {
-        const httpParams = this.toHttpParams(params);
-        const config = { params: httpParams }
-        const url = `${this.baseUrl}${route}`;
+  request<TResponse>(operation: string, route: string, params?: any): Observable<TResponse> {
+    const httpParams = this.toHttpParams(params);
+    const config = { params: httpParams };
+    const url = this.baseUrl + route;
 
-        return this.httpClient.get<TResponse>(url, config).pipe(
-            catchError(this.handleError<TResponse>(operation, {} as TResponse))
-        );
-    }
+    return this.httpClient.get<TResponse>(url, config).pipe(
+      catchError(this.handleError<TResponse>(operation, {} as TResponse))
+    );
+  }
 
-    private toHttpParams(obj: Object): HttpParams {
-        let params = new HttpParams();
+  private toHttpParams(obj: object): HttpParams {
+    let params = new HttpParams();
 
-        if (!obj) return params;
+    if (!obj) { return params; }
 
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
 
-                const val = obj[key];
+        const val = obj[key];
 
-                if (val !== null && val !== undefined) {
-                    params = params.append(key, val.toString());
-                }
-            }
+        if (val !== null && val !== undefined) {
+          params = params.append(key, val.toString());
         }
-        return params;
+      }
     }
+    return params;
+  }
 
-        private log(message: string) {
-        console.log(message);
-    }
+  private log(message: string) {
+    console.log(message);
+  }
 
-    private handleError<T>(operation = "operation", result?: T) {
-        return (error: any): Observable<T> => {
-            // TODO: send the error to remote logging infrastructure
-            // console.error(error); // log to console instead
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      // console.error(error); // log to console instead
 
-            // TODO: better job of transforming error for user consumption
-            this.log(`${operation} failed: ${error.message}`);
+      // TODO: better job of transforming error for user consumption
+      this.log(```${operation} failed: ``` + error.message);
 
-            // Let the app keep running by returning an empty result.
-            // return of(result as T);
-            return throwError(error);
-        };
-    }
-}'
+      // Let the app keep running by returning an empty result.
+      // return of(result as T);
+      return throwError(error);
+    };
+  }
+}"
 
     $code | Set-Content $fn
 }
@@ -176,18 +166,19 @@ export class SearchService {
 function CreateSearchRequestBase($path) {
     
     $dest = "$path\src\app\shared\requests"
-	$fn = "$dest\search-request-base.ts"
+    $fn = "$dest\search-request-base.ts"
     DeleteFile $fn
    
     $code = 
-'export class SearchRequestBase {
+    "export class SearchRequestBase {
     constructor(
-        public search = "",
+        public search = '',
         public page = 0,
         public sortColumn = 0,
-        public isDescending = false) {
+        public isDescending = 0) {
     }
-}'
+}
+"
 
     $code | Set-Content $fn
 }
@@ -195,18 +186,18 @@ function CreateSearchRequestBase($path) {
 function CreateSearchResponseBase($path) {
     
     $dest = "$path\src\app\shared\responses"
-	$fn = "$dest\search-response-base.ts"
-   
+    $fn = "$dest\search-response-base.ts"
     DeleteFile $fn
    
     $code = 
-'export class SearchResponseBase<T> {
+    "export class SearchResponseBase<T> {
     constructor(
         public recordCount = 0,
         public rowsPerPage = 0,
         public items: T[] = []
     ) { }
-}'
+}
+"
 
     $code | Set-Content $fn
 }
@@ -284,29 +275,26 @@ function CreateBusyIndicatorComponent($path) {
 	CreateBusyIndicatorCss $path2
 }
 
-function CreateBusyIndicatorTs($path){
-	$fn = "$path\busy-indicator.component.ts"
+function CreateBusyIndicatorTs($path) {
+    $fn = "$path\busy-indicator.component.ts"
     $successfullDelete = DeleteFile $fn
    
     $code = 
-'import { Component, Input } from "@angular/core";
+    "import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: "app-busy-indicator",
-    templateUrl: "./busy-indicator.component.html",
-    styleUrls: ["./busy-indicator.component.css"]
+    selector: 'app-busy-indicator',
+    templateUrl: './busy-indicator.component.html',
+    styleUrls: ['./busy-indicator.component.css']
 })
-export class BusyIndicatorComponent {
-    
-	@Input() title: string;
+export class BusyIndicatorComponent  {
+    @Input() title: string;
     @Input() isBusy: boolean;
-    
-	constructor() { }
-}'
+    constructor() { }
+}"
 
     $code | Set-Content $fn
 }
-
 function CreateBusyIndicatorHtml($path){
 	$fn = "$path\busy-indicator.component.html"
     $successfullDelete =  DeleteFile $fn
@@ -1293,23 +1281,23 @@ function CreateEmlCheckboxTs($path){
     $successfullDelete = DeleteFile $fn
    
     $code = 
-    'import { Component, OnChanges, Input, EventEmitter, Output } from "@angular/core";
+"import { Component, OnChanges, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: "app-checkbox",
-    templateUrl: "./eml-checkbox.component.html",
-    styleUrls: ["./eml-checkbox.component.css"]
+    selector: 'app-checkbox',
+    templateUrl: './eml-checkbox.component.html',
+    styleUrls: ['./eml-checkbox.component.css']
 })
 export class EmlCheckboxComponent implements OnChanges {
-    
-	@Input() isSelected = false;
+    @Input() isSelected = false;
     @Input() title: string;
-    @Input() class = "eml-checkboxlabel";
+    @Input() class = 'eml-checkboxlabel';
     @Output() isSelectedChange = new EventEmitter<boolean>();
-    
-	constructor() { }
-    ngOnChanges(): void { }
-}'
+    constructor() {
+    }
+    ngOnChanges(): void {
+    }
+}"
 
     $code | Set-Content $fn
 }
@@ -1412,26 +1400,27 @@ function CreateEmlCheckboxCss($path){
 function CreateDebuggerPipe($path) {
     
     $dest = "$path\src\app\shared\pipes"
-	$fn = "$dest\debugger.pipe.ts"
+    
+    $fn = "$dest\debugger.pipe.ts"
     $successfullDelete = DeleteFile $fn
    
     $code = 
-    'import { Pipe, PipeTransform } from "@angular/core";
+    "import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: "debugger"
+    name: 'debugger'
 })
 export class DebuggerPipe implements PipeTransform {
 
     transform(value: any, args?: any): any {
 
-        console.warn("===myDebugger");
+        console.warn('===myDebugger');
         console.warn(value);
 
         return value;
 
     }
-}'
+}"
     $code | Set-Content $fn
 }
 
