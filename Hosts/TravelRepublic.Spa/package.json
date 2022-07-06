@@ -28,7 +28,7 @@
         "dexie": "^2.0.4",
         "font-awesome": "^4.7.0",
         "jquery": "^3.4.1",
-        "moment": "^2.23.0",
+        "moment": "^2.29.4",
         "popper.js": "^1.16.0",
         "primeicons": "^1.0.0",
         "primeng": "^7.0.3",
